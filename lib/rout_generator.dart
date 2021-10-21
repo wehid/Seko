@@ -9,7 +9,7 @@ import 'ItemPage/item_screen.dart';
 import 'ProfilePage/profile_screen.dart';
 import 'EditProfilePage/edit_profile_screen.dart';
 import 'ProfilePage/Components/my_courses.dart';
-import 'HawkariyiHevalkrdPage/SubPage/wane_detail.dart';
+import 'HawkariyiHevalkrdPage/Components/wane_detail.dart';
 
 
 class RoutGenerator {
