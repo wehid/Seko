@@ -4,10 +4,10 @@ import 'dart:convert';
 import '../../Services/api.dart';
 import '../ObjectModels/forum_post.dart';
 import '../RequestModels/search_Forum.dart';
+import '../../constants.dart';
 
 class ForumProvider with ChangeNotifier{
-  final _PRSYARXANE = "1";
-  final _PROJESAZ = "2";
+
   bool _isLoading = false;
   List<ForumPost> _forumList = [];
   ForumPost _selectedFroumPost;
@@ -43,11 +43,11 @@ class ForumProvider with ChangeNotifier{
   }
 
   List<ForumPost> get prsyarxane{
-    return _forumList.where((element) => element.forumType == _PRSYARXANE).toList();
+    return _forumList.where((element) => element.forumType == PRSYARXANE).toList();
   }
 
   List<ForumPost> get projesaz{
-    return _forumList.where((element) => element.forumType == _PROJESAZ).toList();
+    return _forumList.where((element) => element.forumType == PROJESAZ).toList();
   }
 
   ForumPost get selectedFroumPost => _selectedFroumPost;

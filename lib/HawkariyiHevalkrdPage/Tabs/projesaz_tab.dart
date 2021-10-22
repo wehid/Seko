@@ -3,13 +3,13 @@ import 'package:provider/provider.dart';
 
 import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
-import '../Components/wane_detail.dart';
+import '../Components/forum_detail.dart';
 
 class ProjesazTab extends StatelessWidget {
   void _openWaneDetail(BuildContext context, ForumPost selectedPrsyar) {
     Provider.of<ForumProvider>(context, listen: false)
         .setSelectedFroumPost(selectedPrsyar);
-    Navigator.of(context).pushNamed(WaneDetail.routeName);
+    Navigator.of(context).pushNamed(ForumDetail.routeName);
   }
 
   @override

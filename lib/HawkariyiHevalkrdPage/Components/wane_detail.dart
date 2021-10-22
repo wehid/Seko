@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../Models/ObjectModels/wane.dart';
 import '../../Models/ProviderModel/banki_wane_provider.dart';
+import '../../constants.dart';
 
 class WaneDetail extends StatelessWidget {
   static const routeName = '/wane-detail';
@@ -48,10 +49,7 @@ class WaneDetail extends StatelessWidget {
     print(wane.introduction);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('بانکی وانە'),
-        centerTitle: true,
-      ),
+      appBar: customAppBar('بانکی وانە'),
       body: Column(
         children: [
           itemRow("بابەت: ", wane.title, false),
