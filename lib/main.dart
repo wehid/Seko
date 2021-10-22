@@ -17,6 +17,7 @@ import 'Models/ProviderModel/quiz_provider.dart';
 import 'Models/ProviderModel/survey_provider.dart';
 import 'Models/ProviderModel/banki_wane_provider.dart';
 import 'Models/ProviderModel/news_provider.dart';
+import 'Models/ProviderModel/forum_provider.dart';
 import 'rout_generator.dart';
 
 void main() {
@@ -36,6 +37,7 @@ void main() {
         ChangeNotifierProvider(create: (_)=> QuizProvider()),
         ChangeNotifierProvider(create: (_)=> SurveyProvider()),
         ChangeNotifierProvider(create: (_)=> BankiWaneProvider()),
+        ChangeNotifierProvider(create: (_)=> ForumProvider()),
         ChangeNotifierProvider(create: (_)=> NewsProvider() ),
       ],
       child: MyApp(),

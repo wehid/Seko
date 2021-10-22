@@ -1,29 +1,29 @@
-class SearchBankiWane {
+class SearchForum {
+  String forumID;
+  String forumType;
   String title;
-  String uploadGroupId;
-  String userId;
-  String state;
+  String userID;
   String orderBy;
   String orderDir;
   int page;
   int rowsPerPage;
 
-  SearchBankiWane({
-    this.title = "",
-    this.uploadGroupId = "",
-    this.userId = "",
-    this.state ="",
+  SearchForum({
+    this.forumID,
+    this.forumType,
+    this.title,
+    this.userID,
     this.orderBy = "ID",
     this.orderDir = "asc",
     this.page,
     this.rowsPerPage,
   });
 
-  SearchBankiWane.fromJson(Map<String, dynamic> json) {
+  SearchForum.fromJson(Map<String, dynamic> json) {
+    forumID = json['ForumID'];
+    forumType = json['ForumType'];
     title = json['Title'];
-    uploadGroupId = json['UploadGroupID'];
-    userId = json['UserID'];
-    state = json['State'];
+    userID = json['UserID'];
     orderBy = json['OrderBy'];
     orderDir = json['OrderDir'];
     page = json['Page'];
@@ -32,10 +32,10 @@ class SearchBankiWane {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['ForumID'] = this.forumID;
+    data['ForumType'] = this.forumType;
     data['Title'] = this.title;
-    data['UploadGroupID'] = this.uploadGroupId;
-    data['UserID'] = this.userId;
-    data['State'] = this.state;
+    data['UserID'] = this.userID;
     data['OrderBy'] = this.orderBy;
     data['OrderDir'] = this.orderDir;
     data['Page'] = this.page;

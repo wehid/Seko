@@ -44,7 +44,6 @@ class MainScreen extends StatelessWidget {
     Provider.of<LessonProvider>(context, listen: false).getAllLessons();
     Provider.of<ItemProvider>(context, listen: false).getAllItems();
     _userProvider = Provider.of<UserProvider>(context);
-    Provider.of<BankiWaneProvider>(context, listen: false).getAllBankiWane();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
   }
 
