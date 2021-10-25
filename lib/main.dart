@@ -18,27 +18,29 @@ import 'Models/ProviderModel/survey_provider.dart';
 import 'Models/ProviderModel/banki_wane_provider.dart';
 import 'Models/ProviderModel/news_provider.dart';
 import 'Models/ProviderModel/forum_provider.dart';
+import 'Models/ProviderModel/forum_comment_provider.dart';
 import 'rout_generator.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=> CitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> CoursesProvider()),
-        ChangeNotifierProvider(create: (_)=> CategoryProvider()),
-        ChangeNotifierProvider(create: (_)=> WeekProvider()),
-        ChangeNotifierProvider(create: (_)=> LessonProvider()),
-        ChangeNotifierProvider(create: (_)=> ItemProvider()),
-        ChangeNotifierProvider(create: (_)=> ItemCommentsProvider()),
-        ChangeNotifierProvider(create: (_)=> UserProvider()),
-        ChangeNotifierProvider(create: (_)=> CourseLearnerProvider()),
-        ChangeNotifierProvider(create: (_)=> UserItemProvider()),
-        ChangeNotifierProvider(create: (_)=> QuizProvider()),
-        ChangeNotifierProvider(create: (_)=> SurveyProvider()),
-        ChangeNotifierProvider(create: (_)=> BankiWaneProvider()),
-        ChangeNotifierProvider(create: (_)=> ForumProvider()),
-        ChangeNotifierProvider(create: (_)=> NewsProvider() ),
+        ChangeNotifierProvider(create: (_) => CitiesProvider()),
+        ChangeNotifierProvider(create: (_) => CoursesProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => WeekProvider()),
+        ChangeNotifierProvider(create: (_) => LessonProvider()),
+        ChangeNotifierProvider(create: (_) => ItemProvider()),
+        ChangeNotifierProvider(create: (_) => ItemCommentsProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => CourseLearnerProvider()),
+        ChangeNotifierProvider(create: (_) => UserItemProvider()),
+        ChangeNotifierProvider(create: (_) => QuizProvider()),
+        ChangeNotifierProvider(create: (_) => SurveyProvider()),
+        ChangeNotifierProvider(create: (_) => BankiWaneProvider()),
+        ChangeNotifierProvider(create: (_) => ForumProvider()),
+        ChangeNotifierProvider(create: (_) => ForumCommentProvider()),
+        ChangeNotifierProvider(create: (_) => NewsProvider()),
       ],
       child: MyApp(),
     ),

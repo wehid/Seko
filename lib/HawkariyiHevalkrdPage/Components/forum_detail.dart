@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
+import '../../Models/ProviderModel/forum_comment_provider.dart';
+import 'forum_comment_fragment.dart';
 import '../../constants.dart';
 
 class ForumDetail extends StatelessWidget {
@@ -15,30 +17,37 @@ class ForumDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     ForumPost post =
         Provider.of<ForumProvider>(context, listen: false).selectedFroumPost;
+     Provider.of<ForumCommentProvider>(context, listen: false).getForumCommentByPostId(post.iD);
 
     return Scaffold(
       appBar:
           customAppBar(post.forumType == PROJESAZ ? _projesaz : _prsyarxane),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (post.imagePath != '')
-              Container(
-                width: double.infinity,
-                height: 200,
-                child: Image.network(post.imagePath, fit: BoxFit.contain,),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (post.imagePath != '')
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  child: Image.network(
+                    post.imagePath,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  post.title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                post.title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Text(post.contents),
-          ],
+              Text(post.contents),
+              ForumCommentFragment(post.iD),
+            ],
+          ),
         ),
       ),
     );

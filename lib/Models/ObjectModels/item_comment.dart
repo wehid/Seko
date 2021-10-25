@@ -7,9 +7,9 @@ class ItemComment {
   String commentDate;
   String numLikes;
   String userName;
-  Null commentLikeID;
-  Null commentBookmarkID;
-  Null followingID;
+  String commentLikeID;
+  String commentBookmarkID;
+  String followingID;
   List<ItemComment> replies;
 
   ItemComment({
