@@ -8,19 +8,25 @@ class UserInformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle myStyle() {
+    TextStyle myStyleTitle() {
       return TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+    }
+
+    TextStyle myStyleDescription() {
+      return TextStyle(fontSize: 20);
     }
 
     return Container(
       margin: const EdgeInsets.all(15),
-      child: Row(
-        children: [
-          Text('$title:', style: myStyle()),
-          SizedBox(width: 20),
-          Text(description, style: myStyle()),
-          Spacer(),
-        ],
+      child: Flexible(
+        child: Row(
+          children: [
+            Text('$title:', style: myStyleTitle()),
+            SizedBox(width: 15),
+            Text(description, style: myStyleDescription()),
+            Spacer(),
+          ],
+        ),
       ),
     );
   }

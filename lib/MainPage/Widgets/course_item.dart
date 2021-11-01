@@ -17,7 +17,11 @@ class CourseItem extends StatelessWidget {
     return Row(
       children: [
         Icon(iconData, color: detailsColor),
-        Text(details, style: TextStyle(color: detailsColor, fontSize: 14, fontStyle: FontStyle.italic)),
+        Text(details,
+            style: TextStyle(
+                color: detailsColor,
+                fontSize: 14,
+                fontStyle: FontStyle.italic)),
       ],
     );
   }
@@ -32,10 +36,8 @@ class CourseItem extends StatelessWidget {
     );
   }
 
-  Color _getCourseColor(){
-
+  Color _getCourseColor() {
     return Color(int.parse("0xff${course.color}"));
-
   }
 
   @override
@@ -44,7 +46,7 @@ class CourseItem extends StatelessWidget {
       onTap: () => _openCourse(context),
       child: Container(
         width: 200,
-        height: 400,
+        height: 420,
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         margin: const EdgeInsets.all(3),
         decoration: BoxDecoration(

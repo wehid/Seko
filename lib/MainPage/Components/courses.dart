@@ -16,28 +16,28 @@ class Courses extends StatelessWidget {
   Widget build(BuildContext context) {
     return _isCoursesListEmpty()
         ? Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.yellow,
-          child: Center(
-            child: Text(
-              "بەداخەوە هیچ کوورسێک نییە",
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: Colors.redAccent,
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.yellow,
+            child: Center(
+              child: Text(
+                "بەداخەوە هیچ کوورسێک نییە",
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-        )
+          )
         : GridView.builder(
             itemCount: coursesList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
                 crossAxisCount: 2,
-                childAspectRatio: 300 / 410),
+                childAspectRatio: 280 / 400),
             itemBuilder: (context, index) {
               return CourseItem(coursesList[index]);
             },
