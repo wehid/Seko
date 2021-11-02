@@ -17,7 +17,8 @@ class ForumDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     ForumPost post =
         Provider.of<ForumProvider>(context, listen: false).selectedFroumPost;
-     Provider.of<ForumCommentProvider>(context, listen: false).getForumCommentByPostId(post.iD);
+    Provider.of<ForumCommentProvider>(context, listen: false)
+        .getForumCommentByPostId(post.iD);
 
     return Scaffold(
       appBar:
@@ -45,7 +46,7 @@ class ForumDetail extends StatelessWidget {
                 ),
               ),
               Text(post.contents),
-              ForumCommentFragment(post.iD),
+              ForumCommentFragment(),
             ],
           ),
         ),

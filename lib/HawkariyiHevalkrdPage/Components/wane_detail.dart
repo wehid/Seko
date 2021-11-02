@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seko/Models/ProviderModel/wane_comment_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Models/ObjectModels/wane.dart';
 import '../../Models/ProviderModel/banki_wane_provider.dart';
+import '../Components/wane_comment_fragment.dart';
 import '../../constants.dart';
 
 class WaneDetail extends StatelessWidget {
@@ -22,19 +24,16 @@ class WaneDetail extends StatelessWidget {
           Expanded(
             child: isLink
                 ? RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: description,
-                          style: TextStyle(color: Colors.blue),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              launch(description);
-                            },
-                        ),
-                      ]
-                    )
-                  )
+                    text: TextSpan(children: [
+                    TextSpan(
+                      text: description,
+                      style: TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launch(description);
+                        },
+                    ),
+                  ]))
                 : Text(description),
           ),
         ],
@@ -44,9 +43,10 @@ class WaneDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Wane wane = Provider.of<BankiWaneProvider>(context).selectedWane;
-    //todo:delete print
-    print(wane.introduction);
+    Wane wane =
+        Provider.of<BankiWaneProvider>(context, listen: false).selectedWane;
+    Provider.of<WaneCommentProvider>(context, listen: false)
+        .getWaneCommentByWaneId(wane.id);
 
     return Scaffold(
       appBar: customAppBar('بانکی وانە'),
@@ -58,6 +58,7 @@ class WaneDetail extends StatelessWidget {
           itemRow("ئادرەسی ڤیدیۆ: ", wane.videoUrl, true),
           itemRow("کورتە: ", wane.introduction, false),
           itemRow("ناوەڕۆک: ", wane.contents, false),
+          WaneCommentFragment(),
         ],
       ),
     );

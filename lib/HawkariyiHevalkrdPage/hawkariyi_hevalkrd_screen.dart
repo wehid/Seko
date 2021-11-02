@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seko/Models/ObjectModels/forum_comment.dart';
 
 import '../Models/ProviderModel/banki_wane_provider.dart';
 import '../Models/ProviderModel/forum_provider.dart';
@@ -17,7 +16,8 @@ class HawkariyiHevalkrdScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<BankiWaneProvider>(context, listen: false).getAllBankiWane();
     Provider.of<ForumProvider>(context, listen: false).getAllForumPost();
-    Provider.of<ForumCommentProvider>(context, listen: false).getAllForumComment();
+    Provider.of<ForumCommentProvider>(context, listen: false)
+        .getAllForumComment();
 
     return DefaultTabController(
       length: 3,

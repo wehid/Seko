@@ -15,8 +15,9 @@ import '../Models/RequestModels/search_quiz.dart';
 import '../Models/RequestModels/search_survey.dart';
 import '../Models/RequestModels/search_banki_wane.dart';
 import '../Models/RequestModels/search_news.dart';
-import '../Models/RequestModels/search_Forum.dart';
+import '../Models/RequestModels/search_forum.dart';
 import '../Models/RequestModels/search_forum_comment.dart';
+import '../Models/RequestModels/search_wane_comment.dart';
 import '../Models/ObjectModels/user.dart';
 import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
@@ -575,7 +576,36 @@ class Api {
     }
   }
 
-    //  ------------------ get Prsyarxane and projesaz ------------------------------
+  //  ------------------ get Banki Wane Comment ------------------------------
+
+  Future<String> getWaneCommet(SearchWaneComment searchWaneComment) async {
+    // ignore: non_constant_identifier_names
+    final String _METHOD_URL = 'api/upload/comment/search.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    String requestBody = json.encode(searchWaneComment.toJson());
+
+    // todo: delete print
+    print('in get wane comments, url is: $url');
+
+    print('in get wane comments, request body is: $requestBody');
+
+    try {
+      var response = await http.post(url, body: requestBody);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // todo: handle if status code is not 200 or 201
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ get Prsyarxane and projesaz ------------------------------
 
   Future<String> getForum(SearchForum searchForum) async {
     // ignore: non_constant_identifier_names
@@ -599,7 +629,7 @@ class Api {
     }
   }
 
-      //  ------------------ get Prsyarxane and projesaz Comment ------------------------------
+  //  ------------------ get Prsyarxane and projesaz Comment ------------------------------
 
   Future<String> getForumCommet(SearchForumComment searchComment) async {
     // ignore: non_constant_identifier_names
