@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
 import '../../Models/ProviderModel/forum_comment_provider.dart';
-import 'forum_comment_fragment.dart';
+import '../CommentFragments/forum_comment_list.dart';
 import '../../constants.dart';
 
 class ForumDetail extends StatelessWidget {
@@ -46,7 +46,7 @@ class ForumDetail extends StatelessWidget {
                 ),
               ),
               Text(post.contents),
-              ForumCommentFragment(),
+              ForumCommentList(),
             ],
           ),
         ),

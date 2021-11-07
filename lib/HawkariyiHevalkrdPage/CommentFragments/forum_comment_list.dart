@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import '../../Models/ProviderModel/forum_comment_provider.dart';
 import '../Widgets/forum_comment_widget.dart';
 import '../../Models/ObjectModels/forum_comment.dart';
+import '../../constants.dart';
 
-class ForumCommentFragment extends StatelessWidget {
+class ForumCommentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ForumCommentProvider forumCommentProvider =
@@ -19,7 +20,7 @@ class ForumCommentFragment extends StatelessWidget {
                 .map(
                   (comment) => Column(
                     children: [
-                      const Divider(color: Colors.blueGrey, thickness: 1.2),
+                      customDivider(),
                       ForumCommentWidget(comment),
                     ],
                   ),

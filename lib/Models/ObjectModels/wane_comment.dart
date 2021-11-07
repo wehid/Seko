@@ -2,7 +2,7 @@ class WaneComment {
   String iD;
   String uploadID;
   String userID;
-  Null replyID;
+  String replyID;
   String comments;
   String commentDate;
   String userUsername;

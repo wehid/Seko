@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import '../../Models/ProviderModel/wane_comment_provider.dart';
 import '../../Models/ObjectModels/wane_comment.dart';
 import '../Widgets/wane_comment_widget.dart';
+import '../../constants.dart';
 
-class WaneCommentFragment extends StatelessWidget {
+class WaneCommentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WaneCommentProvider waneCommentProvider =
@@ -15,17 +16,20 @@ class WaneCommentFragment extends StatelessWidget {
 
     return waneCommentProvider.isLoading
         ? Center(child: CircularProgressIndicator())
-        : Column(
-            children: commentList
-                .map(
-                  (comment) => Column(
-                    children: [
-                      const Divider(color: Colors.blueGrey, thickness: 1.2),
-                      WaneCommentWidget(comment),
-                    ],
-                  ),
-                )
-                .toList(),
+        : Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: commentList
+                  .map(
+                    (comment) => Column(
+                      children: [
+                        customDivider(),
+                        WaneCommentWidget(comment),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ),
           );
   }
 }

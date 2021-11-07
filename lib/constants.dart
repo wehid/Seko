@@ -46,6 +46,10 @@ AppBar customAppBar(String title) {
   );
 }
 
+Divider customDivider() {
+  return const Divider(color: Colors.blueGrey, thickness: 1.2);
+}
+
 TextStyle titleTextStyle() {
   return TextStyle(
     fontWeight: FontWeight.bold,

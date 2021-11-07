@@ -18,6 +18,7 @@ import '../Models/RequestModels/search_news.dart';
 import '../Models/RequestModels/search_forum.dart';
 import '../Models/RequestModels/search_forum_comment.dart';
 import '../Models/RequestModels/search_wane_comment.dart';
+import '../Models/ObjectModels/create_wane_comment.dart';
 import '../Models/ObjectModels/user.dart';
 import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
@@ -278,7 +279,8 @@ class Api {
   }
 
   //  ------------------ Send Item Comment ------------------------------
-  Future<String> sendItemComments(CreateComment comment) async {
+  Future<String> sendItemComments(
+      CreateComment comment, String userToken) async {
     final String _METHOD_URL = 'api/learn/itemcomment/create.php';
 
     // to make url for api call from base url and method url.
@@ -286,7 +288,8 @@ class Api {
     String sendCommentBody = json.encode(comment.toJson());
 
     try {
-      var response = await http.post(url, body: sendCommentBody);
+      var response = await http.post(url,
+          body: sendCommentBody, headers: securityHeader(userToken));
       return response.body;
     } catch (error) {
       throw error;
@@ -593,6 +596,31 @@ class Api {
 
     try {
       var response = await http.post(url, body: requestBody);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // todo: handle if status code is not 200 or 201
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ send Banki Wane Comment ------------------------------
+
+  Future<String> sendWaneCommet(
+      CreateWaneComment comment, String userToken) async {
+    final String _METHOD_URL = 'api/upload/comment/create.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    String sendCommentBody = json.encode(comment.toJson());
+
+    try {
+      var response = await http.post(url,
+          body: sendCommentBody, headers: securityHeader(userToken));
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.body;
       } else {

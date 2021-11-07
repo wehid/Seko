@@ -6,7 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../Models/ObjectModels/wane.dart';
 import '../../Models/ProviderModel/banki_wane_provider.dart';
-import '../Components/wane_comment_fragment.dart';
+import '../CommentFragments/wane_comment_list.dart';
+import '../CommentFragments/write_wane_comment.dart';
 import '../../constants.dart';
 
 class WaneDetail extends StatelessWidget {
@@ -50,16 +51,19 @@ class WaneDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: customAppBar('بانکی وانە'),
-      body: Column(
-        children: [
-          itemRow("بابەت: ", wane.title, false),
-          itemRow("ناوی پۆلێن: ", wane.uploadGroupName, false),
-          itemRow("لینک: ", wane.link, true),
-          itemRow("ئادرەسی ڤیدیۆ: ", wane.videoUrl, true),
-          itemRow("کورتە: ", wane.introduction, false),
-          itemRow("ناوەڕۆک: ", wane.contents, false),
-          WaneCommentFragment(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            itemRow("بابەت: ", wane.title, false),
+            itemRow("ناوی پۆلێن: ", wane.uploadGroupName, false),
+            itemRow("لینک: ", wane.link, true),
+            itemRow("ئادرەسی ڤیدیۆ: ", wane.videoUrl, true),
+            itemRow("کورتە: ", wane.introduction, false),
+            itemRow("ناوەڕۆک: ", wane.contents, false),
+            WriteWaneComment(),
+            WaneCommentList(),
+          ],
+        ),
       ),
     );
   }
