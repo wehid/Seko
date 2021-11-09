@@ -11,6 +11,7 @@ import 'EditProfilePage/edit_profile_screen.dart';
 import 'ProfilePage/Components/my_courses.dart';
 import 'HawkariyiHevalkrdPage/Components/wane_detail.dart';
 import 'HawkariyiHevalkrdPage/Components/forum_detail.dart';
+import 'HawkariyiHevalkrdPage/Components/add_forum_post.dart';
 
 class RoutGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -47,6 +48,12 @@ class RoutGenerator {
         break;
       case ForumDetail.routeName:
         return MaterialPageRoute(builder: (_) => ForumDetail());
+        break;
+      case AddForumPost.routeName:
+          final args = settings.arguments as String;
+          return MaterialPageRoute(
+              builder: (_) => AddForumPost(args));
+      
         break;
 
       //  todo: default: return (_)=> error screen

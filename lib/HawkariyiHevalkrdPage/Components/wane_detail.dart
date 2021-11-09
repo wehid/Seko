@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../Models/ObjectModels/wane.dart';
 import '../../Models/ProviderModel/banki_wane_provider.dart';
-import '../CommentFragments/wane_comment_list.dart';
-import '../CommentFragments/write_wane_comment.dart';
+import '../CommentComponents/wane_comment_list.dart';
+import '../CommentComponents/write_wane_comment.dart';
 import '../../constants.dart';
 
 class WaneDetail extends StatelessWidget {

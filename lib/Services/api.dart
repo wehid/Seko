@@ -633,6 +633,28 @@ class Api {
     }
   }
 
+    //  ------------------ get all Forums ------------------------------
+
+  Future<String> getAllForum() async {
+    final String _METHOD_URL = 'api/forum/getall.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // todo: handle if status code is not 200 or 201
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
   //  ------------------ get Prsyarxane and projesaz ------------------------------
 
   Future<String> getForum(SearchForum searchForum) async {

@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
 import '../Components/forum_detail.dart';
+import '../Components/add_forum_post.dart';
+import '../../constants.dart';
 
 class ProjesazTab extends StatelessWidget {
   void _openWaneDetail(BuildContext context, ForumPost selectedPrsyar) {
@@ -37,6 +39,12 @@ class ProjesazTab extends StatelessWidget {
                   ),
                 );
               },
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add, size: 30),
+              onPressed: () => Navigator.pushNamed(
+                  context, AddForumPost.routeName,
+                  arguments: PROJESAZ),
             ),
           );
   }
