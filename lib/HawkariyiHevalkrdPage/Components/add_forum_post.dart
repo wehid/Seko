@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seko/Models/ObjectModels/forum.dart';
+import 'package:seko/Models/ProviderModel/forum_provider.dart';
 
 import '../../constants.dart';
 import '../../GlobalWidgets/seko_text_form_field.dart';
 import '../../GlobalWidgets/seko_button.dart';
 import '../../Models/ProviderModel/user_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
+import '../Widgets/dropdown_forum.dart';
 
 class AddForumPost extends StatefulWidget {
   static const routeName = '/add-forum-post';
@@ -62,10 +65,21 @@ class _AddForumPostState extends State<AddForumPost> {
           title: titleController.text,
           contents: constentsController.text,
           videoUrl: videoLinkController.text,
-          // todo: forumId shuld take from forum dropdown
-          forumID: "3");
+          forumID: Provider.of<ForumProvider>(context, listen: false)
+              .selectedForum
+              .id);
       print('the forum post is ready to send');
+      // todo: send the post
+      // todo: clean the form
+      // todo: close the page
     }
+  }
+
+  String dropdownEmptyValidator(Forum value) {
+    if (value == null) {
+      return "زانیاری داواکراو نابێ بەتاڵ بێت";
+    }
+    return null;
   }
 
   @override
@@ -97,7 +111,7 @@ class _AddForumPostState extends State<AddForumPost> {
                     validator: emptyValidatorTFF,
                   ),
                 ),
-                // todo: add dropdown
+                itemRow("ناوی پۆلێن", DropdownForum(widget.forumType)),
                 itemRow(
                   "ئادرەسی ڤیدیۆ",
                   SekoTextFormField(

@@ -12,6 +12,7 @@ class ForumProvider with ChangeNotifier {
   List<ForumPost> _forumPostList = [];
   List<Forum> _forumList = [];
   ForumPost _selectedFroumPost;
+  Forum _selectedForum;
 
   Future getAllForum() async {
     _isLoading = true;
@@ -85,6 +86,11 @@ class ForumProvider with ChangeNotifier {
     return _forumList.where((element) => element.type == PROJESAZ).toList();
   }
 
+  void setSelectedForum(Forum selectedForum) {
+    _selectedForum = selectedForum;
+    notifyListeners();
+  }
+
   ForumPost get selectedFroumPost => _selectedFroumPost;
 
   List<ForumPost> get froumPostList => _forumPostList;
@@ -92,4 +98,6 @@ class ForumProvider with ChangeNotifier {
   List<Forum> get forumList => _forumList;
 
   bool get isLoading => _isLoading;
+
+  Forum get selectedForum => _selectedForum;
 }
