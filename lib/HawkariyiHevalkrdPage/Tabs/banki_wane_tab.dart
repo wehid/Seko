@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../Models/ProviderModel/banki_wane_provider.dart';
 import '../../Models/ObjectModels/wane.dart';
 import '../Components/wane_detail.dart';
+import '../Components/add_wane_post.dart';
 
 class BankiWaneTab extends StatelessWidget {
   void _openWaneDetail(BuildContext context, Wane selectedWane) {
@@ -37,6 +38,13 @@ class BankiWaneTab extends StatelessWidget {
                   ),
                 );
               },
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add, size: 30),
+              onPressed: () => Navigator.pushNamed(
+                context,
+                AddWanePost.routeName,
+              ),
             ),
           );
   }

@@ -38,7 +38,7 @@ class WaneCommentProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     } catch (error) {
-      print('in get wane comment by id: ${waneId}, error is: ${error}');
+      print('in get wane comment by id: $waneId, error is: $error');
       throw error;
     }
   }

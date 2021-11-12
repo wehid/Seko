@@ -15,27 +15,25 @@ class DropdownForum extends StatefulWidget {
 }
 
 class _DropdownForumState extends State<DropdownForum> {
-  ForumProvider forumProvider;
-  List<Forum> forumList;
-  Forum currentForum;
+  ForumProvider _forumProvider;
+  List<Forum> _forumList;
+  Forum _currentForum;
 
   @override
   void initState() {
-    forumProvider = Provider.of<ForumProvider>(context, listen: false);
-    forumList = widget.forumType == PROJESAZ
-        ? forumProvider.projesazForum
-        : forumProvider.prsyarxaneForum;
+    _forumProvider = Provider.of<ForumProvider>(context, listen: false);
+    _forumList = widget.forumType == PROJESAZ
+        ? _forumProvider.projesazForum
+        : _forumProvider.prsyarxaneForum;
 
-    currentForum = forumList[0];
-    forumProvider.setSelectedForum(currentForum);
+    _currentForum = _forumList[0];
+    _forumProvider.setSelectedForum(_currentForum);
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    forumProvider = Provider.of<ForumProvider>(context);
-
     return Container(
       width: double.infinity,
       height: 55,
@@ -46,13 +44,15 @@ class _DropdownForumState extends State<DropdownForum> {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: DropdownButton<Forum>(
-        value: currentForum,
+        value: _currentForum,
         onChanged: (newForum) {
-          currentForum = newForum;
-          forumProvider.setSelectedForum(newForum);
+          _forumProvider.setSelectedForum(newForum);
+          setState(() {
+            _currentForum = newForum;
+          });
         },
         icon: Icon(Icons.arrow_downward_outlined),
-        items: forumList.map((forum) {
+        items: _forumList.map((forum) {
           return DropdownMenuItem<Forum>(
             value: forum,
             child: Text(forum.title),

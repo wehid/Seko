@@ -106,7 +106,7 @@ class ForumProvider with ChangeNotifier {
 
   void setSelectedForum(Forum selectedForum) {
     _selectedForum = selectedForum;
-    notifyListeners();
+    // notifyListeners();
   }
 
   ForumPost get selectedFroumPost => _selectedFroumPost;

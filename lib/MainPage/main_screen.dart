@@ -11,7 +11,6 @@ import '../Models/ProviderModel/cities_provider.dart';
 import '../Models/ProviderModel/lesson_provider.dart';
 import '../Models/ProviderModel/item_provider.dart';
 import '../Models/ProviderModel/user_provider.dart';
-import '../Models/ProviderModel/banki_wane_provider.dart';
 import '../Models/ProviderModel/news_provider.dart';
 
 class MainScreen extends StatelessWidget {

@@ -8,6 +8,7 @@ import '../../Models/ProviderModel/user_provider.dart';
 import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
 import '../Widgets/dropdown_forum.dart';
+import '../Widgets/send_post_item_row.dart';
 
 class AddForumPost extends StatefulWidget {
   static const routeName = '/add-forum-post';
@@ -17,20 +18,6 @@ class AddForumPost extends StatefulWidget {
 
   @override
   _AddForumPostState createState() => _AddForumPostState();
-}
-
-Widget itemRow(String title, Widget trailing) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-      children: [
-        Text("$title :"),
-        const SizedBox(width: 30),
-        // const Spacer(),
-        Expanded(child: trailing),
-      ],
-    ),
-  );
 }
 
 class _AddForumPostState extends State<AddForumPost> {
@@ -67,7 +54,6 @@ class _AddForumPostState extends State<AddForumPost> {
           forumID: Provider.of<ForumProvider>(context, listen: false)
               .selectedForum
               .id);
-      print('the forum post is ready to send');
       Provider.of<ForumProvider>(context, listen: false)
           .sendForumPost(post, _userProvider.token);
       titleController.text = '';
@@ -89,7 +75,7 @@ class _AddForumPostState extends State<AddForumPost> {
             key: _formKey,
             child: Column(
               children: [
-                itemRow(
+                SendPostItemRow(
                   "بەکارهێنەر *",
                   Text(
                     _userProvider.user.name,
@@ -99,21 +85,21 @@ class _AddForumPostState extends State<AddForumPost> {
                     ),
                   ),
                 ),
-                itemRow(
+                SendPostItemRow(
                   "بابەت *",
                   SekoTextFormField(
                     controller: titleController,
                     validator: emptyValidatorTFF,
                   ),
                 ),
-                itemRow("ناوی پۆلێن", DropdownForum(widget.forumType)),
-                itemRow(
+                SendPostItemRow("ناوی پۆلێن", DropdownForum(widget.forumType)),
+                SendPostItemRow(
                   "ئادرەسی ڤیدیۆ",
                   SekoTextFormField(
                     controller: videoLinkController,
                   ),
                 ),
-                itemRow(
+                SendPostItemRow(
                   "ناوەڕۆک *",
                   SekoTextFormField(
                     controller: constentsController,

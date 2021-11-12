@@ -15,6 +15,7 @@ class HawkariyiHevalkrdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<BankiWaneProvider>(context, listen: false).getAllBankiWane();
+    Provider.of<BankiWaneProvider>(context, listen: false).getAllWaneGroup();
     Provider.of<ForumProvider>(context, listen: false).getAllForumPost();
     Provider.of<ForumProvider>(context, listen: false).getAllForum();
     Provider.of<ForumCommentProvider>(context, listen: false)

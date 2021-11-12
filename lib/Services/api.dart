@@ -26,6 +26,7 @@ import '../Models/ObjectModels/survey.dart';
 import '../Models/ObjectModels/item_comment.dart';
 import '../Models/ObjectModels/forum_post.dart';
 import '../Models/ObjectModels/wane_comment.dart';
+import '../Models/ObjectModels/wane.dart';
 
 class Api {
   // this part is define base url for all api
@@ -281,8 +282,7 @@ class Api {
   }
 
   //  ------------------ Send Item Comment ------------------------------
-  Future<String> sendItemComments(
-      ItemComment comment, String userToken) async {
+  Future<String> sendItemComments(ItemComment comment, String userToken) async {
     final String _METHOD_URL = 'api/learn/itemcomment/create.php';
 
     // to make url for api call from base url and method url.
@@ -559,6 +559,34 @@ class Api {
   ///  ------------------ Hawkari Hevalkrd ------------------------------
   ///  ------------------ Hawkari Hevalkrd ------------------------------
 
+  //  ------------------ send Wane Post ------------------------------
+
+  Future<String> sendWanePost(Wane post, String userToken) async {
+    final String _METHOD_URL = 'api/upload/create.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    String sendWanePostBody = json.encode(post.toJson());
+
+    try {
+      var response = await http.post(
+        url,
+        body: sendWanePostBody,
+        headers: securityHeader(userToken),
+      );
+      
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // todo: handle if status code is not 200 or 201
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
   //  ------------------ get Banki Wane ------------------------------
 
   Future<String> getBankiWane(SearchBankiWane searchBankiWane) async {
@@ -570,6 +598,27 @@ class Api {
 
     try {
       var response = await http.post(url, body: requestBody);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ get Wane Group ------------------------------
+
+  Future<String> getAllWaneGroup() async {
+    final String _METHOD_URL = 'api/upload/group/getall.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    try {
+      var response = await http.get(url);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.body;
       } else {
@@ -612,8 +661,7 @@ class Api {
 
   //  ------------------ send Banki Wane Comment ------------------------------
 
-  Future<String> sendWaneCommet(
-      WaneComment comment, String userToken) async {
+  Future<String> sendWaneCommet(WaneComment comment, String userToken) async {
     final String _METHOD_URL = 'api/upload/comment/create.php';
 
     // to make url for api call from base url and method url.
@@ -658,6 +706,7 @@ class Api {
       throw error;
     }
   }
+
   //  ------------------ get all Forums ------------------------------
 
   Future<String> getAllForum() async {
@@ -706,8 +755,7 @@ class Api {
 
   //  ------------------ send Forum Comment ------------------------------
 
-  Future<String> sendForumCommet(
-      ForumComment comment, String userToken) async {
+  Future<String> sendForumCommet(ForumComment comment, String userToken) async {
     final String _METHOD_URL = 'api/forum/reply/create.php';
 
     // to make url for api call from base url and method url.
