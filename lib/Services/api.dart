@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:seko/Models/ObjectModels/forum_comment.dart';
 
 import '../Models/RequestModels/search_item_comments.dart';
 import '../Models/RequestModels/search_course_by_category.dart';
@@ -18,13 +19,13 @@ import '../Models/RequestModels/search_news.dart';
 import '../Models/RequestModels/search_forum.dart';
 import '../Models/RequestModels/search_forum_comment.dart';
 import '../Models/RequestModels/search_wane_comment.dart';
-import '../Models/ObjectModels/create_wane_comment.dart';
 import '../Models/ObjectModels/user.dart';
 import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
 import '../Models/ObjectModels/survey.dart';
-import '../Models/ObjectModels/create_comment.dart';
+import '../Models/ObjectModels/item_comment.dart';
 import '../Models/ObjectModels/forum_post.dart';
+import '../Models/ObjectModels/wane_comment.dart';
 
 class Api {
   // this part is define base url for all api
@@ -281,7 +282,7 @@ class Api {
 
   //  ------------------ Send Item Comment ------------------------------
   Future<String> sendItemComments(
-      CreateComment comment, String userToken) async {
+      ItemComment comment, String userToken) async {
     final String _METHOD_URL = 'api/learn/itemcomment/create.php';
 
     // to make url for api call from base url and method url.
@@ -612,7 +613,7 @@ class Api {
   //  ------------------ send Banki Wane Comment ------------------------------
 
   Future<String> sendWaneCommet(
-      CreateWaneComment comment, String userToken) async {
+      WaneComment comment, String userToken) async {
     final String _METHOD_URL = 'api/upload/comment/create.php';
 
     // to make url for api call from base url and method url.
@@ -679,7 +680,7 @@ class Api {
     }
   }
 
-  //  ------------------ get Prsyarxane and projesaz ------------------------------
+  //  ------------------ get Forum post ------------------------------
 
   Future<String> getForum(SearchForum searchForum) async {
     // ignore: non_constant_identifier_names
@@ -703,7 +704,32 @@ class Api {
     }
   }
 
-  //  ------------------ get Prsyarxane and projesaz Comment ------------------------------
+  //  ------------------ send Forum Comment ------------------------------
+
+  Future<String> sendForumCommet(
+      ForumComment comment, String userToken) async {
+    final String _METHOD_URL = 'api/forum/reply/create.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    String sendCommentBody = json.encode(comment.toJson());
+
+    try {
+      var response = await http.post(url,
+          body: sendCommentBody, headers: securityHeader(userToken));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // todo: handle if status code is not 200 or 201
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ get Forum Comment ------------------------------
 
   Future<String> getForumCommet(SearchForumComment searchComment) async {
     // ignore: non_constant_identifier_names

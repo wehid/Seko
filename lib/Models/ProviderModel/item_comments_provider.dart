@@ -4,7 +4,6 @@ import 'dart:convert';
 import '../../Services/api.dart';
 import '../RequestModels/search_item_comments.dart';
 import '../ObjectModels/item_comment.dart';
-import '../ObjectModels/create_comment.dart';
 
 class ItemCommentsProvider with ChangeNotifier {
   List<ItemComment> _itemCommentList = [];
@@ -70,7 +69,7 @@ class ItemCommentsProvider with ChangeNotifier {
     }
   }
 
-  Future<void> sendComment(CreateComment comment, String userToken) async {
+  Future<void> sendComment(ItemComment comment, String userToken) async {
     _isLoading = true;
     notifyListeners();
     ItemComment response;
@@ -85,7 +84,7 @@ class ItemCommentsProvider with ChangeNotifier {
       //todo: this part is for debugging. delete it before release
       print('after send comment, response username is: ${response.userName}');
 
-      getItemCommentListByItemId(response.itemID);
+      getItemCommentListByItemId(response.itemId);
 
       _isLoading = false;
       notifyListeners();
@@ -97,7 +96,7 @@ class ItemCommentsProvider with ChangeNotifier {
 
   List<ItemComment> itemCommentsWithoutReplay() {
     return _itemCommentList
-        .where((element) => element.replyID == null)
+        .where((element) => element.replyId == null)
         .toList();
   }
 

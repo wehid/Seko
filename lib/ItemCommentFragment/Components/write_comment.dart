@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../GlobalWidgets/seko_text_form_field.dart';
-import '../../Models/ObjectModels/create_comment.dart';
+import '../../Models/ObjectModels/item_comment.dart';
 import '../../Models/ProviderModel/user_provider.dart';
 import '../../Models/ProviderModel/item_provider.dart';
 import '../../Models/ProviderModel/item_comments_provider.dart';
 
 class WriteComment extends StatefulWidget {
-  final int replayId;
+  final String replayId;
 
   WriteComment({this.replayId});
 
@@ -42,7 +42,7 @@ class _WriteCommentState extends State<WriteComment> {
   _sendComment() {
     if (_commentFormKey.currentState.validate()) {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
-      CreateComment createComment = CreateComment(
+      ItemComment createComment = ItemComment(
         replyId: widget.replayId,
         comments: _itemCommentController.text,
         itemId:

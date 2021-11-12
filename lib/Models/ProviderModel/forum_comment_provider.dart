@@ -41,6 +41,27 @@ class ForumCommentProvider with ChangeNotifier {
     }
   }
 
+  Future sendForumComment(ForumComment comment, String userToken) async {
+    _isLoading = true;
+    notifyListeners();
+    ForumComment response;
+
+    try {
+      String responseCommentString =
+          await Api().sendForumCommet(comment, userToken);
+
+      response = ForumComment.fromJson(json.decode(responseCommentString));
+
+      getForumCommentByPostId(response.forumEntryID);
+
+      _isLoading = false;
+      notifyListeners();
+    } catch (error) {
+      print('in send forum comment, error is: $error');
+      throw error;
+    }
+  }
+
   bool get isLoading => _isLoading;
 
   List<ForumComment> get forumCommentList => _forumCommentList;

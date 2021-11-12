@@ -82,7 +82,7 @@ class _CommentWidgetState extends State<CommentWidget> {
           ),
         _space(),
         if(_isShowWriteReplay)
-              WriteComment(replayId: int.parse(widget.itemComment.id)),
+              WriteComment(replayId: widget.itemComment.id),
       ],
     );
   }

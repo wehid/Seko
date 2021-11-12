@@ -5,6 +5,7 @@ import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
 import '../../Models/ProviderModel/forum_comment_provider.dart';
 import '../CommentComponents/forum_comment_list.dart';
+import '../CommentComponents/write_forum_comment.dart';
 import '../../constants.dart';
 
 class ForumDetail extends StatelessWidget {
@@ -46,6 +47,8 @@ class ForumDetail extends StatelessWidget {
                 ),
               ),
               Text(post.contents),
+              const SizedBox(height: 35),
+              WriteForumCommetn(),
               ForumCommentList(),
             ],
           ),

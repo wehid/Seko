@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import '../ObjectModels/wane_comment.dart';
 import '../RequestModels/search_wane_comment.dart';
-import '../ObjectModels/create_wane_comment.dart';
 import '../../Services/api.dart';
 
 class WaneCommentProvider with ChangeNotifier {
@@ -44,7 +43,7 @@ class WaneCommentProvider with ChangeNotifier {
     }
   }
 
-  Future sendWaneComment(CreateWaneComment comment, String userToken) async {
+  Future sendWaneComment(WaneComment comment, String userToken) async {
     _isLoading = true;
     notifyListeners();
     WaneComment response;
