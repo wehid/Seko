@@ -61,6 +61,24 @@ class ForumProvider with ChangeNotifier {
     }
   }
 
+  Future sendForumPost(ForumPost post, String userToken) async {
+    _isLoading = true;
+    ForumPost response;
+    notifyListeners();
+
+    try {
+      String sendPostString = await Api().sendForumPost(post, userToken);
+
+      response = ForumPost.fromJson(json.decode(sendPostString));
+      _isLoading = false;
+      notifyListeners();
+      getAllForumPost();
+    } catch (error) {
+      print('in send forum post, error is: $error');
+      throw error;
+    }
+  }
+
   void setSelectedFroumPost(ForumPost selectedFroumPost) {
     _selectedFroumPost = selectedFroumPost;
     notifyListeners();

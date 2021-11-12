@@ -24,6 +24,7 @@ import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
 import '../Models/ObjectModels/survey.dart';
 import '../Models/ObjectModels/create_comment.dart';
+import '../Models/ObjectModels/forum_post.dart';
 
 class Api {
   // this part is define base url for all api
@@ -633,7 +634,30 @@ class Api {
     }
   }
 
-    //  ------------------ get all Forums ------------------------------
+  //  ------------------ send Forum Post ------------------------------
+
+  Future<String> sendForumPost(ForumPost post, String userToken) async {
+    final String _METHOD_URL = 'api/forum/entry/create.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    String sendForumPostBody = json.encode(post.toJson());
+
+    try {
+      var response = await http.post(url,
+          body: sendForumPostBody, headers: securityHeader(userToken));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // todo: handle if status code is not 200 or 201
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+  //  ------------------ get all Forums ------------------------------
 
   Future<String> getAllForum() async {
     final String _METHOD_URL = 'api/forum/getall.php';

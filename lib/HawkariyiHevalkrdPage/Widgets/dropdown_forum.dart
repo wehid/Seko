@@ -47,7 +47,6 @@ class _DropdownForumState extends State<DropdownForum> {
       ),
       child: DropdownButton<Forum>(
         value: currentForum,
-        hint: Text('ناوی پۆلێن هەڵبژێرە'),
         onChanged: (newForum) {
           currentForum = newForum;
           forumProvider.setSelectedForum(newForum);

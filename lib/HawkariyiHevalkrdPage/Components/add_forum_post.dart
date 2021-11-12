@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seko/Models/ObjectModels/forum.dart';
-import 'package:seko/Models/ProviderModel/forum_provider.dart';
 
 import '../../constants.dart';
 import '../../GlobalWidgets/seko_text_form_field.dart';
 import '../../GlobalWidgets/seko_button.dart';
 import '../../Models/ProviderModel/user_provider.dart';
+import '../../Models/ProviderModel/forum_provider.dart';
 import '../../Models/ObjectModels/forum_post.dart';
 import '../Widgets/dropdown_forum.dart';
 
@@ -69,17 +68,13 @@ class _AddForumPostState extends State<AddForumPost> {
               .selectedForum
               .id);
       print('the forum post is ready to send');
-      // todo: send the post
-      // todo: clean the form
-      // todo: close the page
+      Provider.of<ForumProvider>(context, listen: false)
+          .sendForumPost(post, _userProvider.token);
+      titleController.text = '';
+      constentsController.text = '';
+      videoLinkController.text = '';
+      Navigator.of(context).pop();
     }
-  }
-
-  String dropdownEmptyValidator(Forum value) {
-    if (value == null) {
-      return "زانیاری داواکراو نابێ بەتاڵ بێت";
-    }
-    return null;
   }
 
   @override
