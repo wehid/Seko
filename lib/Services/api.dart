@@ -825,4 +825,28 @@ class Api {
       throw error;
     }
   }
+  
+  ///  ------------------ Family ------------------------------
+  ///  ------------------ Family ------------------------------
+
+  //  ------------------ get Family Categories ------------------------------
+
+    Future<String> getFamilyCategories() async {
+    final String _METHOD_URL = 'api/family/cat/getall.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }

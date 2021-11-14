@@ -22,6 +22,7 @@ import 'Models/ProviderModel/news_provider.dart';
 import 'Models/ProviderModel/forum_provider.dart';
 import 'Models/ProviderModel/forum_comment_provider.dart';
 import 'Models/ProviderModel/wane_comment_provider.dart';
+import 'Models/ProviderModel/family_provider.dart';
 import 'rout_generator.dart';
 
 void main() {
@@ -46,6 +47,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ForumCommentProvider()),
         ChangeNotifierProvider(create: (_) => WaneCommentProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
+        ChangeNotifierProvider(create: (_) => FamilyProvider()),
       ],
       child: MyApp(),
     ),
