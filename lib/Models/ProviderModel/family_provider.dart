@@ -25,9 +25,9 @@ class FamilyProvider with ChangeNotifier {
       // TODO: delete print
       print(
           'in get all family categories, number of all categories are: ${response.length}');
-          
-      _isLoading = false;
+
       _familyCategories = response;
+      _isLoading = false;
       notifyListeners();
     } catch (error) {
       print('in get all family categories, error is: $error');
@@ -41,6 +41,8 @@ class FamilyProvider with ChangeNotifier {
   }
 
   bool get isLoading => _isLoading;
+
   List<FamilyCategory> get familyCategories => _familyCategories;
+
   FamilyCategory get selectedFamilyCategory => _selectedFamilyCategory;
 }

@@ -11,7 +11,6 @@ import '../Models/ProviderModel/cities_provider.dart';
 import '../Models/ProviderModel/lesson_provider.dart';
 import '../Models/ProviderModel/item_provider.dart';
 import '../Models/ProviderModel/user_provider.dart';
-import '../Models/ProviderModel/news_provider.dart';
 
 class MainScreen extends StatelessWidget {
   static const routName = '/';
@@ -43,7 +42,6 @@ class MainScreen extends StatelessWidget {
     Provider.of<LessonProvider>(context, listen: false).getAllLessons();
     Provider.of<ItemProvider>(context, listen: false).getAllItems();
     _userProvider = Provider.of<UserProvider>(context);
-    Provider.of<NewsProvider>(context, listen: false).getAllNews();
   }
 
   bool _isLoadingData() {

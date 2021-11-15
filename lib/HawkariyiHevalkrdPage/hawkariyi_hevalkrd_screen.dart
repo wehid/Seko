@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../Models/ProviderModel/banki_wane_provider.dart';
 import '../Models/ProviderModel/forum_provider.dart';
-import '../Models/ProviderModel/forum_comment_provider.dart';
 
 import 'Tabs/banki_wane_tab.dart';
 import 'Tabs/prsyarxane_tab.dart';
@@ -18,8 +17,6 @@ class HawkariyiHevalkrdScreen extends StatelessWidget {
     Provider.of<BankiWaneProvider>(context, listen: false).getAllWaneGroup();
     Provider.of<ForumProvider>(context, listen: false).getAllForumPost();
     Provider.of<ForumProvider>(context, listen: false).getAllForum();
-    Provider.of<ForumCommentProvider>(context, listen: false)
-        .getAllForumComment();
 
     return DefaultTabController(
       length: 3,
