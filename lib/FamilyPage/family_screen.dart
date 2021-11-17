@@ -34,7 +34,7 @@ class FamilyScreen extends StatelessWidget {
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
                 crossAxisCount: 2,
-                childAspectRatio: 280 / 400,
+                childAspectRatio: 220 / 400,
               ),
               itemBuilder: (_, index) {
                 return FamilyCategoryWidget(familyCategories[index]);
