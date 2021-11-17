@@ -21,10 +21,6 @@ class LearningTab extends StatelessWidget {
         : _coursesProvider.getCourseListBySelectedCategoryId(_selectedCategory.id);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('لاپەڕەی سەرەکی'),
-      //   centerTitle: true,
-      // ),
       appBar: customAppBar("لاپەڕەی سەرەکی"),
       body: Column(
         children: [

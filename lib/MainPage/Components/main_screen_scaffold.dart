@@ -6,6 +6,7 @@ import 'user_tab.dart';
 import '../../HawkariyiHevalkrdPage/hawkariyi_hevalkrd_screen.dart';
 import '../../NewsPage/news_screen.dart';
 import '../../FamilyPage/family_screen.dart';
+import '../../BooksPage/books_screen.dart';
 import '../../Models/ProviderModel/user_provider.dart';
 
 class MainScreenScaffold extends StatefulWidget {
@@ -22,6 +23,7 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
   final List<Widget> _tabScreen = [
     LearningTab(),
     HawkariyiHevalkrdScreen(),
+    BooksScrenn(),
     FamilyScreen(),
     NewsScreen(),
     UserTab(),
@@ -64,6 +66,10 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
               label: 'هاوکاریی هەڤاڵکرد',
               backgroundColor: Colors.lightBlue),
           BottomNavigationBarItem(
+              icon: Icon(Icons.local_library),
+              label: 'کتێبخانە',
+              backgroundColor: Colors.deepOrange),
+          BottomNavigationBarItem(
               icon: Icon(Icons.family_restroom),
               label: 'گەنجینەی خێزان',
               backgroundColor: Colors.green.shade700),
@@ -74,7 +80,7 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
           BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'پرۆفایل',
-              backgroundColor: Colors.deepOrangeAccent),
+              backgroundColor: Colors.lightGreen),
         ],
       ),
     );
