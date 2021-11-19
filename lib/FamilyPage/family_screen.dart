@@ -12,6 +12,7 @@ class FamilyScreen extends StatelessWidget {
   void loadCategories(BuildContext context) {
     Provider.of<FamilyProvider>(context, listen: false)
         .getAllFamilyCategories();
+    Provider.of<FamilyProvider>(context, listen: false).getAllFamilyItems();
     _isFirstRun = false;
   }
 

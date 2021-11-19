@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../Models/ObjectModels/family_category.dart';
 import '../../Models/ProviderModel/family_provider.dart';
 import '../../GlobalWidgets/image_with_progress.dart';
+import '../Components/family_category_details.dart';
 
 class FamilyCategoryWidget extends StatelessWidget {
   final FamilyCategory familyCategory;
@@ -15,12 +16,10 @@ class FamilyCategoryWidget extends StatelessWidget {
   }
 
   void _openCategory(BuildContext context) {
-    // TODO: delete print
-    print('selecet family category of category id: ${familyCategory.id}');
     Provider.of<FamilyProvider>(context, listen: false)
         .setSelectedFamilyCategory(familyCategory);
 
-    // TODO: open category details or item of this family category
+        Navigator.of(context).pushNamed(FamilyCategoryDetails.routeName);
   }
 
   @override
