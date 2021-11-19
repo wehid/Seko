@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import '../../Services/api.dart';
+import '../../constants.dart';
 
 import '../ObjectModels/book.dart';
 import '../RequestModels/search_book.dart';
 
 class BookProvider with ChangeNotifier {
-  static const String _TEXT_BOOK_TYPE = "1";
-  static const String _VIDEO_BOOK_TYPE = "2";
-  static const String _AUDIO_BOOK_TYPE = "3";
 
   bool _isLoading = false;
   Book _selectedBook;
@@ -47,11 +45,11 @@ class BookProvider with ChangeNotifier {
   }
 
   List<Book> get textBookList =>
-      _bookList.where((element) => element.type == _TEXT_BOOK_TYPE).toList();
+      _bookList.where((element) => element.type == TEXT_BOOK_TYPE).toList();
   List<Book> get videoBookList =>
-      _bookList.where((element) => element.type == _VIDEO_BOOK_TYPE).toList();
+      _bookList.where((element) => element.type == VIDEO_BOOK_TYPE).toList();
   List<Book> get audioBookList =>
-      _bookList.where((element) => element.type == _AUDIO_BOOK_TYPE).toList();
+      _bookList.where((element) => element.type == AUDIO_BOOK_TYPE).toList();
 
   bool get isLoading => _isLoading;
   Book get selectedBook => _selectedBook;

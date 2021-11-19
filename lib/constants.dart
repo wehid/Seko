@@ -81,6 +81,10 @@ const MULTI_CHOICE_ANSWER_TYPE = "1";
 const PRSYARXANE = "1";
 const PROJESAZ = "2";
 
+const String TEXT_BOOK_TYPE = "1";
+const String VIDEO_BOOK_TYPE = "2";
+const String AUDIO_BOOK_TYPE = "3";
+
 final List<IconData> listItemIcon = [
   Icons.local_movies,
   Icons.article,
