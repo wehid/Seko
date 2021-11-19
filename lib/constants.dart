@@ -85,6 +85,13 @@ const String TEXT_BOOK_TYPE = "1";
 const String VIDEO_BOOK_TYPE = "2";
 const String AUDIO_BOOK_TYPE = "3";
 
+const List<IconData> BOOK_CATEGORY_ICON = [
+  null,
+  Icons.library_books,
+  Icons.videocam,
+  Icons.headphones
+];
+
 final List<IconData> listItemIcon = [
   Icons.local_movies,
   Icons.article,

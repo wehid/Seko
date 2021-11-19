@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
+import 'package:provider/provider.dart';
 
 import '../../Models/ObjectModels/book.dart';
+import '../../Models/ProviderModel/book_provider.dart';
 import '../../GlobalWidgets/image_with_progress.dart';
-import 'text_book_details.dart';
-import 'video_book_details.dart';
+import 'show_book_details.dart';
+import '../../constants.dart';
 
 class BookItem extends StatelessWidget {
   final Book book;
-  final List categoryIcom = [
-    null,
-    Icons.library_books,
-    Icons.videocam,
-    Icons.headphones
-  ];
+
 
   BookItem(this.book);
 
@@ -31,7 +26,7 @@ class BookItem extends StatelessWidget {
         Row(
           children: [
             Icon(
-              categoryIcom[int.parse(book.type)],
+              BOOK_CATEGORY_ICON[int.parse(book.type)],
               color: Colors.grey.shade600,
             ),
             const SizedBox(width: 5),
@@ -56,16 +51,8 @@ class BookItem extends StatelessWidget {
   }
 
   void _openBookDetails(BuildContext context) {
-    switch (book.type) {
-      case TEXT_BOOK_TYPE:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (ctx) => TextBookDetails(book)));
-        break;
-      case VIDEO_BOOK_TYPE:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (ctx) => VideoBookDetails(book)));
-        break;
-    }
+    Provider.of<BookProvider>(context, listen: false).setSelectedBook(book);
+    Navigator.of(context).pushNamed(ShowBookDetails.routeName);
   }
 
   @override

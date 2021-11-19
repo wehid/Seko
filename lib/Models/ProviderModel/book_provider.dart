@@ -8,7 +8,6 @@ import '../ObjectModels/book.dart';
 import '../RequestModels/search_book.dart';
 
 class BookProvider with ChangeNotifier {
-
   bool _isLoading = false;
   Book _selectedBook;
   List<Book> _bookList = [];
@@ -50,6 +49,21 @@ class BookProvider with ChangeNotifier {
       _bookList.where((element) => element.type == VIDEO_BOOK_TYPE).toList();
   List<Book> get audioBookList =>
       _bookList.where((element) => element.type == AUDIO_BOOK_TYPE).toList();
+
+  List<Book> getBookListByType(String bookType) {
+    switch (bookType) {
+      case TEXT_BOOK_TYPE:
+        return textBookList;
+        break;
+      case VIDEO_BOOK_TYPE:
+        return videoBookList;
+        break;
+      case AUDIO_BOOK_TYPE:
+        return audioBookList;
+        break;
+    }
+    return textBookList;
+  }
 
   bool get isLoading => _isLoading;
   Book get selectedBook => _selectedBook;
