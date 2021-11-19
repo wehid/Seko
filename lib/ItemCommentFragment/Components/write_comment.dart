@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../GlobalWidgets/seko_text_form_field.dart';
-import '../../Models/ObjectModels/create_comment.dart';
+import '../../Models/ObjectModels/item_comment.dart';
 import '../../Models/ProviderModel/user_provider.dart';
 import '../../Models/ProviderModel/item_provider.dart';
 import '../../Models/ProviderModel/item_comments_provider.dart';
 
 class WriteComment extends StatefulWidget {
-  final int replayId;
+  final String replayId;
 
   WriteComment({this.replayId});
 
@@ -32,22 +32,26 @@ class _WriteCommentState extends State<WriteComment> {
     super.dispose();
   }
 
-  String _emptyCommentValidator(String comment){
-    if(comment == null || comment.isEmpty){
+  String _emptyCommentValidator(String comment) {
+    if (comment == null || comment.isEmpty) {
       return "پێویستە لە پێشدا بۆچوونەکەت بنووسی";
     }
     return null;
   }
 
-  _sendComment(){
-    if(_commentFormKey.currentState.validate()){
-      CreateComment createComment = CreateComment(
+  _sendComment() {
+    if (_commentFormKey.currentState.validate()) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      ItemComment createComment = ItemComment(
         replyId: widget.replayId,
         comments: _itemCommentController.text,
-        itemId: Provider.of<ItemProvider>(context, listen: false).selectedItem.id,
-        userId: Provider.of<UserProvider>(context, listen: false).user.id,
+        itemId:
+            Provider.of<ItemProvider>(context, listen: false).selectedItem.id,
+        userId: userProvider.user.id,
       );
-      Provider.of<ItemCommentsProvider>(context, listen: false).sendComment(createComment);
+      String userToken = userProvider.token;
+      Provider.of<ItemCommentsProvider>(context, listen: false)
+          .sendComment(createComment, userToken);
       _itemCommentController.text = "";
     }
   }
@@ -73,7 +77,7 @@ class _WriteCommentState extends State<WriteComment> {
           onPressed: _sendComment,
           icon: RotationTransition(
             // this is for rotating icon in 45 degree
-            turns: AlwaysStoppedAnimation(155/360),
+            turns: AlwaysStoppedAnimation(155 / 360),
             child: Icon(
               Icons.send,
               color: Colors.green,

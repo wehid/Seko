@@ -4,22 +4,23 @@ import 'dart:convert';
 import '../../Services/api.dart';
 import '../RequestModels/search_item_comments.dart';
 import '../ObjectModels/item_comment.dart';
-import '../ObjectModels/create_comment.dart';
 
-class ItemCommentsProvider with ChangeNotifier{
+class ItemCommentsProvider with ChangeNotifier {
   List<ItemComment> _itemCommentList = [];
   bool _isLoading = false;
 
-  Future<void> getAllItemComments()async{
+  Future<void> getAllItemComments() async {
     List<ItemComment> result = [];
     _isLoading = true;
     SearchItemComments searchAllItemComment = SearchItemComments();
 
-    try{
-      String itemCommentsString = await Api().searchItemComments(searchAllItemComment);
+    try {
+      String itemCommentsString =
+          await Api().searchItemComments(searchAllItemComment);
 
       Iterable iterable = json.decode(itemCommentsString)["Data"];
-      result = iterable.map((comment) => ItemComment.fromJson(comment)).toList();
+      result =
+          iterable.map((comment) => ItemComment.fromJson(comment)).toList();
 
       //todo: this part is for debugging. delete it before release
       print('get comment item length is: ${result.length}');
@@ -27,29 +28,28 @@ class ItemCommentsProvider with ChangeNotifier{
       _itemCommentList = result;
       _isLoading = false;
       notifyListeners();
-
-    }catch(error){
+    } catch (error) {
       print('in get all item comment, error is: $error');
       throw error;
     }
-
   }
 
-  Future<void> getItemCommentListByItemId(String itemId) async{
+  Future<void> getItemCommentListByItemId(String itemId) async {
     _isLoading = true;
     _itemCommentList = [];
     // notifyListeners();
     List<ItemComment> result = [];
     SearchItemComments searchItemComments = SearchItemComments(itemId: itemId);
 
-    try{
-      String itemCommentsString = await Api().searchItemComments(searchItemComments);
+    try {
+      String itemCommentsString =
+          await Api().searchItemComments(searchItemComments);
       //todo: delete print
       print(itemCommentsString);
 
       Iterable iterable = json.decode(itemCommentsString)["Data"];
-      result = iterable.map((comment) => ItemComment.fromJson(comment)).toList();
-
+      result =
+          iterable.map((comment) => ItemComment.fromJson(comment)).toList();
 
       //todo: this part is for debugging. delete it before release
       print('get comment item by item id, length is: ${result.length}');
@@ -63,19 +63,20 @@ class ItemCommentsProvider with ChangeNotifier{
       }
 
       // return result;
-    }catch (error){
+    } catch (error) {
       print('in get item comment by item id, error is: $error');
       throw error;
     }
   }
 
-  Future<void> sendComment(CreateComment comment) async{
+  Future<void> sendComment(ItemComment comment, String userToken) async {
     _isLoading = true;
     notifyListeners();
     ItemComment response;
 
-    try{
-      String responseCommentString = await Api().sendItemComments(comment);
+    try {
+      String responseCommentString =
+          await Api().sendItemComments(comment, userToken);
       //todo: delete print
       print(responseCommentString);
 
@@ -83,18 +84,20 @@ class ItemCommentsProvider with ChangeNotifier{
       //todo: this part is for debugging. delete it before release
       print('after send comment, response username is: ${response.userName}');
 
-      getItemCommentListByItemId(response.itemID);
+      getItemCommentListByItemId(response.itemId);
 
       _isLoading = false;
       notifyListeners();
-    }catch(error){
+    } catch (error) {
       print('in send comment, error is: $error');
       throw error;
     }
   }
 
-  List<ItemComment> itemCommentsWithoutReplay(){
-    return _itemCommentList.where((element) => element.replyID == null).toList();
+  List<ItemComment> itemCommentsWithoutReplay() {
+    return _itemCommentList
+        .where((element) => element.replyId == null)
+        .toList();
   }
 
   bool get isLoading => _isLoading;

@@ -10,7 +10,6 @@ import 'Models/RequestModels/search_user_item.dart';
 import 'Models/ProviderModel/user_provider.dart';
 import 'Models/ProviderModel/quiz_provider.dart';
 import 'Models/ProviderModel/survey_provider.dart';
-import 'Models/ProviderModel/item_comments_provider.dart';
 
 Widget progressPage() {
   return Scaffold(
@@ -39,7 +38,7 @@ Widget showError(String error) {
   );
 }
 
-AppBar customAppBar(String title){
+AppBar customAppBar(String title) {
   return AppBar(
     title: Text(title),
     centerTitle: true,
@@ -47,15 +46,19 @@ AppBar customAppBar(String title){
   );
 }
 
-TextStyle titleTextStyle(){
+Divider customDivider() {
+  return const Divider(color: Colors.blueGrey, thickness: 1.2);
+}
+
+TextStyle titleTextStyle() {
   return TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
 }
 
-String emptyValidatorTFF(String value){
-  if(value == null || value.isEmpty){
+String emptyValidatorTFF(String value) {
+  if (value == null || value.isEmpty) {
     return "زانیاری داواکراو نابێ بەتاڵ بێت";
   }
   return null;
@@ -63,8 +66,7 @@ String emptyValidatorTFF(String value){
 
 //return selected city id or empty string if not selected
 String getSelectedCityId(BuildContext context) {
-  City city =
-      Provider.of<CitiesProvider>(context, listen: false).selectedCity;
+  City city = Provider.of<CitiesProvider>(context, listen: false).selectedCity;
   return city != null ? city.iD : '';
 }
 
@@ -76,6 +78,12 @@ const SURVEY_TYPE = 5;
 
 const MULTI_CHOICE_ANSWER_TYPE = "1";
 
+const PRSYARXANE = "1";
+const PROJESAZ = "2";
+
+const String TEXT_BOOK_TYPE = "1";
+const String VIDEO_BOOK_TYPE = "2";
+const String AUDIO_BOOK_TYPE = "3";
 
 final List<IconData> listItemIcon = [
   Icons.local_movies,
@@ -100,7 +108,8 @@ void downloadAllNeededAfterLogin(BuildContext context) {
   // Provider.of<ItemCommentsProvider>(context, listen: false).getAllItemComments();
 }
 
-void showUnAnsweredAlertDialog(String unAnsweredQuestions, BuildContext context) {
+void showUnAnsweredAlertDialog(
+    String unAnsweredQuestions, BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -128,7 +137,7 @@ void showUnAnsweredAlertDialog(String unAnsweredQuestions, BuildContext context)
   );
 }
 
-void removeAllDownloadedAfterLogout(BuildContext context){
+void removeAllDownloadedAfterLogout(BuildContext context) {
 //  todo: remove downloaded from provider
 }
 
