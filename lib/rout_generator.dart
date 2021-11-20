@@ -13,8 +13,9 @@ import 'HawkariyiHevalkrdPage/Components/wane_detail.dart';
 import 'HawkariyiHevalkrdPage/Components/forum_detail.dart';
 import 'HawkariyiHevalkrdPage/Components/add_forum_post.dart';
 import 'HawkariyiHevalkrdPage/Components/add_wane_post.dart';
-import 'BooksPage/Widgets/show_book_details.dart';
+import 'BooksPage/Componants/show_book_details.dart';
 import 'FamilyPage/Components/family_category_details.dart';
+import 'FamilyPage/Components/family_item_details.dart';
 
 class RoutGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -64,6 +65,9 @@ class RoutGenerator {
         break;
       case FamilyCategoryDetails.routeName:
         return MaterialPageRoute(builder: (_) => FamilyCategoryDetails());
+        break;
+      case FamilyItemDetails.routeName:
+        return MaterialPageRoute(builder: (_) => FamilyItemDetails());
         break;
 
       //  TODO: default: return (_)=> error screen
