@@ -72,7 +72,6 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
     );
   }
 
-
   void _addThisCourseToLearning() {
     if (_user == null) {
       _showFirstLoginAlertDialog();
@@ -87,6 +86,8 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('course item screen build. ${DateTime.now()}');
+
     if (_user == null) {
       _isLearningThisCourse = false;
     } else {
@@ -100,5 +101,7 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
         : _isLearningThisCourse
             ? LessonScreen()
             : CourseReview(_myCourse, _addThisCourseToLearning);
+
+
   }
 }

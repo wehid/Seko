@@ -14,6 +14,8 @@ class LessonScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('leason screen build. ${DateTime.now()}');
+
     final _selectedCourse =
         Provider.of<CoursesProvider>(context, listen: false).selectedCourse;
     final List<Lesson> _myLessons =
@@ -36,6 +38,9 @@ class LessonScreen extends StatelessWidget {
                 // type of this parameter should same to type of value parameter.
                 initialOpenPanelValue: _myLessons[_firstIndex],
                 children: _myLessons.map((lesson) {
+                  print(
+                      'leason screen build. ${lesson.title} in ${DateTime.now()}');
+
                   return ExpansionPanelRadio(
                     canTapOnHeader: true,
                     // this value is like key for define witch item is expanded

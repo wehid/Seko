@@ -11,19 +11,7 @@ import 'Models/RequestModels/search_user_item.dart';
 import 'Models/ProviderModel/user_provider.dart';
 import 'Models/ProviderModel/quiz_provider.dart';
 import 'Models/ProviderModel/survey_provider.dart';
-
-Future<bool> isConnectToInternet() async {
-  bool _isConnection = false;
-  try {
-    final result = await InternetAddress.lookup('google.com');
-    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      _isConnection = true;
-    }
-  } on SocketException catch (_) {
-    _isConnection = false;
-  }
-  return _isConnection;
-}
+import 'Models/ProviderModel/internet_check_provider.dart';
 
 Widget progressPage() {
   return Scaffold(
@@ -38,18 +26,34 @@ Widget progressPage() {
 
 Widget showError(String error) {
   return Scaffold(
-    appBar: AppBar(
-      title: Text('کێشەیەک ڕووی داوە'),
-    ),
+    appBar: customAppBar('کێشەیەک ڕووی داوە'),
     body: Center(
-        child: Text(
-      error,
-      style: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.yellow.shade700,
+            size: 100,
+          ),
+          Text(
+            error,
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
-    )),
+    ),
   );
+}
+
+Future checkInternetAndOpenPage(BuildContext context, String routName) {
+  InternetCheckProvider internetCheckProvider =
+      Provider.of<InternetCheckProvider>(context);
+  internetCheckProvider.checkInternetConnection();
+
 }
 
 AppBar customAppBar(String title) {
@@ -126,7 +130,6 @@ void downloadAllNeededAfterLogin(BuildContext context) {
       SearchUserItem(userId: _userProvider.user.id), _userProvider.token);
   Provider.of<QuizProvider>(context, listen: false).getAllQuestions();
   Provider.of<SurveyProvider>(context, listen: false).getAllSurveyQuestion();
-  // Provider.of<ItemCommentsProvider>(context, listen: false).getAllItemComments();
 }
 
 void showUnAnsweredAlertDialog(
@@ -140,7 +143,35 @@ void showUnAnsweredAlertDialog(
         size: 100,
       ),
       content: Text(
-        'ئەم پرسیارانە وڵان نەدراونەتەوە: $unAnsweredQuestions',
+        'ئەم پرسیارانە وڵام نەدراونەتەوە: $unAnsweredQuestions',
+        style: TextStyle(
+          fontSize: 20,
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(
+            'باشە',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Future showWarningAlertDialog(String warning, BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Icon(
+        Icons.warning_amber_rounded,
+        color: Colors.yellow.shade700,
+        size: 100,
+      ),
+      content: Text(
+        'کێشەیەک ڕووی داوە. /n/n $warning',
         style: TextStyle(
           fontSize: 20,
         ),
