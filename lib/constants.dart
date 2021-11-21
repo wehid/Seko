@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,19 @@ import 'Models/RequestModels/search_user_item.dart';
 import 'Models/ProviderModel/user_provider.dart';
 import 'Models/ProviderModel/quiz_provider.dart';
 import 'Models/ProviderModel/survey_provider.dart';
+
+Future<bool> isConnectToInternet() async {
+  bool _isConnection = false;
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      _isConnection = true;
+    }
+  } on SocketException catch (_) {
+    _isConnection = false;
+  }
+  return _isConnection;
+}
 
 Widget progressPage() {
   return Scaffold(

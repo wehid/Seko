@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../Models/ObjectModels/book.dart';
 import '../../Models/ProviderModel/book_provider.dart';
 import '../../GlobalWidgets/image_with_progress.dart';
-import 'show_book_details.dart';
+import '../Componants/show_book_details.dart';
 import '../../constants.dart';
 
 class BookItem extends StatelessWidget {

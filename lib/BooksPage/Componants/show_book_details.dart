@@ -1,13 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import '../../constants.dart';
 import '../../GlobalWidgets/youtube_video_item.dart';
 import '../../GlobalWidgets/image_with_progress.dart';
+import '../../GlobalWidgets/outline_linke.dart';
 
 import '../../Models/ObjectModels/book.dart';
 import '../../Models/ProviderModel/book_provider.dart';
@@ -89,39 +89,15 @@ class _ShowBookDetailsState extends State<ShowBookDetails> {
         padding: const EdgeInsets.all(8.0),
         child: Html(data: book.brief),
       ),
-      RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: "بەستەری دەرەکی",
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  launch(book.link);
-                },
-            ),
-          ],
-        ),
+      OutlineLink(
+        icon: CupertinoIcons.link,
+        description: "بەستەری دەرەکی",
+        link: book.link,
       ),
-      RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: "دابەزێنە",
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  launch(book.filePath);
-                },
-            ),
-          ],
-        ),
+      OutlineLink(
+        icon: CupertinoIcons.paperclip,
+        description: "دابەزێنە",
+        link: book.filePath,
       ),
     ];
   }
