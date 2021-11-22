@@ -21,6 +21,7 @@ import '../Models/RequestModels/search_forum_comment.dart';
 import '../Models/RequestModels/search_wane_comment.dart';
 import '../Models/RequestModels/search_book.dart';
 import '../Models/RequestModels/search_family_item.dart';
+import '../Models/RequestModels/search_user_log.dart';
 import '../Models/ObjectModels/user.dart';
 import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
@@ -545,7 +546,8 @@ class Api {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.body;
       } else {
-        print('in register api, response status code is: ${response.statusCode}');
+        print(
+            'in register api, response status code is: ${response.statusCode}');
         print('in register api, response body is: ${response.body}');
         throw response.statusCode;
       }
@@ -899,6 +901,31 @@ class Api {
     // to make url for api call from base url and method url.
     var url = Uri.https(_BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchBook.toJson());
+
+    try {
+      var response = await http.post(url, body: requestBody);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  ///  ------------------ User Log ------------------------------
+  ///  ------------------ User Log ------------------------------
+
+  //  ------------------ get User Log ------------------------------
+
+  Future<String> getUserLogs(SearchUserLog searchUserLog) async {
+    final String _METHOD_URL = 'api/log/user/search.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    String requestBody = json.encode(searchUserLog.toJson());
 
     try {
       var response = await http.post(url, body: requestBody);

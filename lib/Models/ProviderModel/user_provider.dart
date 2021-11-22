@@ -3,12 +3,15 @@ import 'dart:convert';
 
 import '../../Services/api.dart';
 import '../ObjectModels/user.dart';
+import '../ObjectModels/user_log.dart';
+import '../RequestModels/search_user_log.dart';
 
 class UserProvider with ChangeNotifier {
   User _user;
   bool _isLoading = false;
   String _token = '';
   String _errorMessage;
+  List<UserLog> _userLogs = [];
 
   Future<void> login(String username, String password) async {
     _isLoading = true;
@@ -83,6 +86,29 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  Future getUserLogs() async {
+    _isLoading = true;
+    List<UserLog> response = [];
+    SearchUserLog searchAll = SearchUserLog(userId: int.parse(_user.id));
+
+    try {
+      String stringUserLogs = await Api().getUserLogs(searchAll);
+
+      Iterable iterable = json.decode(stringUserLogs)["Data"];
+      response = iterable.map((element) => UserLog.fromJson(element)).toList();
+
+      // TODO: delete print
+      print('in get user logs. number of logs are: ${response.length}');
+
+      _isLoading = false;
+      _userLogs = response;
+      notifyListeners();
+    } catch (error) {
+      print('in get user logs, error is: $error');
+      throw error;
+    }
+  }
+
   void logout() {
     _user = null;
     _token = '';
@@ -102,6 +128,8 @@ class UserProvider with ChangeNotifier {
   String get token => _token;
 
   String get errorMessage => _errorMessage;
+
+  List<UserLog> get userLogs => _userLogs;
 
   String removeAllHtmlTags(String htmlText) {
     RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
