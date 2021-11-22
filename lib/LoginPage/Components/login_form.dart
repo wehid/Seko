@@ -20,6 +20,7 @@ class _LoginFormState extends State<LoginForm> {
   SQLHelper helper;
 
   bool _saveMe = true;
+  bool _showProgressBar = false;
 
   @override
   void initState() {
@@ -42,83 +43,99 @@ class _LoginFormState extends State<LoginForm> {
 
   void _login() async {
     if (_formKey.currentState.validate()) {
+      setState(() {
+        _showProgressBar = true;
+      });
       String username = _usernameController.text;
       String password = _passwordController.text;
 
       List<Login> savedLogin = await helper.getLogin();
       if (savedLogin.length > 0) helper.deleteAll();
 
-      //todo: wright user provider and login with username and password in it.
-      //todo: after login successfully, push and replace login or register screen with profile screen
+      UserProvider userProvider =
+          Provider.of<UserProvider>(context, listen: false);
+      userProvider.login(username, password).then((_) {
+        // setState(() {
+        //   _showProgressBar = false;
+        // });
+        _showProgressBar = false;
 
-      Provider.of<UserProvider>(context, listen: false)
-          .login(username, password).then((_) => downloadAllNeededAfterLogin(context));
+        downloadAllNeededAfterLogin(context);
 
-      Login login = Login(
-        username: username,
-        password: password,
-      );
+        Login login = Login(
+          username: username,
+          password: password,
+        );
 
-      helper.insertLogin(login);
+        helper.insertLogin(login);
+      }).onError((error, stackTrace) {
+        setState(() {
+          _showProgressBar = false;
+        });
+        showWarningAlertDialog(userProvider.errorMessage, context);
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Form(
-            key: _formKey,
+    return _showProgressBar
+        ? Center(child: CircularProgressIndicator())
+        : SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 50),
-                SekoTextFormField(
-                  controller: _usernameController,
-                  textInputAction: TextInputAction.next,
-                  isPassword: false,
-                  label: "ناوی بەکارهێنەر",
-                  validator: emptyValidatorTFF,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      SekoTextFormField(
+                        controller: _usernameController,
+                        textInputAction: TextInputAction.next,
+                        isPassword: false,
+                        label: "ناوی بەکارهێنەر",
+                        validator: emptyValidatorTFF,
+                      ),
+                      SekoTextFormField(
+                        controller: _passwordController,
+                        textInputAction: TextInputAction.done,
+                        isPassword: true,
+                        label: "تێپەڕوشە",
+                        validator: emptyValidatorTFF,
+                      ),
+                    ],
+                  ),
                 ),
-                SekoTextFormField(
-                  controller: _passwordController,
-                  textInputAction: TextInputAction.done,
-                  isPassword: true,
-                  label: "تێپەڕوشە",
-                  validator: emptyValidatorTFF,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('لە بیرم مەکە'),
+                    Checkbox(
+                      value: _saveMe,
+                      onChanged: _changeSaveMe,
+                    ),
+                  ],
                 ),
+                ElevatedButton(
+                  onPressed: _login,
+                  child: Text('چوونە ژوورەوە'),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(RegisterScreen.routeName);
+                      },
+                      child: Text("بوون بە ئەندام"),
+                    ),
+                    TextButton(
+                        onPressed: () {}, child: Text("تێپەڕوشەم بیر چۆتەوە")),
+                  ],
+                )
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('لە بیرم مەکە'),
-
-              Checkbox(
-                value: _saveMe,
-                onChanged: _changeSaveMe,
-              ),
-            ],
-          ),
-          ElevatedButton(
-            onPressed: _login,
-            child: Text('چوونە ژوورەوە'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(RegisterScreen.routeName);
-                },
-                child: Text("بوون بە ئەندام"),
-              ),
-              TextButton(onPressed: () {}, child: Text("تێپەڕوشەم بیر چۆتەوە")),
-            ],
-          )
-        ],
-      ),
-    );
+          );
   }
 }

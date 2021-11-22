@@ -86,8 +86,6 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('course item screen build. ${DateTime.now()}');
-
     if (_user == null) {
       _isLearningThisCourse = false;
     } else {

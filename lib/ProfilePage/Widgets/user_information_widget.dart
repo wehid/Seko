@@ -18,15 +18,12 @@ class UserInformationWidget extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.all(15),
-      child: Flexible(
-        child: Row(
-          children: [
-            Text('$title:', style: myStyleTitle()),
-            SizedBox(width: 15),
-            Text(description, style: myStyleDescription()),
-            Spacer(),
-          ],
-        ),
+      child: Row(
+        children: [
+          Text('$title:', style: myStyleTitle()),
+          SizedBox(width: 15),
+          Expanded(child: Text(description, style: myStyleDescription())),
+        ],
       ),
     );
   }

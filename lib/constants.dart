@@ -53,7 +53,6 @@ Future checkInternetAndOpenPage(BuildContext context, String routName) {
   InternetCheckProvider internetCheckProvider =
       Provider.of<InternetCheckProvider>(context);
   internetCheckProvider.checkInternetConnection();
-
 }
 
 AppBar customAppBar(String title) {
@@ -161,7 +160,7 @@ void showUnAnsweredAlertDialog(
   );
 }
 
-Future showWarningAlertDialog(String warning, BuildContext context) {
+Future<void> showWarningAlertDialog(String warning, BuildContext context) {
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -171,7 +170,7 @@ Future showWarningAlertDialog(String warning, BuildContext context) {
         size: 100,
       ),
       content: Text(
-        'کێشەیەک ڕووی داوە. /n/n $warning',
+        'کێشەیەک ڕووی داوە. $warning',
         style: TextStyle(
           fontSize: 20,
         ),

@@ -517,7 +517,14 @@ class Api {
 
     try {
       var response = await http.post(url, body: loginRequestBody);
-      return response.body;
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print('in login api, response status code is: ${response.statusCode}');
+        print('in login api, response body is: ${response.body}');
+        throw response.statusCode;
+      }
     } catch (error) {
       throw error;
     }
@@ -534,7 +541,14 @@ class Api {
 
     try {
       var response = await http.post(url, body: loginRequestBody);
-      return response.body;
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print('in register api, response status code is: ${response.statusCode}');
+        print('in register api, response body is: ${response.body}');
+        throw response.statusCode;
+      }
     } catch (error) {
       throw error;
     }
@@ -576,7 +590,7 @@ class Api {
         body: sendWanePostBody,
         headers: securityHeader(userToken),
       );
-      
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.body;
       } else {
@@ -827,13 +841,13 @@ class Api {
       throw error;
     }
   }
-  
+
   ///  ------------------ Family ------------------------------
   ///  ------------------ Family ------------------------------
 
   //  ------------------ get Family Categories ------------------------------
 
-    Future<String> getFamilyCategories() async {
+  Future<String> getFamilyCategories() async {
     final String _METHOD_URL = 'api/family/cat/getall.php';
 
     // to make url for api call from base url and method url.
@@ -873,7 +887,7 @@ class Api {
       throw error;
     }
   }
-  
+
   ///  ------------------ Book ------------------------------
   ///  ------------------ Book ------------------------------
 

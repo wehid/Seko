@@ -29,7 +29,6 @@ class CourseItem extends StatelessWidget {
   void _openCourse(BuildContext context) {
     //TODO: delete print
     print('clicking on course ${course.name} with course id: ${course.id}');
-    print(DateTime.now());
     
     Provider.of<CoursesProvider>(context, listen: false)
         .setSelectedCourse(course);
