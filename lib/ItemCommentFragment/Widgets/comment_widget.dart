@@ -7,7 +7,6 @@ class CommentWidget extends StatefulWidget {
   final ItemComment itemComment;
   final bool isThisReplay;
 
-
   CommentWidget(this.itemComment, this.isThisReplay);
 
   @override
@@ -33,7 +32,7 @@ class _CommentWidgetState extends State<CommentWidget> {
     );
   }
 
-  _showWriteReplay(){
+  _showWriteReplay() {
     setState(() {
       _isShowWriteReplay = true;
     });
@@ -45,8 +44,10 @@ class _CommentWidgetState extends State<CommentWidget> {
 
   TextStyle _titleTextStyle() {
     return TextStyle(
-      color: widget.isThisReplay ? Colors.lightBlueAccent : Colors.green.shade800,
-      fontSize: 19.5);
+        color: widget.isThisReplay
+            ? Colors.lightBlueAccent
+            : Colors.green.shade800,
+        fontSize: 19.5);
   }
 
   @override
@@ -60,7 +61,7 @@ class _CommentWidgetState extends State<CommentWidget> {
           children: [
             Text(
               widget.itemComment.userName,
-              style:_titleTextStyle(),
+              style: _titleTextStyle(),
             ),
             Text(
               widget.itemComment.commentDate,
@@ -75,14 +76,15 @@ class _CommentWidgetState extends State<CommentWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _commentIcon(Icons.bookmark_border, "نیشاندار", null),
+              // TODO: add bookmark and favorite should complete later
+
+              // _commentIcon(Icons.bookmark_border, "نیشاندار", null),
               _commentIcon(Icons.reply, "وڵامی دەوە", _showWriteReplay),
-              _commentIcon(Icons.favorite_border, "بەدڵمە", null),
+              // _commentIcon(Icons.favorite_border, "بەدڵمە", null),
             ],
           ),
         _space(),
-        if(_isShowWriteReplay)
-              WriteComment(replayId: widget.itemComment.id),
+        if (_isShowWriteReplay) WriteComment(replayId: widget.itemComment.id),
       ],
     );
   }

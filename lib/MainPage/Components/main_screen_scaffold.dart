@@ -26,7 +26,7 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
     BooksScrenn(),
     FamilyScreen(),
     NewsScreen(),
-    UserTab(),
+    UserTab()
   ];
 
   @override

@@ -74,20 +74,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return _isUpdatingUser
         ? progressPage()
         : Scaffold(
-            appBar: AppBar(
-              title: Text('گۆڕینی پرۆفایل'),
-              centerTitle: true,
-              //todo: active this button
-              // actions: [
-              //   IconButton(
-              //       icon: Icon(
-              //         Icons.delete,
-              //         color: Colors.redAccent,
-              //         size: 30,
-              //       ),
-              //       onPressed: () {})
-              // ],
-            ),
+            appBar: customAppBar('گۆڕینی پرۆفایل'),
             body: Column(
               children: [
                 Expanded(
@@ -126,11 +113,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                 ),
-                SekoButton(
-                  buttonIcon: Icons.save,
-                  buttonString: 'پاشەکەوت کردن',
-                  backgroundColor: Colors.greenAccent,
-                  onPressed: _updateUser,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SekoButton(
+                    buttonIcon: Icons.save,
+                    buttonString: 'پاشەکەوت کردن',
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    onPressed: _updateUser,
+                  ),
                 ),
               ],
             ),
