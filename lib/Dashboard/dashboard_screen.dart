@@ -7,6 +7,7 @@ import '../ProfilePage/profile_screen.dart';
 import '../ProfilePage/Components/my_courses.dart';
 import '../EditProfilePage/edit_profile_screen.dart';
 import '../Models/ProviderModel/user_provider.dart';
+import '../UserLogsPage/user_logs_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   Widget popupMenuRow(int value, String title, IconData icon) {
@@ -44,7 +45,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
           appBar: AppBar(
             title: Text("داشبۆرد"),
@@ -64,6 +65,9 @@ class DashboardScreen extends StatelessWidget {
               tabs: [
                 Tab(text: 'پرۆفایل'),
                 Tab(text: 'خولەکانی من'),
+                Tab(
+                  text: 'پەیام و چالاکی',
+                )
               ],
             ),
           ),
@@ -71,6 +75,7 @@ class DashboardScreen extends StatelessWidget {
             children: [
               ProfileScreen(),
               MyCourses(),
+              UserLogsScreen(),
             ],
           )),
     );

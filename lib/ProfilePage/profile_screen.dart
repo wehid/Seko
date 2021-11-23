@@ -67,7 +67,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context, listen: false).user;
-    Provider.of<UserProvider>(context, listen: false).getUserLogs();
 
     return Scaffold(
       body: Column(
