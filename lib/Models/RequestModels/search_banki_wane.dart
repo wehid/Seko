@@ -15,7 +15,7 @@ class SearchBankiWane {
     this.state ="",
     this.orderBy = "ID",
     this.orderDir = "asc",
-    this.page = 1,
+    this.page,
     this.rowsPerPage,
   });
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
+import '../Models/ProviderModel/internet_check_provider.dart';
 import '../Models/ProviderModel/courses_provider.dart';
 import '../Models/ProviderModel/category_provider.dart';
 import 'Components/main_screen_scaffold.dart';
@@ -11,13 +12,12 @@ import '../Models/ProviderModel/cities_provider.dart';
 import '../Models/ProviderModel/lesson_provider.dart';
 import '../Models/ProviderModel/item_provider.dart';
 import '../Models/ProviderModel/user_provider.dart';
-import '../Models/ProviderModel/banki_wane_provider.dart';
-import '../Models/ProviderModel/news_provider.dart';
 
 class MainScreen extends StatelessWidget {
   static const routName = '/';
   bool _isFirstLoad = true;
 
+  InternetCheckProvider _internetCheckProvider;
   CoursesProvider _coursesProvider;
   CategoryProvider _categoryProvider;
   UserProvider _userProvider;
@@ -38,14 +38,14 @@ class MainScreen extends StatelessWidget {
   }
 
   void _firstLoadRun(BuildContext context) {
+    _internetCheckProvider = Provider.of<InternetCheckProvider>(context);
+    _internetCheckProvider.checkInternetConnection();
     _coursesProvider = Provider.of<CoursesProvider>(context);
     _categoryProvider = Provider.of<CategoryProvider>(context);
     Provider.of<CitiesProvider>(context, listen: false);
     Provider.of<LessonProvider>(context, listen: false).getAllLessons();
     Provider.of<ItemProvider>(context, listen: false).getAllItems();
     _userProvider = Provider.of<UserProvider>(context);
-    Provider.of<BankiWaneProvider>(context, listen: false).getAllBankiWane();
-    Provider.of<NewsProvider>(context, listen: false).getAllNews();
   }
 
   bool _isLoadingData() {
@@ -62,6 +62,14 @@ class MainScreen extends StatelessWidget {
       _isFirstLoad = false;
     }
 
-    return _isLoadingData() ? progressPage() : MainScreenScaffold();
+    if (_internetCheckProvider.isChekingInternet) {
+      return progressPage();
+    } else {
+      if (_internetCheckProvider.isConnected) {
+        return _isLoadingData() ? progressPage() : MainScreenScaffold();
+      } else {
+        return showError("ئەنتەرنێتەکەت کارا نییە");
+      }
+    }
   }
 }

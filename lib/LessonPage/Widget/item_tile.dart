@@ -13,12 +13,7 @@ class ItemTile extends StatelessWidget {
 
   ItemTile(this.item);
 
-  @override
-  Widget build(BuildContext context) {
-    bool isReadedThisItem = Provider.of<UserItemProvider>(context).isItemReaded(item.id);
-    Color itemColor = isReadedThisItem?readedItemColor:unReadeItemColor;
-
-    void _openItemScreen() {
+    void _openItemScreen(BuildContext context) {
       //todo: delete print
       print(
           'tap item. item name is: ${item.title} lessen id is: ${item.lessonID} and item id is: ${item.id}');
@@ -28,6 +23,13 @@ class ItemTile extends StatelessWidget {
       Provider.of<ItemProvider>(context, listen: false).setSelectedItem(item);
       Navigator.of(context).pushNamed(ItemScreen.routeName);
     }
+
+  @override
+  Widget build(BuildContext context) {
+    bool isReadedThisItem = Provider.of<UserItemProvider>(context).isItemReaded(item.id);
+    Color itemColor = isReadedThisItem?readedItemColor:unReadeItemColor;
+
+
 
     return Container(
       decoration: BoxDecoration(
@@ -46,7 +48,7 @@ class ItemTile extends StatelessWidget {
           color: itemColor,
           size: 30,
         ),
-        onTap: _openItemScreen,
+        onTap: ()=> _openItemScreen(context),
       ),
     );
   }

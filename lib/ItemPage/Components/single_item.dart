@@ -5,7 +5,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'item_header.dart';
 import '../Widget/video_item.dart';
-import '../Widget/youtube_video_item.dart';
+import '../../GlobalWidgets/youtube_video_item.dart';
 import '../../Models/ObjectModels/item.dart';
 import '../../QuizFragment/quiz_fragment.dart';
 import '../../constants.dart';

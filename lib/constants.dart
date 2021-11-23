@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +11,7 @@ import 'Models/RequestModels/search_user_item.dart';
 import 'Models/ProviderModel/user_provider.dart';
 import 'Models/ProviderModel/quiz_provider.dart';
 import 'Models/ProviderModel/survey_provider.dart';
-import 'Models/ProviderModel/item_comments_provider.dart';
+import 'Models/ProviderModel/internet_check_provider.dart';
 
 Widget progressPage() {
   return Scaffold(
@@ -25,21 +26,36 @@ Widget progressPage() {
 
 Widget showError(String error) {
   return Scaffold(
-    appBar: AppBar(
-      title: Text('کێشەیەک ڕووی داوە'),
-    ),
+    appBar: customAppBar('کێشەیەک ڕووی داوە'),
     body: Center(
-        child: Text(
-      error,
-      style: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.yellow.shade700,
+            size: 100,
+          ),
+          Text(
+            error,
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
-    )),
+    ),
   );
 }
 
-AppBar customAppBar(String title){
+Future checkInternetAndOpenPage(BuildContext context, String routName) {
+  InternetCheckProvider internetCheckProvider =
+      Provider.of<InternetCheckProvider>(context);
+  internetCheckProvider.checkInternetConnection();
+}
+
+AppBar customAppBar(String title) {
   return AppBar(
     title: Text(title),
     centerTitle: true,
@@ -47,15 +63,19 @@ AppBar customAppBar(String title){
   );
 }
 
-TextStyle titleTextStyle(){
+Divider customDivider() {
+  return const Divider(color: Colors.blueGrey, thickness: 1.2);
+}
+
+TextStyle titleTextStyle() {
   return TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 18,
   );
 }
 
-String emptyValidatorTFF(String value){
-  if(value == null || value.isEmpty){
+String emptyValidatorTFF(String value) {
+  if (value == null || value.isEmpty) {
     return "زانیاری داواکراو نابێ بەتاڵ بێت";
   }
   return null;
@@ -63,8 +83,7 @@ String emptyValidatorTFF(String value){
 
 //return selected city id or empty string if not selected
 String getSelectedCityId(BuildContext context) {
-  City city =
-      Provider.of<CitiesProvider>(context, listen: false).selectedCity;
+  City city = Provider.of<CitiesProvider>(context, listen: false).selectedCity;
   return city != null ? city.iD : '';
 }
 
@@ -76,6 +95,19 @@ const SURVEY_TYPE = 5;
 
 const MULTI_CHOICE_ANSWER_TYPE = "1";
 
+const PRSYARXANE = "1";
+const PROJESAZ = "2";
+
+const String TEXT_BOOK_TYPE = "1";
+const String VIDEO_BOOK_TYPE = "2";
+const String AUDIO_BOOK_TYPE = "3";
+
+const List<IconData> BOOK_CATEGORY_ICON = [
+  null,
+  Icons.library_books,
+  Icons.videocam,
+  Icons.headphones
+];
 
 final List<IconData> listItemIcon = [
   Icons.local_movies,
@@ -97,10 +129,10 @@ void downloadAllNeededAfterLogin(BuildContext context) {
       SearchUserItem(userId: _userProvider.user.id), _userProvider.token);
   Provider.of<QuizProvider>(context, listen: false).getAllQuestions();
   Provider.of<SurveyProvider>(context, listen: false).getAllSurveyQuestion();
-  // Provider.of<ItemCommentsProvider>(context, listen: false).getAllItemComments();
 }
 
-void showUnAnsweredAlertDialog(String unAnsweredQuestions, BuildContext context) {
+void showUnAnsweredAlertDialog(
+    String unAnsweredQuestions, BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -110,7 +142,7 @@ void showUnAnsweredAlertDialog(String unAnsweredQuestions, BuildContext context)
         size: 100,
       ),
       content: Text(
-        'ئەم پرسیارانە وڵان نەدراونەتەوە: $unAnsweredQuestions',
+        'ئەم پرسیارانە وڵام نەدراونەتەوە: $unAnsweredQuestions',
         style: TextStyle(
           fontSize: 20,
         ),
@@ -128,7 +160,35 @@ void showUnAnsweredAlertDialog(String unAnsweredQuestions, BuildContext context)
   );
 }
 
-void removeAllDownloadedAfterLogout(BuildContext context){
+Future<void> showWarningAlertDialog(String warning, BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Icon(
+        Icons.warning_amber_rounded,
+        color: Colors.yellow.shade700,
+        size: 100,
+      ),
+      content: Text(
+        'کێشەیەک ڕووی داوە. $warning',
+        style: TextStyle(
+          fontSize: 20,
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(
+            'باشە',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+void removeAllDownloadedAfterLogout(BuildContext context) {
 //  todo: remove downloaded from provider
 }
 

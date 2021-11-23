@@ -1,44 +1,44 @@
 class ItemComment {
   String id;
-  String itemID;
-  String userID;
-  String replyID;
+  String itemId;
+  String userId;
+  String replyId;
   String comments;
   String commentDate;
   String numLikes;
   String userName;
-  Null commentLikeID;
-  Null commentBookmarkID;
-  Null followingID;
+  String commentLikeId;
+  String commentBookmarkId;
+  String followingId;
   List<ItemComment> replies;
 
   ItemComment({
     this.id,
-    this.itemID,
-    this.userID,
-    this.replyID,
+    this.itemId,
+    this.userId,
+    this.replyId,
     this.comments,
     this.commentDate,
     this.numLikes,
     this.userName,
-    this.commentLikeID,
-    this.commentBookmarkID,
-    this.followingID,
+    this.commentLikeId,
+    this.commentBookmarkId,
+    this.followingId,
     this.replies,
   });
 
   ItemComment.fromJson(Map<String, dynamic> json) {
     id = json['ID'];
-    itemID = json['ItemID'];
-    userID = json['UserID'];
-    replyID = json['ReplyID'];
+    itemId = json['ItemID'];
+    userId = json['UserID'];
+    replyId = json['ReplyID'];
     comments = json['Comments'];
     commentDate = json['CommentDate'];
     numLikes = json['NumLikes'];
     userName = json['UserName'];
-    commentLikeID = json['CommentLikeID'];
-    commentBookmarkID = json['CommentBookmarkID'];
-    followingID = json['FollowingID'];
+    commentLikeId = json['CommentLikeID'];
+    commentBookmarkId = json['CommentBookmarkID'];
+    followingId = json['FollowingID'];
     if (json['Replies'] != null) {
       replies = [];
       json['Replies'].forEach((v) {
@@ -50,16 +50,16 @@ class ItemComment {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['ID'] = this.id;
-    data['ItemID'] = this.itemID;
-    data['UserID'] = this.userID;
-    data['ReplyID'] = this.replyID;
+    data['ItemID'] = this.itemId;
+    data['UserID'] = this.userId;
+    data['ReplyID'] = this.replyId;
     data['Comments'] = this.comments;
     data['CommentDate'] = this.commentDate;
     data['NumLikes'] = this.numLikes;
     data['UserName'] = this.userName;
-    data['CommentLikeID'] = this.commentLikeID;
-    data['CommentBookmarkID'] = this.commentBookmarkID;
-    data['FollowingID'] = this.followingID;
+    data['CommentLikeID'] = this.commentLikeId;
+    data['CommentBookmarkID'] = this.commentBookmarkId;
+    data['FollowingID'] = this.followingId;
     if (this.replies != null) {
       data['Replies'] = this.replies.map((v) => v.toJson()).toList();
     }

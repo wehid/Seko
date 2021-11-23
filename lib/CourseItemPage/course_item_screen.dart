@@ -72,7 +72,6 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
     );
   }
 
-
   void _addThisCourseToLearning() {
     if (_user == null) {
       _showFirstLoginAlertDialog();
@@ -100,5 +99,7 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
         : _isLearningThisCourse
             ? LessonScreen()
             : CourseReview(_myCourse, _addThisCourseToLearning);
+
+
   }
 }
