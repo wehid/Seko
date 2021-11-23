@@ -10,7 +10,6 @@ import '../../constants.dart';
 class BookItem extends StatelessWidget {
   final Book book;
 
-
   BookItem(this.book);
 
   Widget _details() {
@@ -33,7 +32,8 @@ class BookItem extends StatelessWidget {
             Expanded(
               child: Text(
                 book.name,
-                overflow: TextOverflow.fade,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),

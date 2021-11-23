@@ -65,12 +65,18 @@ class _RegisterFormState extends State<RegisterForm> {
     });
     if (_formKey.currentState.validate()) {
       User registerUser = _registerUser();
-      Provider.of<UserProvider>(context, listen: false)
-          .register(registerUser)
-          .then((value) {
+      UserProvider userProvider =
+          Provider.of<UserProvider>(context, listen: false);
+          
+      userProvider.register(registerUser).then((value) {
         _saveUsernameAndPassword(registerUser);
         _isRegistering = false;
         Navigator.of(context).pop();
+      }).onError((error, stackTrace) {
+        setState(() {
+          _isRegistering = false;
+        });
+        showWarningAlertDialog(userProvider.errorMessage, context);
       });
     }
   }
@@ -99,7 +105,7 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return _isRegistering
-        ? progressPage()
+        ? Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
             child: Column(
               children: [

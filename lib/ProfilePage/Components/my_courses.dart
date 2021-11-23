@@ -30,17 +30,6 @@ class MyCourses extends StatelessWidget {
     List<CourseLearner> _myCourseLearner =
         _courseLearnerProvider.getAllCourseLearningForUserId(userId);
 
-    //todo: delete print
-    for (CourseLearner learner in _myCourseLearner)
-      print(
-          'course learner name is: ${learner.courseName} and course learner id is ${learner.id}');
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('خولەکانی من'),
-        centerTitle: true,
-      ),
-      body: Courses(_myLearningCourse(_myCourseLearner, context)),
-    );
+    return Courses(_myLearningCourse(_myCourseLearner, context));
   }
 }

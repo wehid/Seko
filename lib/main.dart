@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'MainPage/main_screen.dart';
+import 'Models/ProviderModel/internet_check_provider.dart';
 import 'Models/ProviderModel/cities_provider.dart';
 import 'Models/ProviderModel/courses_provider.dart';
 import 'Models/ProviderModel/category_provider.dart';
@@ -31,6 +32,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => InternetCheckProvider()),
         ChangeNotifierProvider(create: (_) => CitiesProvider()),
         ChangeNotifierProvider(create: (_) => CoursesProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),

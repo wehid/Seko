@@ -5,7 +5,7 @@ import '../../Services/api.dart';
 import '../ObjectModels/course_learner.dart';
 import '../RequestModels/search_course_learner.dart';
 
-class  CourseLearnerProvider with ChangeNotifier {
+class CourseLearnerProvider with ChangeNotifier {
   bool _isLoading = false;
   List<CourseLearner> _allCourseLearners = [];
   CourseLearner _selectedCourseLearner;
@@ -22,7 +22,8 @@ class  CourseLearnerProvider with ChangeNotifier {
       allCourseLearner = iterable
           .map((courseLearner) => CourseLearner.fromJson(courseLearner))
           .toList();
-
+      print(
+          'in get all course learner. number of course learner is: ${allCourseLearner.length}');
       _allCourseLearners = allCourseLearner;
       _isLoading = false;
       notifyListeners();
@@ -80,9 +81,9 @@ class  CourseLearnerProvider with ChangeNotifier {
     return _selectedCourseLearner != null;
   }
 
-  CourseLearner curseLernerOfThisCourse(String userId, String courseId){
+  CourseLearner curseLernerOfThisCourse(String userId, String courseId) {
     return _allCourseLearners.firstWhere(
-            (element) => element.userId == userId && element.courseId == courseId,
+        (element) => element.userId == userId && element.courseId == courseId,
         orElse: () => null);
   }
 
