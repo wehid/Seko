@@ -7,30 +7,38 @@ import '../RequestModels/search_course_learner.dart';
 
 class CourseLearnerProvider with ChangeNotifier {
   bool _isLoading = false;
-  List<CourseLearner> _allCourseLearners = [];
+  List<CourseLearner> _myCourseLearners = [];
   CourseLearner _selectedCourseLearner;
 
-  Future<void> getAllCourseLearners(String userToken) async {
-    _isLoading = true;
-    List<CourseLearner> allCourseLearner = [];
+  Future<List<CourseLearner>> searchCourseLearners(
+      String userToken, SearchCourseLearner searchCourseLearner) async {
+    List<CourseLearner> response = [];
 
     try {
-      String courseLearnerListString = await Api()
-          .getCourseLearner(_getSearchCourseLearnerToGetAll(), userToken);
+      String courseLearnerListString =
+          await Api().getCourseLearner(searchCourseLearner, userToken);
 
       Iterable iterable = json.decode(courseLearnerListString)["Data"];
-      allCourseLearner = iterable
+      response = iterable
           .map((courseLearner) => CourseLearner.fromJson(courseLearner))
           .toList();
       print(
-          'in get all course learner. number of course learner is: ${allCourseLearner.length}');
-      _allCourseLearners = allCourseLearner;
-      _isLoading = false;
-      notifyListeners();
+          'in get course learner. number of course learner is: ${response.length}');
+      return response;
     } catch (error) {
-      print('in get all course learner, error is: $error');
+      print('in get my course learner, error is: $error');
       throw error;
     }
+  }
+
+
+  Future<void> getMyCourseLearners(String userToken, String userId) async {
+    _isLoading = true;
+    SearchCourseLearner searchMyCourses = SearchCourseLearner(userId: userId);
+
+    _myCourseLearners = await searchCourseLearners(userToken, searchMyCourses);
+    _isLoading = false;
+    notifyListeners();
   }
 
   Future<void> addCourseToLearning(
@@ -47,7 +55,7 @@ class CourseLearnerProvider with ChangeNotifier {
       CourseLearner newCourseLearner =
           CourseLearner.fromJson(json.decode(courseLearnerString));
 
-      _allCourseLearners.add(newCourseLearner);
+      _myCourseLearners.add(newCourseLearner);
       _isLoading = false;
       notifyListeners();
     } catch (error) {
@@ -56,47 +64,23 @@ class CourseLearnerProvider with ChangeNotifier {
     }
   }
 
-  List<CourseLearner> getAllLearnerForCourseId(String courseId) {
-    return _allCourseLearners
-        .where((learner) => learner.courseId == courseId)
-        .toList();
-  }
-
-  List<CourseLearner> getAllCourseLearningForUserId(String userId) {
-    return _allCourseLearners
-        .where((learner) => learner.userId == userId)
-        .toList();
-  }
-
-  bool isLearningThisCourse(String userId, String courseId) {
-    // bool isLearning = _allCourseLearners.any(
-    //     (element) => element.userId == userId && element.courseId == courseId);
-    // if (isLearning)
-    //   _selectedCourseLearner = _allCourseLearners.firstWhere((element) =>
-    //       element.userId == userId && element.courseId == courseId);
-    _selectedCourseLearner = _allCourseLearners.firstWhere(
-        (element) => element.userId == userId && element.courseId == courseId,
+  bool isLearningThisCourse(String courseId) {
+    _selectedCourseLearner = _myCourseLearners.firstWhere(
+        (element) => element.courseId == courseId,
         orElse: () => null);
 
     return _selectedCourseLearner != null;
   }
 
-  CourseLearner curseLernerOfThisCourse(String userId, String courseId) {
-    return _allCourseLearners.firstWhere(
-        (element) => element.userId == userId && element.courseId == courseId,
+  CourseLearner curseLernerOfThisCourse(String courseId) {
+    return _myCourseLearners.firstWhere(
+        (element) => element.courseId == courseId,
         orElse: () => null);
-  }
-
-  SearchCourseLearner _getSearchCourseLearnerToGetAll() {
-    return SearchCourseLearner(
-      userId: '',
-      courseId: '',
-    );
   }
 
   bool get isLoading => _isLoading;
 
   CourseLearner get selectedCourseLearner => _selectedCourseLearner;
 
-// List<CourseLearner> get allCourseLearners => _allCourseLearners;
+List<CourseLearner> get myCourseLearners => _myCourseLearners;
 }

@@ -124,7 +124,7 @@ IconData itemIcon(Item item) {
 void downloadAllNeededAfterLogin(BuildContext context) {
   final _userProvider = Provider.of<UserProvider>(context, listen: false);
   Provider.of<CourseLearnerProvider>(context, listen: false)
-      .getAllCourseLearners(_userProvider.token);
+      .getMyCourseLearners(_userProvider.token, _userProvider.user.id);
   Provider.of<UserItemProvider>(context, listen: false).getAllUserItem(
       SearchUserItem(userId: _userProvider.user.id), _userProvider.token);
   Provider.of<QuizProvider>(context, listen: false).getAllQuestions();
