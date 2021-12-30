@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../Widgets/course_item_top.dart';
 import '../../Models/ObjectModels/course.dart';
 import '../../Models/ProviderModel/courses_provider.dart';
+import '../../Models/ProviderModel/lesson_provider.dart';
 import '../../CourseItemPage/course_item_screen.dart';
 
 class CourseItem extends StatelessWidget {
@@ -29,12 +30,13 @@ class CourseItem extends StatelessWidget {
   void _openCourse(BuildContext context) {
     //TODO: delete print
     print('clicking on course ${course.name} with course id: ${course.id}');
-    
+
     Provider.of<CoursesProvider>(context, listen: false)
         .setSelectedCourse(course);
-    Navigator.of(context).pushNamed(
-      CourseItemScreen.routeName,
-    );
+    Provider.of<LessonProvider>(context, listen: false)
+        .fetchLessonWithItems(course.id);
+
+    Navigator.of(context).pushNamed(CourseItemScreen.routeName);
   }
 
   Color _getCourseColor() {

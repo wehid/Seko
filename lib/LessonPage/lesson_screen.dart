@@ -11,23 +11,21 @@ class LessonScreen extends StatelessWidget {
   static const routeName = '/lesson_screen';
 
   final int _firstIndex = 0;
+  List<Lesson> _myLessons;
 
   @override
   Widget build(BuildContext context) {
     final _selectedCourse =
         Provider.of<CoursesProvider>(context, listen: false).selectedCourse;
-    final List<Lesson> _myLessons =
-        Provider.of<LessonProvider>(context, listen: false)
-            .getAllLessonsInCourse(_selectedCourse.name, context);
+
+    LessonProvider lessonProvider = Provider.of<LessonProvider>(context);
+
+    _myLessons = lessonProvider.lessonList;
 
     return Scaffold(
       appBar: customAppBar(_selectedCourse.name),
-      //check for _myLessons is empty
-      body: _myLessons.length == 0
-          //todo: return something better
-          ? Center(
-              child: Text("هیچ وانەیەک نییە"),
-            )
+      body: lessonProvider.isLoading
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: ExpansionPanelList.radio(
                 dividerColor: Colors.blueGrey,
