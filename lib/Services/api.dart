@@ -939,4 +939,33 @@ class Api {
       throw error;
     }
   }
+
+  ///  ------------------ Squad ------------------------------
+  ///  ------------------ Squad ------------------------------
+
+  //  ------------------ get Squad by user id ------------------------------
+
+  Future<String> searchSquadForUser(User user) async {
+    final String _METHOD_URL = 'api/squad/find.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    String squadSearchBody = json.encode({"MemberID": user.id});
+
+    try {
+      var response = await http.post(url,
+          body: squadSearchBody, headers: securityHeader(user.token));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // TODO: handle if status code is not 200 or 201
+        throw (response.statusCode);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
