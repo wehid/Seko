@@ -16,10 +16,10 @@ class ItemTile extends StatelessWidget {
     void _openItemScreen(BuildContext context) {
       //todo: delete print
       print(
-          'tap item. item name is: ${item.title} lessen id is: ${item.lessonID} and item id is: ${item.id}');
+          'tap item. item name is: ${item.title} lessen id is: ${item.lessonId} and item id is: ${item.id}');
 
       Provider.of<LessonProvider>(context, listen: false)
-          .setSelectedLessonByID(item.lessonID);
+          .setSelectedLessonByID(item.lessonId);
       Provider.of<ItemProvider>(context, listen: false).setSelectedItem(item);
       Navigator.of(context).pushNamed(ItemScreen.routeName);
     }

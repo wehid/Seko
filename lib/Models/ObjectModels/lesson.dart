@@ -38,13 +38,13 @@ class Lesson {
     weekName = json['WeekName'];
     picturePath = json['PicturePath'];
     isExpanded = false;
-    items = [];
-    // if (json['Items'] != null) {
-    //   items = new List<Item>();
-    //   json['Items'].forEach((v) {
-    //     items.add(new Item.fromJson(v));
-    //   });
-    // }
+    // items = [];
+    if (json['Items'] != null) {
+      items = [];
+      json['Items'].forEach((v) {
+        items.add(new Item.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {

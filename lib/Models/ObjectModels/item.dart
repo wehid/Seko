@@ -1,6 +1,6 @@
 class Item {
   String id;
-  String lessonID;
+  String lessonId;
   String title;
   String sortIndex;
   String video;
@@ -10,15 +10,18 @@ class Item {
   String type;
   //for allow comments, 1 means false, 2 means true
   String allowComments;
+  String allowFiles;
   String lessonName;
-  String userItemID;
+  String weekId;
+  String userItemId;
   String userItemStatus;
+  String userItemDoneDate;
   String picturePath;
   String videoPath;
 
   Item({
     this.id,
-    this.lessonID,
+    this.lessonId,
     this.title,
     this.sortIndex,
     this.video,
@@ -27,16 +30,19 @@ class Item {
     this.contents,
     this.type,
     this.allowComments,
+    this.allowFiles,
     this.lessonName,
-    this.userItemID,
+    this.weekId,
+    this.userItemId,
     this.userItemStatus,
+    this.userItemDoneDate,
     this.picturePath,
     this.videoPath,
   });
 
   Item.fromJson(Map<String, dynamic> json) {
     id = json['ID'];
-    lessonID = json['LessonID'];
+    lessonId = json['LessonID'];
     title = json['Title'];
     sortIndex = json['SortIndex'];
     video = json['Video'];
@@ -45,9 +51,12 @@ class Item {
     contents = json['Contents'];
     type = json['Type'];
     allowComments = json['AllowComments'];
+    allowFiles = json['AllowFiles'];
     lessonName = json['LessonName'];
-    userItemID = json['UserItemID'];
+    weekId = json['WeekID'];
+    userItemId = json['UserItemID'];
     userItemStatus = json['UserItemStatus'];
+    userItemDoneDate = json['UserItemDoneDate'];
     picturePath = json['PicturePath'];
     videoPath = json['VideoPath'];
   }
@@ -55,7 +64,7 @@ class Item {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['ID'] = this.id;
-    data['LessonID'] = this.lessonID;
+    data['LessonID'] = this.lessonId;
     data['Title'] = this.title;
     data['SortIndex'] = this.sortIndex;
     data['Video'] = this.video;
@@ -64,9 +73,12 @@ class Item {
     data['Contents'] = this.contents;
     data['Type'] = this.type;
     data['AllowComments'] = this.allowComments;
+    data['AllowFiles'] = this.allowFiles;
     data['LessonName'] = this.lessonName;
-    data['UserItemID'] = this.userItemID;
+    data['WeekID'] = this.weekId;
+    data['UserItemID'] = this.userItemId;
     data['UserItemStatus'] = this.userItemStatus;
+    data['UserItemDoneDate'] = this.userItemDoneDate;
     data['PicturePath'] = this.picturePath;
     data['VideoPath'] = this.videoPath;
     return data;

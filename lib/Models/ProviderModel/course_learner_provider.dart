@@ -37,6 +37,14 @@ class CourseLearnerProvider with ChangeNotifier {
     SearchCourseLearner searchMyCourses = SearchCourseLearner(userId: userId);
 
     _myCourseLearners = await searchCourseLearners(userToken, searchMyCourses);
+
+        // TODO: DELETE PRINT
+    for (CourseLearner courseLearner in _myCourseLearners) {
+      print(
+          "course name is: ${courseLearner.courseName} and course learner id is: ${courseLearner.id}");
+
+    }
+    
     _isLoading = false;
     notifyListeners();
   }
