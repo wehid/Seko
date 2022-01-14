@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Models/ObjectModels/squad_member.dart';
+import '../../GlobalWidgets/user_circle_avatar.dart';
 
 class MemberViewWidget extends StatelessWidget {
   final SquadMember squadMember;
@@ -8,13 +9,6 @@ class MemberViewWidget extends StatelessWidget {
 
   const MemberViewWidget(this.squadMember, this.isThisSupervisor);
 
-  bool _isMemberImageEmpty() {
-    if (squadMember.memberImagePath == null ||
-        squadMember.memberImagePath == "") {
-      return true;
-    }
-    return false;
-  }
 
   TextStyle supervisorStyle() {
     return TextStyle(
@@ -31,19 +25,7 @@ class MemberViewWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          CircleAvatar(
-              radius: 40,
-              backgroundImage: !_isMemberImageEmpty()
-                  ? NetworkImage(squadMember.memberImagePath)
-                  : null,
-              backgroundColor: Colors.transparent,
-              child: _isMemberImageEmpty()
-                  ? Icon(
-                      Icons.person,
-                      size: 55,
-                      color: Colors.blue,
-                    )
-                  : null),
+          UserCirlceAvatar(squadMember.memberImagePath, 5),
           const SizedBox(height: 5),
           Text(
             squadMember.memberName,

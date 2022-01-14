@@ -25,7 +25,7 @@ class QuizProvider with ChangeNotifier {
       Iterable iterable = json.decode(allQuestionString)["Data"];
       response = iterable.map((item) => QuizQuestion.fromJson(item)).toList();
 
-      //todo: delete print
+      //TODO: delete print
       print('in get all question, number of questions is: ${response.length}');
 
       _isLoading = false;
