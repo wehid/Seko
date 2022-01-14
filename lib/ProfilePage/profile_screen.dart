@@ -7,6 +7,8 @@ import 'Widgets/user_information_widget.dart';
 import '../Models/ProviderModel/cities_provider.dart';
 import '../Models/ObjectModels/city.dart';
 
+import '../SquadPage/squad_screen.dart';
+
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
@@ -76,6 +78,12 @@ class ProfileScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(SquadScreen.routeName);
+                    },
+                    child: Text("گرووپی من"),
+                  ),
                   UserInformationWidget(
                     icon: Icons.person_outline,
                     title: "ناوی بەکارهێنەر",
