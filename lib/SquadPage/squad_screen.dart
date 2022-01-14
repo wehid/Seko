@@ -12,6 +12,7 @@ import 'Widgets/squad_banner.dart';
 
 import 'Componants/members_grid.dart';
 import 'Componants/activities_grid.dart';
+import 'Componants/option_gird.dart';
 
 enum SquadBody {
   members,
@@ -33,7 +34,16 @@ class _SquadScreenState extends State<SquadScreen> {
   Squad squad;
   SquadProvider squadProvider;
 
+  bool showActivitiesInBody = false;
   bool _firstRun = true;
+
+  changeShowBody(bool isShowActivity) {
+    if (isShowActivity == null) return;
+    if (isShowActivity == showActivitiesInBody) return;
+    setState(() {
+      showActivitiesInBody = isShowActivity;
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -59,9 +69,33 @@ class _SquadScreenState extends State<SquadScreen> {
           ? Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                SquadBanner(squad.title),
-                // Expanded(child: MembersGrid(squad)),
-                Expanded(child: ActivitiesGrid(squadActivities)),
+                Flexible(
+                  flex: 20,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(flex: 2, child: SquadBanner(squad.title)),
+                      Flexible(
+                        flex: 3,
+                        child: OptionGrid(showActivitiesInBody, changeShowBody),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
+                Flexible(
+                  flex: 60,
+                  child: showActivitiesInBody
+                      ? ActivitiesGrid(squadActivities)
+                      : MembersGrid(squad),
+                ),
+                Flexible(
+                  flex: 20,
+                  child: TextButton(
+                    onPressed: () => changeShowBody(!showActivitiesInBody),
+                    child: Text("change"),
+                  ),
+                ),
               ],
             ),
     );
