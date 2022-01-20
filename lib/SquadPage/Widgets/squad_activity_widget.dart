@@ -17,9 +17,8 @@ class SquadActivityWidget extends StatelessWidget {
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(8),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               squadActivity.activityDate,
@@ -28,9 +27,7 @@ class SquadActivityWidget extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
-            UserCirlceAvatar(squadActivity.userImagePath, 5),
-            const SizedBox(height: 10),
+            UserCirlceAvatar(squadActivity.userImagePath, 4),
             const Divider(),
             Expanded(
               child: SingleChildScrollView(

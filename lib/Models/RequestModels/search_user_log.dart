@@ -10,7 +10,7 @@ class SearchUserLog {
 
     // seen = 1 => seened. seen = 0 => not seen. seen = null => all
     this.seen,
-    orderDir = "asc",
+    this.orderDir = "desc",
     this.page = 1,
     this.rowsPerPage,
   });

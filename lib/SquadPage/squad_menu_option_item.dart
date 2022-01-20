@@ -8,4 +8,6 @@ class SquadMenuOptionItem {
     this.title,
     this.isThisActivities,
   });
+
+  
 }

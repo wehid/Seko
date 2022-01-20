@@ -6,7 +6,7 @@ import '../../Models/ObjectModels/squad_member.dart';
 import '../Widgets/member_view_widget.dart';
 
 class MembersGrid extends StatelessWidget {
-  final _SUPERVISER_INDEX = 0;
+  static const _SUPERVISER_INDEX = 0;
 
   final Squad squad;
 
@@ -29,7 +29,6 @@ class MembersGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List<SquadMember> membersWithSupervisor = _membersWithSupervisor();
     return GridView.builder(
       itemCount: _membersWithSupervisor().length,
       padding: const EdgeInsets.all(8),

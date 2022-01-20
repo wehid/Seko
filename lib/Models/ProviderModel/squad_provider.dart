@@ -9,6 +9,7 @@ import '../RequestModels/search_squad_activity.dart';
 
 class SquadProvider with ChangeNotifier {
   bool _isLoading = false;
+  bool _isLoadingActivities = false;
   Squad _squad;
   List<SquadActivity> _squadActivityList;
 
@@ -36,7 +37,7 @@ class SquadProvider with ChangeNotifier {
   }
 
   Future<void> searchSquadActivity(String squadId, String userToken) async {
-    _isLoading = true;
+    _isLoadingActivities = true;
     // notifyListeners();
     SearchSquadActivity searchSquadActivity =
         SearchSquadActivity(squadId: squadId);
@@ -55,7 +56,7 @@ class SquadProvider with ChangeNotifier {
       print(
           "in search squad activities for squad id: $squadId, number of squad activities are: ${response.length}");
 
-      _isLoading = false;
+      _isLoadingActivities = false;
       _squadActivityList = response;
       notifyListeners();
     } catch (error) {
@@ -65,9 +66,30 @@ class SquadProvider with ChangeNotifier {
     }
   }
 
+  Future sendSquadActivity(
+      SquadActivity squadActivity, String userToken) async {
+    _isLoadingActivities = true;
+    notifyListeners();
+
+    try {
+      String squadResponseString =
+          await Api().sendSquadActivity(squadActivity, userToken);
+
+      print("in send squad Activity, response is: $squadResponseString");
+      _isLoading = false;
+      searchSquadActivity(squadActivity.squadId, userToken);
+    } catch (error) {
+      print(
+          "in send squad activity for squad id: ${squadActivity.squadId}, error is: $error");
+      throw error;
+    }
+  }
+
   get isLoading => _isLoading;
 
   get mySquad => _squad;
 
   get squadActivityList => _squadActivityList;
+
+  get isLoadingActivities => _isLoadingActivities;
 }

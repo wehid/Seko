@@ -35,20 +35,6 @@ class OptionGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return GridView.builder(
-    //   padding: const EdgeInsets.all(8),
-    //   shrinkWrap: true,
-    //   itemCount: getMenuItems().length,
-    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //     childAspectRatio: 4 / 4,
-    //     crossAxisCount: 2,
-    //     crossAxisSpacing: 5,
-    //     mainAxisSpacing: 5,
-    //   ),
-    //   itemBuilder: (context, index) {
-    //     return SquadOptionWidget(getMenuItems()[index]);
-    //   },
-    // );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
