@@ -25,6 +25,7 @@ import 'Models/ProviderModel/forum_comment_provider.dart';
 import 'Models/ProviderModel/wane_comment_provider.dart';
 import 'Models/ProviderModel/family_provider.dart';
 import 'Models/ProviderModel/book_provider.dart';
+import 'Models/ProviderModel/squad_provider.dart';
 import 'rout_generator.dart';
 
 void main() {
@@ -52,6 +53,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => NewsProvider()),
         ChangeNotifierProvider(create: (_) => FamilyProvider()),
         ChangeNotifierProvider(create: (_) => BookProvider()),
+        ChangeNotifierProvider(create: (_) => SquadProvider()),
       ],
       child: MyApp(),
     ),

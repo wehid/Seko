@@ -22,6 +22,7 @@ import '../Models/RequestModels/search_wane_comment.dart';
 import '../Models/RequestModels/search_book.dart';
 import '../Models/RequestModels/search_family_item.dart';
 import '../Models/RequestModels/search_user_log.dart';
+import '../Models/RequestModels/search_squad_activity.dart';
 import '../Models/ObjectModels/user.dart';
 import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
@@ -30,6 +31,7 @@ import '../Models/ObjectModels/item_comment.dart';
 import '../Models/ObjectModels/forum_post.dart';
 import '../Models/ObjectModels/wane_comment.dart';
 import '../Models/ObjectModels/wane.dart';
+import '../Models/ObjectModels/squad_activity.dart';
 
 class Api {
   // this part is define base url for all api
@@ -934,6 +936,89 @@ class Api {
       } else {
         print(response.statusCode);
         return response.body;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  ///  ------------------ Squad ------------------------------
+  ///  ------------------ Squad ------------------------------
+
+  //  ------------------ get Squad by user id ------------------------------
+
+  Future<String> searchSquadForUser(User user) async {
+    final String _METHOD_URL = 'api/squad/find.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    String squadSearchBody = json.encode({"MemberID": user.id});
+
+    try {
+      var response = await http.post(url,
+          body: squadSearchBody, headers: securityHeader(user.token));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // TODO: handle if status code is not 200 or 201
+        throw (response.statusCode);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ search Squad activity ------------------------------
+
+  Future<String> searchSquadActivity(
+      SearchSquadActivity searchSquadActivity, String userToken) async {
+    final String _METHOD_URL = 'api/squad/activity/search.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    String squadSearchBody = json.encode(searchSquadActivity.toJson());
+
+    try {
+      var response = await http.post(url,
+          body: squadSearchBody, headers: securityHeader(userToken));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // TODO: handle if status code is not 200 or 201
+        throw (response.statusCode);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ Send Squad activity ------------------------------
+
+  Future<String> sendSquadActivity(
+      SquadActivity squadActivity, String userToken) async {
+    final String _METHOD_URL = 'api/squad/activity/create.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(_BASE_URL, _METHOD_URL);
+
+    String createSquadActivityBody = json.encode(squadActivity.toJson());
+
+    try {
+      var response = await http.post(url,
+          body: createSquadActivityBody, headers: securityHeader(userToken));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // TODO: handle if status code is not 200 or 201
+        throw (response.statusCode);
       }
     } catch (error) {
       throw error;

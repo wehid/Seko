@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +11,7 @@ import 'Models/ProviderModel/user_provider.dart';
 import 'Models/ProviderModel/quiz_provider.dart';
 import 'Models/ProviderModel/survey_provider.dart';
 import 'Models/ProviderModel/internet_check_provider.dart';
+import 'Models/ProviderModel/squad_provider.dart';
 
 Widget progressPage() {
   return Scaffold(
@@ -129,6 +129,8 @@ void downloadAllNeededAfterLogin(BuildContext context) {
       SearchUserItem(userId: _userProvider.user.id), _userProvider.token);
   Provider.of<QuizProvider>(context, listen: false).getAllQuestions();
   Provider.of<SurveyProvider>(context, listen: false).getAllSurveyQuestion();
+  Provider.of<SquadProvider>(context, listen: false)
+      .getUserSquad(_userProvider.user);
 }
 
 void showUnAnsweredAlertDialog(

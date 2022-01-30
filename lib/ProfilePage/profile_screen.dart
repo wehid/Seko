@@ -7,6 +7,8 @@ import 'Widgets/user_information_widget.dart';
 import '../Models/ProviderModel/cities_provider.dart';
 import '../Models/ObjectModels/city.dart';
 
+import '../SquadPage/squad_screen.dart';
+
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
@@ -19,10 +21,10 @@ class ProfileScreen extends StatelessWidget {
     return city.name;
   }
 
-  Widget userProfileCard(User user) {
+  Widget userProfileCard(User user, BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 150,
+      // height: 150,
       color: Colors.lightGreen,
       padding: const EdgeInsets.symmetric(vertical: 25),
       child: Row(
@@ -56,6 +58,12 @@ class ProfileScreen extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
+                const SizedBox(height: 15),
+                ElevatedButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(SquadScreen.routeName),
+                  child: Text("گرووپی من"),
+                ),
               ],
             ),
           ),
@@ -71,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          userProfileCard(user),
+          userProfileCard(user, context),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../Models/ProviderModel/lesson_provider.dart';
 import '../Models/ProviderModel/courses_provider.dart';
 import '../Models/ObjectModels/lesson.dart';
+import '../SquadPage/squad_screen.dart';
 import 'Widget/item_tile.dart';
 import '../constants.dart';
 
@@ -27,31 +28,40 @@ class LessonScreen extends StatelessWidget {
       body: lessonProvider.isLoading
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-              child: ExpansionPanelList.radio(
-                dividerColor: Colors.blueGrey,
-                animationDuration: const Duration(milliseconds: 550),
-                //for the first run, define witch one is open.
-                // type of this parameter should same to type of value parameter.
-                initialOpenPanelValue: _myLessons[_firstIndex],
-                children: _myLessons.map((lesson) {
-                  return ExpansionPanelRadio(
-                    canTapOnHeader: true,
-                    // this value is like key for define witch item is expanded
-                    value: lesson,
-                    headerBuilder: (context, isExpanded) {
-                      return ListTile(
-                        title: Text(
-                          lesson.title,
-                          style: TextStyle(color: Colors.brown.shade600),
-                        ),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(SquadScreen.routeName),
+                    child: Text("گرووپی من"),
+                  ),
+                  ExpansionPanelList.radio(
+                    dividerColor: Colors.blueGrey,
+                    animationDuration: const Duration(milliseconds: 550),
+                    //for the first run, define witch one is open.
+                    // type of this parameter should same to type of value parameter.
+                    initialOpenPanelValue: _myLessons[_firstIndex],
+                    children: _myLessons.map((lesson) {
+                      return ExpansionPanelRadio(
+                        canTapOnHeader: true,
+                        // this value is like key for define witch item is expanded
+                        value: lesson,
+                        headerBuilder: (context, isExpanded) {
+                          return ListTile(
+                            title: Text(
+                              lesson.title,
+                              style: TextStyle(color: Colors.brown.shade600),
+                            ),
+                          );
+                        },
+                        body: Column(
+                            children: lesson.items
+                                .map((lesson) => ItemTile(lesson))
+                                .toList()),
                       );
-                    },
-                    body: Column(
-                        children: lesson.items
-                            .map((lesson) => ItemTile(lesson))
-                            .toList()),
-                  );
-                }).toList(),
+                    }).toList(),
+                  ),
+                ],
               ),
             ),
     );
