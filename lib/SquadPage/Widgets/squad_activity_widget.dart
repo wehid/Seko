@@ -27,7 +27,18 @@ class SquadActivityWidget extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
             ),
-            UserCirlceAvatar(squadActivity.userImagePath, 4),
+            Row(
+              children: [
+                UserCirlceAvatar(squadActivity.userImagePath, 4),
+                Text(
+                  "${squadActivity.userName} ${squadActivity.userFamily}",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
             const Divider(),
             Expanded(
               child: SingleChildScrollView(

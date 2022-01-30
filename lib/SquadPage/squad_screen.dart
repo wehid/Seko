@@ -26,11 +26,11 @@ class SquadScreen extends StatefulWidget {
 }
 
 class _SquadScreenState extends State<SquadScreen> {
-  SquadBody currentBody = SquadBody.activities;
+  SquadBody _currentBody = SquadBody.activities;
   Squad squad;
   SquadProvider squadProvider;
 
-  bool showActivitiesInBody = false;
+  bool showActivitiesInBody = true;
   bool _firstRun = true;
 
   changeShowBody(bool isShowActivity) {
