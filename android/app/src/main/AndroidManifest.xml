@@ -6,6 +6,7 @@
         android:label="سەکۆی زانیاری مامۆستا"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:exported="false"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
