@@ -9,8 +9,13 @@ import '../EditProfilePage/edit_profile_screen.dart';
 import '../Models/ProviderModel/user_provider.dart';
 import '../UserLogsPage/user_logs_screen.dart';
 
+enum popupMenuEnum {
+  editeProfile,
+  logout,
+}
+
 class DashboardScreen extends StatelessWidget {
-  Widget popupMenuRow(int value, String title, IconData icon) {
+  Widget popupMenuRow(popupMenuEnum value, String title, IconData icon) {
     return PopupMenuItem(
       value: value,
       child: Row(
@@ -26,12 +31,12 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  void _selectedMenuItemAction(BuildContext context, item) {
+  void _selectedMenuItemAction(BuildContext context, popupMenuEnum item) {
     switch (item) {
-      case 0:
+      case popupMenuEnum.editeProfile:
         Navigator.of(context).pushNamed(EditProfileScreen.routeName);
         break;
-      case 1:
+      case popupMenuEnum.logout:
         _logout(context);
         break;
     }
@@ -51,12 +56,12 @@ class DashboardScreen extends StatelessWidget {
             title: Text("داشبۆرد"),
             centerTitle: true,
             actions: [
-              PopupMenuButton<int>(
+              PopupMenuButton<popupMenuEnum>(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 itemBuilder: (context) => [
-                  popupMenuRow(0, "گۆڕینی پرۆفایل", Icons.edit),
-                  popupMenuRow(1, "چوونە دەر", Icons.logout),
+                  popupMenuRow(popupMenuEnum.editeProfile, "گۆڕینی پرۆفایل", Icons.edit),
+                  popupMenuRow(popupMenuEnum.logout, "چوونە دەر", Icons.logout),
                 ],
                 onSelected: (item) => _selectedMenuItemAction(context, item),
               ),

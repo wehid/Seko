@@ -5,11 +5,11 @@ class UserInformationWidget extends StatelessWidget {
   final String title;
   final String description;
 
-  UserInformationWidget({
-    @required this.icon,
-    @required this.title,
-    @required this.description,
-  });
+  UserInformationWidget(
+      {@required this.icon,
+      @required this.title,
+      @required this.description,
+      });
 
   TextStyle myStyleTitle() {
     return TextStyle(fontSize: 15, color: Colors.grey);
@@ -33,13 +33,16 @@ class UserInformationWidget extends StatelessWidget {
           SizedBox(width: 25),
           Expanded(
             child: Container(
-              height: 60,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('$title:', style: myStyleTitle()),
                   SizedBox(width: 5),
-                  Text(description, style: myStyleDescription()),
+                  Text(
+                    description,
+                    style: myStyleDescription(),
+                    overflow: TextOverflow.fade,
+                  )
                 ],
               ),
             ),

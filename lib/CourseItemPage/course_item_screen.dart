@@ -36,7 +36,7 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
   void _getQuizAndSurveyForThisCurseLerner() {
     String courseLearnerId =
         Provider.of<CourseLearnerProvider>(context, listen: false)
-            .curseLernerOfThisCourse(_user.id, _myCourse.id)
+            .curseLernerOfThisCourse(_myCourse.id)
             .id;
     Provider.of<QuizProvider>(context, listen: false)
         .getQuizInCurseLearner(courseLearnerId, _user.token);
@@ -90,7 +90,7 @@ class _CourseItemScreenState extends State<CourseItemScreen> {
       _isLearningThisCourse = false;
     } else {
       _isLearningThisCourse = Provider.of<CourseLearnerProvider>(context)
-          .isLearningThisCourse(_user.id, _myCourse.id);
+          .isLearningThisCourse(_myCourse.id);
     }
     if (_isLearningThisCourse) _getQuizAndSurveyForThisCurseLerner();
 

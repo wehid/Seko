@@ -24,11 +24,11 @@ class MyCourses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String userId = Provider.of<UserProvider>(context, listen: false).user.id;
+    // String userId = Provider.of<UserProvider>(context, listen: false).user.id;
     final CourseLearnerProvider _courseLearnerProvider =
         Provider.of<CourseLearnerProvider>(context, listen: false);
     List<CourseLearner> _myCourseLearner =
-        _courseLearnerProvider.getAllCourseLearningForUserId(userId);
+        _courseLearnerProvider.myCourseLearners;
 
     return Courses(_myLearningCourse(_myCourseLearner, context));
   }

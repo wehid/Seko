@@ -9,8 +9,6 @@ import 'Components/main_screen_scaffold.dart';
 import '../Models/ObjectModels/login.dart';
 import '../Services/sql_helper.dart';
 import '../Models/ProviderModel/cities_provider.dart';
-import '../Models/ProviderModel/lesson_provider.dart';
-import '../Models/ProviderModel/item_provider.dart';
 import '../Models/ProviderModel/user_provider.dart';
 
 class MainScreen extends StatelessWidget {
@@ -43,8 +41,6 @@ class MainScreen extends StatelessWidget {
     _coursesProvider = Provider.of<CoursesProvider>(context);
     _categoryProvider = Provider.of<CategoryProvider>(context);
     Provider.of<CitiesProvider>(context, listen: false);
-    Provider.of<LessonProvider>(context, listen: false).getAllLessons();
-    Provider.of<ItemProvider>(context, listen: false).getAllItems();
     _userProvider = Provider.of<UserProvider>(context);
   }
 
