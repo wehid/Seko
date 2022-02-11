@@ -63,12 +63,6 @@ class _ItemScreenState extends State<ItemScreen> {
                 return SingleItem(_selectedLesson.items[index]);
               },
             )
-            // child: PageView(
-            //   controller: _itemPageController,
-            //   children: _selectedLesson.items
-            //       .map((item) => SingleItem(item))
-            //       .toList(),
-            // ),
           ),
           userItemProvider.isLoading
               ? Center(child: CircularProgressIndicator())

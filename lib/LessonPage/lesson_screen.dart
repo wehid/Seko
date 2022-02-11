@@ -40,7 +40,8 @@ class LessonScreen extends StatelessWidget {
                     animationDuration: const Duration(milliseconds: 550),
                     //for the first run, define witch one is open.
                     // type of this parameter should same to type of value parameter.
-                    initialOpenPanelValue: _myLessons[_firstIndex],
+
+                    // initialOpenPanelValue: _myLessons[_firstIndex],
                     children: _myLessons.map((lesson) {
                       return ExpansionPanelRadio(
                         canTapOnHeader: true,
