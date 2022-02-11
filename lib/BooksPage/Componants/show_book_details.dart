@@ -66,13 +66,7 @@ class _ShowBookDetailsState extends State<ShowBookDetails> {
   List<Widget> videoBookWidgets() {
     return [
       YoutubeVideoItem(
-        YoutubePlayerController(
-          initialVideoId: YoutubePlayer.convertUrlToId(book.link),
-          flags: YoutubePlayerFlags(
-            autoPlay: false,
-            controlsVisibleAtStart: true,
-          ),
-        ),
+        book.link
       ),
     ];
   }

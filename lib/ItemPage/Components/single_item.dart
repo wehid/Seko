@@ -6,6 +6,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'item_header.dart';
 import '../Widget/video_item.dart';
 import '../../GlobalWidgets/youtube_video_item.dart';
+import '../../GlobalWidgets/html_view.dart';
 import '../../Models/ObjectModels/item.dart';
 import '../../QuizFragment/quiz_fragment.dart';
 import '../../constants.dart';
@@ -34,26 +35,15 @@ class SingleItem extends StatelessWidget {
             //video url have http:// as default because that must be >10
             if (item.videoUrl.length > 10)
               YoutubeVideoItem(
-                YoutubePlayerController(
-                  initialVideoId:
-                      YoutubePlayer.convertUrlToId(item.videoUrl),
-                  flags: YoutubePlayerFlags(
-                    autoPlay: false,
-                    controlsVisibleAtStart: true,
-                  ),
-                ),
+                item.videoUrl
               ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Html(
-                data: item.contents,
-              ),
+              child: HtmlView(item.contents),
             ),
-            if(int.parse(item.type) == QUESTION_TYPE)
-              QuizFragment(item.id),
-            if(int.parse(item.type) == SURVEY_TYPE)
-              SurveyFragment(item.id),
-            if(item.allowComments == _ITEM_CAN_HAVE_COMMENT)
+            if (int.parse(item.type) == QUESTION_TYPE) QuizFragment(item.id),
+            if (int.parse(item.type) == SURVEY_TYPE) SurveyFragment(item.id),
+            if (item.allowComments == _ITEM_CAN_HAVE_COMMENT)
               ItemCommentFragment(),
           ],
         ),
