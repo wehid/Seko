@@ -13,9 +13,17 @@ class Course {
   String status;
   String hoursPerWeek;
   String color;
+  String backColor;
+  String foreColor;
+  String secondBackColor;
+  String secondForeColor;
+  String video;
+  String videoUrl;
+  String studyType;
   String partnerName;
   String categoryName;
   String smallImagePath;
+  String videoPath;
 
   Course({
     this.id,
@@ -31,10 +39,18 @@ class Course {
     this.type,
     this.status,
     this.hoursPerWeek,
+    this.color,
+    this.backColor,
+    this.foreColor,
+    this.secondBackColor,
+    this.secondForeColor,
+    this.video,
+    this.videoUrl,
+    this.studyType,
     this.partnerName,
     this.categoryName,
     this.smallImagePath,
-    this.color,
+    this.videoPath,
   });
 
   Course.fromJson(Map<String, dynamic> json) {
@@ -51,10 +67,18 @@ class Course {
     type = json['Type'];
     status = json['Status'];
     hoursPerWeek = json['HoursPerWeek'];
+    color = json['Color'];
+    backColor = json['BackColor'];
+    foreColor = json['ForeColor'];
+    secondBackColor = json['SecondBackColor'];
+    secondForeColor = json['SecondForeColor'];
+    video = json['Video'];
+    videoUrl = json['VideoUrl'];
+    studyType = json['StudyType'];
     partnerName = json['PartnerName'];
     categoryName = json['CategoryName'];
     smallImagePath = json['SmallImagePath'];
-    color = json['Color'];
+    videoPath = json['VideoPath'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,10 +96,18 @@ class Course {
     data['Type'] = this.type;
     data['Status'] = this.status;
     data['HoursPerWeek'] = this.hoursPerWeek;
+    data['Color'] = this.color;
+    data['BackColor'] = this.backColor;
+    data['ForeColor'] = this.foreColor;
+    data['SecondBackColor'] = this.secondBackColor;
+    data['SecondForeColor'] = this.secondForeColor;
+    data['Video'] = this.video;
+    data['VideoUrl'] = this.videoUrl;
+    data['StudyType'] = this.studyType;
     data['PartnerName'] = this.partnerName;
     data['CategoryName'] = this.categoryName;
     data['SmallImagePath'] = this.smallImagePath;
-    data['Color'] = this.color;
+    data['VideoPath'] = this.videoPath;
     return data;
   }
 }
