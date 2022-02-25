@@ -6,9 +6,12 @@ import '../ObjectModels/course.dart';
 import '../RequestModels/search_course_by_category.dart';
 
 class CoursesProvider with ChangeNotifier {
+  static const _TEAM_COURSES = "2";
+  static const _ALONE_COURSES = "1";
   bool _isLoadData = false;
   List<Course> _courseList = [];
   Course _selectedCourse;
+  List<Course> _showingCourses = [];
 
   CoursesProvider() {
     getAllCourses();
@@ -22,7 +25,8 @@ class CoursesProvider with ChangeNotifier {
       String courseListString = await Api().getAllCourses();
       Iterable iterable = json.decode(courseListString);
       myCourses = iterable.map((item) => Course.fromJson(item)).toList();
-      _courseList = myCourses;
+      _courseList = myCourses.reversed.toList();
+      _showingCourses = _courseList;
       _isLoadData = false;
       notifyListeners();
     } catch (error) {
@@ -62,13 +66,49 @@ class CoursesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Course> getCourseListBySelectedCategoryId(String selectedCategoryId) {
-    return _courseList
+  void showCoursesBySelectedCategoryId(String selectedCategoryId) {
+    _showingCourses = _courseList
         .where((course) => course.categoryID == selectedCategoryId)
         .toList();
+
+    notifyListeners();
   }
 
-  Course courseById(String courseId){
+  void showCoursesWithWord(String searched) {
+    _showingCourses =
+        _courseList.where((course) => course.name.contains(searched)).toList();
+
+    notifyListeners();
+  }
+
+  void showTeamCourses() {
+    _showingCourses = _courseList
+        .where((course) => course.studyType == _TEAM_COURSES)
+        .toList();
+
+    notifyListeners();
+  }
+
+  void showAloneCourses() {
+    _showingCourses = _courseList
+        .where((course) => course.studyType == _ALONE_COURSES)
+        .toList();
+
+    notifyListeners();
+  }
+
+  void showCoursesReverse() {
+    _showingCourses = _courseList.reversed.toList();
+
+    notifyListeners();
+  }
+
+  void showAllCourse() {
+    _showingCourses = _courseList;
+    notifyListeners();
+  }
+
+  Course courseById(String courseId) {
     return _courseList.firstWhere((course) => course.id == courseId);
   }
 
@@ -76,5 +116,6 @@ class CoursesProvider with ChangeNotifier {
 
   Course get selectedCourse => _selectedCourse;
 
-  List<Course> get courseList => _courseList;
+  // List<Course> get courseList => _courseList;
+  List<Course> get courseList => _showingCourses;
 }
