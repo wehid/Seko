@@ -24,7 +24,6 @@ class ProfileScreen extends StatelessWidget {
   Widget userProfileCard(User user, BuildContext context) {
     return Container(
       width: double.infinity,
-      // height: 150,
       color: Colors.lightGreen,
       padding: const EdgeInsets.symmetric(vertical: 25),
       child: Row(

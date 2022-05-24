@@ -13,6 +13,9 @@ import 'Models/ProviderModel/survey_provider.dart';
 import 'Models/ProviderModel/internet_check_provider.dart';
 import 'Models/ProviderModel/squad_provider.dart';
 
+
+final String BASE_URL = 'szm.one';
+
 Widget progressPage() {
   return Scaffold(
     appBar: AppBar(

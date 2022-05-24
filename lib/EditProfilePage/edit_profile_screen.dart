@@ -8,6 +8,8 @@ import '../RegisterPage/Widgets/dropdown_city.dart';
 import '../GlobalWidgets/seko_button.dart';
 import '../constants.dart';
 
+import '../Models/ProviderModel/upload_provider.dart';
+
 class EditProfileScreen extends StatefulWidget {
   static const routeName = '/edit-profile-screen';
 
@@ -18,10 +20,12 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   User _user;
   UserProvider _userProvider;
+  UploadProvider _uploadProvider;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _familyController = TextEditingController();
   TextEditingController _mobileController = TextEditingController();
   bool _isUpdatingUser = false;
+  String _userPhotoUrl;
 
   //todo: change email validation from register page to constant page and use here and add email edit
   // TextEditingController _emailController = TextEditingController();
@@ -37,6 +41,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _mobileController.text = _user.mobile;
     _siteController.text = _user.website;
     _introductionController.text = _user.introduction;
+    _userPhotoUrl = _user.imagePath;
     super.initState();
   }
 
@@ -63,14 +68,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     updatedUser.website = _siteController.text;
     updatedUser.introduction = _introductionController.text;
     updatedUser.cityID = getSelectedCityId(context);
+    updatedUser.imagePath = _userPhotoUrl;
 
     Provider.of<UserProvider>(context, listen: false)
         .update(updatedUser)
         .then((value) => Navigator.of(context).pop());
   }
 
+  void _chosePhoto() {
+    // final uploadProvider = Provider.of<UploadProvider>(context);
+    _uploadProvider.uploadUserPhoto(_user.token);
+    _userPhotoUrl = _uploadProvider.fileUrl;
+  }
+
   @override
   Widget build(BuildContext context) {
+    _uploadProvider = Provider.of<UploadProvider>(context);
+
     return _isUpdatingUser
         ? progressPage()
         : Scaffold(
@@ -83,6 +97,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
+                          ElevatedButton(
+                            onPressed: _chosePhoto,
+                            child: Text("وێنەکەت هەڵبژێرە"),
+                          ),
                           SekoTextFormField(
                             controller: _nameController,
                             label: 'ناو',

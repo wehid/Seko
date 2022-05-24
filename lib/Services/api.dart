@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:seko/Models/ObjectModels/forum_comment.dart';
 
+import '../constants.dart';
+
 import '../Models/RequestModels/search_item_comments.dart';
 import '../Models/RequestModels/search_course_by_category.dart';
 import '../Models/RequestModels/search_week_by_course.dart';
@@ -35,7 +37,6 @@ import '../Models/ObjectModels/squad_activity.dart';
 
 class Api {
   // this part is define base url for all api
-  final String _BASE_URL = 'szm.one';
 
   Map<String, String> securityHeader(String userToken) {
     return {"Token": userToken};
@@ -47,7 +48,7 @@ class Api {
     final String _METHOD_URL = 'api/category/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -69,7 +70,7 @@ class Api {
     final String _METHOD_URL = '/api/course/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String searchRequestBody = json.encode(searchCourse.toJson());
 
     try {
@@ -90,7 +91,7 @@ class Api {
     final String _METHOD_URL = 'api/course/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -106,7 +107,7 @@ class Api {
     final String _METHOD_URL = 'api/course/week/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -128,7 +129,7 @@ class Api {
     final String _METHOD_URL = 'api/course/week/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String searchRequestBody = json.encode(searchWeekByCourse.toJson());
 
     try {
@@ -145,7 +146,7 @@ class Api {
     final String _METHOD_URL = 'api/course/lesson/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String searchRequestBody = json.encode(searchLesson.toJson());
 
     try {
@@ -162,7 +163,7 @@ class Api {
     final String _METHOD_URL = 'api/course/lesson/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -186,7 +187,7 @@ class Api {
     final String _METHOD_URL = 'api/course/item/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String searchRequestBody = json.encode(searchItem.toJson());
 
     try {
@@ -203,7 +204,7 @@ class Api {
     final String _METHOD_URL = 'api/course/item/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -225,7 +226,7 @@ class Api {
     final String _METHOD_URL = 'api/learn/useritem/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(createUserItem.toJson());
 
     try {
@@ -249,7 +250,7 @@ class Api {
     final String _METHOD_URL = 'api/learn/useritem/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchUserItem.toJson());
 
     try {
@@ -275,7 +276,7 @@ class Api {
     final String _METHOD_URL = 'api/learn/itemcomment/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String searchRequestBody = json.encode(searchItemComments.toJson());
 
     try {
@@ -291,7 +292,7 @@ class Api {
     final String _METHOD_URL = 'api/learn/itemcomment/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String sendCommentBody = json.encode(comment.toJson());
 
     try {
@@ -309,7 +310,7 @@ class Api {
     final String _METHOD_URL = 'api/city/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -326,7 +327,7 @@ class Api {
     final String _METHOD_URL = 'api/learn/courselearner/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String searchRequestBody = json.encode(searchCourseLearner.toJson());
 
     try {
@@ -345,7 +346,7 @@ class Api {
     final String _METHOD_URL = 'api/learn/courselearner/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(courseLearner.toJson());
 
     try {
@@ -366,7 +367,7 @@ class Api {
     final String _METHOD_URL = 'api/quiz/question/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchQuestion.toJson());
 
     try {
@@ -388,7 +389,7 @@ class Api {
     final String _METHOD_URL = 'api/quiz/quiz/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchQuiz.toJson());
 
     try {
@@ -413,7 +414,7 @@ class Api {
     final String _METHOD_URL = 'api/quiz/quiz/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(answerQuiz.toJson());
 
     try {
@@ -441,7 +442,7 @@ class Api {
     final String _METHOD_URL = 'api/survey/question/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchSurveyQuestion.toJson());
 
     try {
@@ -463,7 +464,7 @@ class Api {
     final String _METHOD_URL = 'api/survey/survey/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchSurvey.toJson());
 
     try {
@@ -487,7 +488,7 @@ class Api {
     final String _METHOD_URL = 'api/survey/survey/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(answerSurvey.toJson());
 
     try {
@@ -515,7 +516,7 @@ class Api {
     final String _METHOD_URL = 'api/user/login.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String loginRequestBody = json.encode(user.toJson());
 
     try {
@@ -539,7 +540,7 @@ class Api {
     final String _METHOD_URL = 'api/user/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String loginRequestBody = json.encode(user.toJson());
 
     try {
@@ -564,7 +565,7 @@ class Api {
     final String _METHOD_URL = 'api/user/update.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String loginRequestBody = json.encode(user.toJson());
 
     try {
@@ -585,7 +586,7 @@ class Api {
     final String _METHOD_URL = 'api/upload/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String sendWanePostBody = json.encode(post.toJson());
 
     try {
@@ -613,7 +614,7 @@ class Api {
     final String _METHOD_URL = 'api/upload/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchBankiWane.toJson());
 
     try {
@@ -635,7 +636,7 @@ class Api {
     final String _METHOD_URL = 'api/upload/group/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -657,7 +658,7 @@ class Api {
     final String _METHOD_URL = 'api/upload/comment/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchWaneComment.toJson());
 
     // todo: delete print
@@ -685,7 +686,7 @@ class Api {
     final String _METHOD_URL = 'api/upload/comment/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String sendCommentBody = json.encode(comment.toJson());
 
     try {
@@ -709,7 +710,7 @@ class Api {
     final String _METHOD_URL = 'api/forum/entry/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String sendForumPostBody = json.encode(post.toJson());
 
     try {
@@ -733,7 +734,7 @@ class Api {
     final String _METHOD_URL = 'api/forum/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -756,7 +757,7 @@ class Api {
     final String _METHOD_URL = 'api/forum/entry/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchForum.toJson());
 
     try {
@@ -779,7 +780,7 @@ class Api {
     final String _METHOD_URL = 'api/forum/reply/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String sendCommentBody = json.encode(comment.toJson());
 
     try {
@@ -804,7 +805,7 @@ class Api {
     final String _METHOD_URL = 'api/forum/reply/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchComment.toJson());
 
     try {
@@ -830,7 +831,7 @@ class Api {
     final String _METHOD_URL = 'api/headline/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchNews.toJson());
 
     try {
@@ -855,7 +856,7 @@ class Api {
     final String _METHOD_URL = 'api/family/cat/getall.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     try {
       var response = await http.get(url);
@@ -876,7 +877,7 @@ class Api {
     final String _METHOD_URL = 'api/family/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchFamilyItem.toJson());
 
     try {
@@ -901,7 +902,7 @@ class Api {
     final String _METHOD_URL = 'api/book/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchBook.toJson());
 
     try {
@@ -926,7 +927,7 @@ class Api {
     final String _METHOD_URL = 'api/log/user/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
     String requestBody = json.encode(searchUserLog.toJson());
 
     try {
@@ -951,7 +952,7 @@ class Api {
     final String _METHOD_URL = 'api/squad/find.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     String squadSearchBody = json.encode({"MemberID": user.id});
 
@@ -978,7 +979,7 @@ class Api {
     final String _METHOD_URL = 'api/squad/activity/search.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     String squadSearchBody = json.encode(searchSquadActivity.toJson());
 
@@ -1005,7 +1006,7 @@ class Api {
     final String _METHOD_URL = 'api/squad/activity/create.php';
 
     // to make url for api call from base url and method url.
-    var url = Uri.https(_BASE_URL, _METHOD_URL);
+    var url = Uri.https(BASE_URL, _METHOD_URL);
 
     String createSquadActivityBody = json.encode(squadActivity.toJson());
 
@@ -1019,6 +1020,40 @@ class Api {
         print(response.statusCode);
         // TODO: handle if status code is not 200 or 201
         throw (response.statusCode);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ Send file ------------------------------
+
+  Future<String> uploadFile(String filePath, String userToken, String typeOfFile,
+      String typeOfTable, String id) async {
+    final String _METHOD_URL = 'api/upload.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(BASE_URL, _METHOD_URL);
+
+    try {
+      var request = await http.MultipartRequest('POST', url);
+      request.fields['ext'] = typeOfFile;
+      request.fields['type'] = typeOfTable;
+      if (id != null) request.fields['id'] = id;
+      request.headers.addAll({"Token": userToken});
+      request.files.add(await http.MultipartFile.fromPath('file', filePath));
+
+      var response = await request. send();
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("file uploaded");
+        final respString = await response.stream.bytesToString();
+        return respString;
+      } else {
+        print(response.statusCode);
+
+        print("Something went wrong");
+        throw ("Something went wrong!");
       }
     } catch (error) {
       throw error;

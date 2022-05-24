@@ -26,6 +26,7 @@ import 'Models/ProviderModel/wane_comment_provider.dart';
 import 'Models/ProviderModel/family_provider.dart';
 import 'Models/ProviderModel/book_provider.dart';
 import 'Models/ProviderModel/squad_provider.dart';
+import 'Models/ProviderModel/upload_provider.dart';
 import 'rout_generator.dart';
 
 void main() {
@@ -54,6 +55,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => FamilyProvider()),
         ChangeNotifierProvider(create: (_) => BookProvider()),
         ChangeNotifierProvider(create: (_) => SquadProvider()),
+        ChangeNotifierProvider(create: (_) => UploadProvider()),
       ],
       child: MyApp(),
     ),
@@ -75,7 +77,7 @@ class MyApp extends StatelessWidget {
       ],
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
       initialRoute: MainScreen.routName,
       // initialRoute: AllCategoryScreen.routeName,
