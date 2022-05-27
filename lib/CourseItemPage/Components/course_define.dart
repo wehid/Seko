@@ -8,6 +8,10 @@ class CourseDefine extends StatelessWidget {
 
   CourseDefine(this.myCourse);
 
+  final _myColor = Colors.blue.shade600;
+  final TextStyle _myStyle =
+      titleTextStyle().copyWith(color: Colors.blue.shade600);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,11 +21,20 @@ class CourseDefine extends StatelessWidget {
         children: [
           Text(
             'ناوی هاوکار: ${myCourse.partnerName}',
-            style: titleTextStyle(),
+            style: _myStyle,
+          ),
+          SizedBox(
+            height: 15,
+            child: Center(
+              child: Divider(
+                thickness: 1,
+                color: _myColor,
+              ),
+            ),
           ),
           Text(
-            'لقی: ${myCourse.categoryName}',
-            style: titleTextStyle(),
+            'ماوەی خول: ${myCourse.hoursPerWeek} هەفتە',
+            style: _myStyle,
           ),
         ],
       ),

@@ -22,10 +22,10 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
   //list of screen to show for each tab
   final List<Widget> _tabScreen = [
     LearningTab(),
-    HawkariyiHevalkrdScreen(),
-    BooksScrenn(),
+    // HawkariyiHevalkrdScreen(),
     FamilyScreen(),
-    NewsScreen(),
+    BooksScrenn(),
+    // NewsScreen(),
     UserTab()
   ];
 
@@ -53,34 +53,48 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
         //to the tab color. if change to "fixed", the color is not change
         type: BottomNavigationBarType.shifting,
         currentIndex: _selectedTabIndex,
-        selectedFontSize: 16,
-        selectedIconTheme: IconThemeData(size: 22),
+        selectedFontSize: 18,
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.blue,
+        // selectedLabelStyle:
+        //     TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold),
+        unselectedItemColor: Colors.blueGrey,
+        selectedIconTheme: IconThemeData(size: 27),
         showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'هۆبەی ڕاهێزان',
-              backgroundColor: Colors.deepPurple),
+            icon: Icon(Icons.school),
+            label: 'هۆبەی ڕاهێنان',
+            // backgroundColor: Colors.deepPurple,
+          ),
+
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.supervisor_account),
+          //     label: 'هاوکاریی هەڤاڵکرد',
+          //     backgroundColor: Colors.lightBlue),
+
           BottomNavigationBarItem(
-              icon: Icon(Icons.supervisor_account),
-              label: 'هاوکاریی هەڤاڵکرد',
-              backgroundColor: Colors.lightBlue),
+            icon: Icon(Icons.family_restroom),
+            label: 'گەنجینەی خێزان',
+            // backgroundColor: Colors.green.shade700,
+          ),
+
           BottomNavigationBarItem(
-              icon: Icon(Icons.local_library),
-              label: 'کتێبخانە',
-              backgroundColor: Colors.deepOrange),
+            icon: Icon(Icons.local_library),
+            label: 'کتێبخانە',
+            // backgroundColor: Colors.deepOrange,
+          ),
+
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.live_tv_outlined),
+          //     label: 'هەواڵ',
+          //     backgroundColor: Colors.red.shade800),
+
           BottomNavigationBarItem(
-              icon: Icon(Icons.family_restroom),
-              label: 'گەنجینەی خێزان',
-              backgroundColor: Colors.green.shade700),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.live_tv_outlined),
-              label: 'هەواڵ',
-              backgroundColor: Colors.red.shade800),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'پرۆفایل',
-              backgroundColor: Colors.lightGreen),
+            icon: Icon(Icons.person),
+            label: 'پرۆفایل',
+            // backgroundColor: Colors.lightGreen,
+          ),
         ],
       ),
     );

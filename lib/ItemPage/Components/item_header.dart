@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../Models/ObjectModels/item.dart';
 
 class ItemHeader extends StatelessWidget {
-final Item item;
+  final Item item;
 
-ItemHeader(this.item);
+  ItemHeader(this.item);
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,20 @@ ItemHeader(this.item);
           Flexible(
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
-              child: Text(
-                item.title,
-                style: TextStyle(fontSize: 20),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                color: Colors.blue.shade800,
+                child: Center(
+                  child: Text(
+                    item.title,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),

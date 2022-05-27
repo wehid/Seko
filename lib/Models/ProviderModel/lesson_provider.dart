@@ -15,9 +15,7 @@ class LessonProvider with ChangeNotifier {
 
     List<Lesson> myLessons = await _fetchLessonList(courseId: courseId);
 
-    // change in API and we dont need this anymore
-
-    // List<Lesson> finalLessons = await _fetchItemsForEachLesson(myLessons);
+    print("items");
 
     _setLessonList(myLessons);
     _setIsLoading(false);

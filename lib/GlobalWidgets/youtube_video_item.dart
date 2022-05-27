@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeVideoItem extends StatefulWidget {
-
-  // TODO: FIND BETER SOLUTION FOR THIS
-
   YoutubePlayerController controller;
 
   YoutubeVideoItem(String youtubeVideoUrl) {
     this.controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId("https:$youtubeVideoUrl"),
+      initialVideoId: YoutubePlayer.convertUrlToId(youtubeVideoUrl),
       flags: YoutubePlayerFlags(
         autoPlay: false,
         controlsVisibleAtStart: true,
@@ -22,7 +19,6 @@ class YoutubeVideoItem extends StatefulWidget {
 }
 
 class _YoutubeVideoItemState extends State<YoutubeVideoItem> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

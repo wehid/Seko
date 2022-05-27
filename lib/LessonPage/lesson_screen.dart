@@ -11,7 +11,6 @@ import '../constants.dart';
 class LessonScreen extends StatelessWidget {
   static const routeName = '/lesson_screen';
 
-  final int _firstIndex = 0;
   List<Lesson> _myLessons;
 
   @override
@@ -38,10 +37,6 @@ class LessonScreen extends StatelessWidget {
                   ExpansionPanelList.radio(
                     dividerColor: Colors.blueGrey,
                     animationDuration: const Duration(milliseconds: 550),
-                    //for the first run, define witch one is open.
-                    // type of this parameter should same to type of value parameter.
-
-                    // initialOpenPanelValue: _myLessons[_firstIndex],
                     children: _myLessons.map((lesson) {
                       return ExpansionPanelRadio(
                         canTapOnHeader: true,

@@ -13,8 +13,7 @@ import 'Models/ProviderModel/survey_provider.dart';
 import 'Models/ProviderModel/internet_check_provider.dart';
 import 'Models/ProviderModel/squad_provider.dart';
 
-
-final String BASE_URL = 'szm.one';
+final String BASE_URL = 'e-rahenan.krd';
 
 Widget progressPage() {
   return Scaffold(
@@ -62,7 +61,12 @@ AppBar customAppBar(String title) {
   return AppBar(
     title: Text(title),
     centerTitle: true,
-    actions: [Image.asset("assets/images/krg_logo.png")],
+    actions: [
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Image.asset("assets/images/krg_logo.png"),
+      ),
+    ],
   );
 }
 
@@ -196,6 +200,10 @@ Future<void> showWarningAlertDialog(String warning, BuildContext context) {
 void removeAllDownloadedAfterLogout(BuildContext context) {
 //  todo: remove downloaded from provider
 }
+
+  final String familyVideoType = '2';
+  final String familyTextType = '1';
+  final String familyPosterType = '4';
 
 final Color unReadeItemColor = Colors.pinkAccent;
 final Color readedItemColor = Colors.green;

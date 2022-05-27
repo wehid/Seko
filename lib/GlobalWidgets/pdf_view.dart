@@ -36,7 +36,6 @@ class _PdfViewState extends State<PdfView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(widget.pdfUrl.split("/").last),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),

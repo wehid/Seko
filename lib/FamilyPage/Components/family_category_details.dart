@@ -6,6 +6,7 @@ import '../../Models/ProviderModel/family_provider.dart';
 import '../../Models/ObjectModels/family_category.dart';
 import '../Widgets/family_item_widget.dart';
 import '../../constants.dart';
+import 'family_item_list_show.dart';
 
 class FamilyCategoryDetails extends StatelessWidget {
   static const String routeName = '/category-details';
@@ -18,14 +19,32 @@ class FamilyCategoryDetails extends StatelessWidget {
         familyProvider.selectedFamilyCategory;
     final List<FamilyItem> familyItemList =
         familyProvider.getFamilyItemListWithCategoryId(selectedCategory.id);
+    final List<FamilyItem> familyVideoItemList =
+        familyProvider.getFamilyItemListWithCategoryIdAndType(
+            selectedCategory.id, familyVideoType);
+    final List<FamilyItem> familyTextItemList =
+        familyProvider.getFamilyItemListWithCategoryIdAndType(
+            selectedCategory.id, familyTextType);
+    final List<FamilyItem> familyPosterItemList =
+        familyProvider.getFamilyItemListWithCategoryIdAndType(
+            selectedCategory.id, familyPosterType);
 
     return Scaffold(
       appBar: customAppBar(selectedCategory.title),
-      body: ListView.builder(
-        itemCount: familyItemList.length,
-        itemBuilder: (context, index) {
-          return FamilyItemWidget(familyItemList[index]);
-        },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              if (familyVideoItemList.length > 0)
+                FamilyItemLlistShow(familyVideoItemList, "ڤیدیۆ"),
+              if (familyTextItemList.length > 0)
+                FamilyItemLlistShow(familyTextItemList, "نامیلکه"),
+              if (familyPosterItemList.length > 0)
+                FamilyItemLlistShow(familyPosterItemList, "پۆستەر"),
+            ],
+          ),
+        ),
       ),
     );
   }

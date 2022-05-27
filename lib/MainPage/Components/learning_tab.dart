@@ -28,7 +28,7 @@ class _LearningTabState extends State<LearningTab> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("هۆبەی ڕاهێزان"),
+        title: Text("هۆبەی ڕاهێنان"),
         actions: [
           Image.asset("assets/images/krg_logo.png"),
           IconButton(

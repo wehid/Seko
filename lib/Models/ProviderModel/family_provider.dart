@@ -78,6 +78,10 @@ class FamilyProvider with ChangeNotifier {
     return _familyItems.where((element) => element.familyCatId == categoryId).toList();
   }
 
+  List<FamilyItem> getFamilyItemListWithCategoryIdAndType(String categoryId, String type){
+    return _familyItems.where((element) => element.familyCatId == categoryId && element.type == type).toList();
+  }
+
   bool get isLoading => _isLoading;
 
   List<FamilyCategory> get familyCategories => _familyCategories;
