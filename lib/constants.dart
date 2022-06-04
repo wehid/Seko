@@ -201,9 +201,22 @@ void removeAllDownloadedAfterLogout(BuildContext context) {
 //  todo: remove downloaded from provider
 }
 
-  final String familyVideoType = '2';
-  final String familyTextType = '1';
-  final String familyPosterType = '4';
+Color getColorCode(String colorString) {
+  return Color(int.parse("0xff$colorString"));
+}
+
+  String makeYoutubeUrlFromYoutubeBe(String url) {
+    // youtube video in this part back in formate "https://youtu.be/weDVEn0u7EY"
+    // and i have to change it to standard format
+
+    String videoId = url.split('/').last;
+    print("the video id is: $videoId");
+    return "https://www.youtube.com/watch?v=$videoId";
+  }
+
+final String familyVideoType = '2';
+final String familyTextType = '1';
+final String familyPosterType = '4';
 
 final Color unReadeItemColor = Colors.pinkAccent;
 final Color readedItemColor = Colors.green;

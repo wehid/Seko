@@ -10,6 +10,7 @@ class FamilyItem {
   String link;
   String createDate;
   String type;
+  String file2;
   String familyCatName;
   String userUsername;
   String userName;
@@ -17,6 +18,7 @@ class FamilyItem {
   String userImage;
   String smallImagePath;
   String filePath;
+  String file2Path;
   String userImagePath;
 
   FamilyItem({
@@ -31,6 +33,7 @@ class FamilyItem {
     this.link,
     this.createDate,
     this.type,
+    this.file2,
     this.familyCatName,
     this.userUsername,
     this.userName,
@@ -38,6 +41,7 @@ class FamilyItem {
     this.userImage,
     this.smallImagePath,
     this.filePath,
+    this.file2Path,
     this.userImagePath,
   });
 
@@ -53,6 +57,7 @@ class FamilyItem {
     link = json['Link'];
     createDate = json['CreateDate'];
     type = json['Type'];
+    file2 = json['File2'];
     familyCatName = json['FamilyCatName'];
     userUsername = json['UserUsername'];
     userName = json['UserName'];
@@ -60,6 +65,7 @@ class FamilyItem {
     userImage = json['UserImage'];
     smallImagePath = json['SmallImagePath'];
     filePath = json['FilePath'];
+    file2Path = json['File2Path'];
     userImagePath = json['UserImagePath'];
   }
 
@@ -76,6 +82,7 @@ class FamilyItem {
     data['Link'] = this.link;
     data['CreateDate'] = this.createDate;
     data['Type'] = this.type;
+    data['File2'] = this.file2;
     data['FamilyCatName'] = this.familyCatName;
     data['UserUsername'] = this.userUsername;
     data['UserName'] = this.userName;
@@ -83,6 +90,7 @@ class FamilyItem {
     data['UserImage'] = this.userImage;
     data['SmallImagePath'] = this.smallImagePath;
     data['FilePath'] = this.filePath;
+    data['File2Path'] = this.file2Path;
     data['UserImagePath'] = this.userImagePath;
     return data;
   }

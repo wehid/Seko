@@ -8,6 +8,7 @@ import '../RequestModels/search_course_by_category.dart';
 class CoursesProvider with ChangeNotifier {
   static const _TEAM_COURSES = "2";
   static const _ALONE_COURSES = "1";
+  static const _ACTIVE_COURSE_STATUS = "2";
   bool _isLoadData = false;
   List<Course> _courseList = [];
   Course _selectedCourse;
@@ -25,6 +26,9 @@ class CoursesProvider with ChangeNotifier {
       String courseListString = await Api().getAllCourses();
       Iterable iterable = json.decode(courseListString);
       myCourses = iterable.map((item) => Course.fromJson(item)).toList();
+      myCourses = myCourses
+          .where((course) => course.status == _ACTIVE_COURSE_STATUS)
+          .toList();
       _courseList = myCourses.reversed.toList();
       _showingCourses = _courseList;
       _isLoadData = false;

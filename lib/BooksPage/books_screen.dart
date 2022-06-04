@@ -20,36 +20,6 @@ class _BooksScrennState extends State<BooksScrenn> {
     super.initState();
   }
 
-  // TODO: add this type of choose category
-
-  // Widget categoriesGrid() {
-  //   return GridView.builder(
-  //     itemCount: _bookCategories.length,
-  //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //       childAspectRatio: 1,
-  //       crossAxisCount: 3,
-  //       crossAxisSpacing: 0,
-  //       mainAxisSpacing: 0,
-  //     ),
-  //     itemBuilder: (ctx, index) {
-  //       BookCategory thisCategory = _bookCategories[index];
-  //       return CategoryItem(
-  //         thisCategory,
-  //         thisCategory.type == selectedCategories
-  //             ? Colors.white
-  //             : thisCategory.color,
-  //         () => _changeCategories(thisCategory),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // void _changeCategories(BookCategory category) {
-  //   setState(() {
-  //     selectedCategories = category.type;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     // final bookProvider = Provider.of<BookProvider>(context);

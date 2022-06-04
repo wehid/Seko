@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../Models/ObjectModels/family_item.dart';
 import '../../Models/ProviderModel/family_provider.dart';
 import '../../Models/ObjectModels/family_category.dart';
-import '../Widgets/family_item_widget.dart';
 import '../../constants.dart';
 import 'family_item_list_show.dart';
 
@@ -17,8 +16,6 @@ class FamilyCategoryDetails extends StatelessWidget {
         Provider.of<FamilyProvider>(context, listen: false);
     final FamilyCategory selectedCategory =
         familyProvider.selectedFamilyCategory;
-    final List<FamilyItem> familyItemList =
-        familyProvider.getFamilyItemListWithCategoryId(selectedCategory.id);
     final List<FamilyItem> familyVideoItemList =
         familyProvider.getFamilyItemListWithCategoryIdAndType(
             selectedCategory.id, familyVideoType);
