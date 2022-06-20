@@ -15,10 +15,12 @@ class MyCourses extends StatelessWidget {
       List<CourseLearner> myCourseLearner, BuildContext context) {
     List<Course> myCourses = [];
     for (CourseLearner courseLearner in myCourseLearner) {
+
       Course course = Provider.of<CoursesProvider>(context, listen: false)
           .courseById(courseLearner.courseId);
-      myCourses.add(course);
+      if (course != null) myCourses.add(course);
     }
+    print('make course from course learner. length is: ${myCourses.length}');
     return myCourses;
   }
 
@@ -29,6 +31,8 @@ class MyCourses extends StatelessWidget {
         Provider.of<CourseLearnerProvider>(context, listen: false);
     List<CourseLearner> _myCourseLearner =
         _courseLearnerProvider.myCourseLearners;
+
+    print("in get my curses, courses length is: ${_myCourseLearner.length}");
 
     return Courses(_myLearningCourse(_myCourseLearner, context));
   }

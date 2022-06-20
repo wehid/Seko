@@ -19,8 +19,8 @@ class OptionGrid extends StatelessWidget {
       ),
       SquadMenuOptionItem(
         iconPath: !isShowActivities
-            ? "assets/images/dashboard_active.png"
-            : "assets/images/dashboard.png",
+            ? "assets/images/group_active.png"
+            : "assets/images/group.png",
         title: "ئەندامان",
         isThisActivities: false,
       ),
@@ -31,15 +31,14 @@ class OptionGrid extends StatelessWidget {
     ];
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
-        children:
-            getMenuItems().map((item) => SquadOptionWidget(item, changeShowBody)).toList(),
+        children: getMenuItems()
+            .map((item) => SquadOptionWidget(item, changeShowBody))
+            .toList(),
       ),
     );
   }

@@ -26,7 +26,7 @@ class FamilyCategoryWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => _openCategory(context),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.all(3),
         decoration: BoxDecoration(
           color: getColorCode(familyCategory.backColor),

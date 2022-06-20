@@ -18,13 +18,13 @@ class FamilyCategoryDetails extends StatelessWidget {
         familyProvider.selectedFamilyCategory;
     final List<FamilyItem> familyVideoItemList =
         familyProvider.getFamilyItemListWithCategoryIdAndType(
-            selectedCategory.id, familyVideoType);
+            selectedCategory.id, FAMILY_VIDEO_TYPE);
     final List<FamilyItem> familyTextItemList =
         familyProvider.getFamilyItemListWithCategoryIdAndType(
-            selectedCategory.id, familyTextType);
+            selectedCategory.id, FAMILY_TEXT_TYPE);
     final List<FamilyItem> familyPosterItemList =
         familyProvider.getFamilyItemListWithCategoryIdAndType(
-            selectedCategory.id, familyPosterType);
+            selectedCategory.id, FAMILY_POSTER_TYPE);
 
     return Scaffold(
       appBar: customAppBar(selectedCategory.title),

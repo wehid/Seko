@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'image_with_progress.dart';
+
 class UserCirlceAvatar extends StatelessWidget {
   final String userImagePath;
-  final double size;
+  // final double size;
 
-  const UserCirlceAvatar(this.userImagePath, this.size);
+  const UserCirlceAvatar(this.userImagePath);
 
   bool _isMemberImageEmpty() {
     if (userImagePath == null || userImagePath == "") {
@@ -15,17 +17,14 @@ class UserCirlceAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-        radius: 8 * size,
-        backgroundImage:
-            !_isMemberImageEmpty() ? NetworkImage(userImagePath) : null,
-        backgroundColor: Colors.transparent,
-        child: _isMemberImageEmpty()
-            ? Icon(
-                Icons.person,
-                size: 11 * size,
-                color: Colors.blue,
-              )
-            : null);
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(200)),
+      child: _isMemberImageEmpty()
+          ? Icon(
+              Icons.person,
+              color: Colors.blue,
+            )
+          : ImageWithProgress(userImagePath),
+    );
   }
 }

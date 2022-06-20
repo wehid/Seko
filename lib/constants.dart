@@ -105,9 +105,15 @@ const MULTI_CHOICE_ANSWER_TYPE = "1";
 const PRSYARXANE = "1";
 const PROJESAZ = "2";
 
-const String TEXT_BOOK_TYPE = "1";
-const String VIDEO_BOOK_TYPE = "2";
-const String AUDIO_BOOK_TYPE = "3";
+const FAMILY_VIDEO_TYPE = '2';
+const FAMILY_TEXT_TYPE = '1';
+const FAMILY_POSTER_TYPE = '4';
+
+const TEXT_BOOK_TYPE = "1";
+const VIDEO_BOOK_TYPE = "2";
+const AUDIO_BOOK_TYPE = "3";
+
+const UNSEEN_LOG = "0";
 
 const List<IconData> BOOK_CATEGORY_ICON = [
   null,
@@ -205,18 +211,14 @@ Color getColorCode(String colorString) {
   return Color(int.parse("0xff$colorString"));
 }
 
-  String makeYoutubeUrlFromYoutubeBe(String url) {
-    // youtube video in this part back in formate "https://youtu.be/weDVEn0u7EY"
-    // and i have to change it to standard format
+String makeYoutubeUrlFromYoutubeBe(String url) {
+  // youtube video in this part back in formate "https://youtu.be/weDVEn0u7EY"
+  // and i have to change it to standard format
 
-    String videoId = url.split('/').last;
-    print("the video id is: $videoId");
-    return "https://www.youtube.com/watch?v=$videoId";
-  }
-
-final String familyVideoType = '2';
-final String familyTextType = '1';
-final String familyPosterType = '4';
+  String videoId = url.split('/').last;
+  print("the video id is: $videoId");
+  return "https://www.youtube.com/watch?v=$videoId";
+}
 
 final Color unReadeItemColor = Colors.pinkAccent;
 final Color readedItemColor = Colors.green;

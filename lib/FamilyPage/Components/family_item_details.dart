@@ -23,11 +23,11 @@ class FamilyItemDetails extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            if (familyItem.type == familyVideoType)
+            if (familyItem.type == FAMILY_VIDEO_TYPE)
               InternalVideoItem(familyItem.filePath),
-            if (familyItem.type == familyPosterType)
+            if (familyItem.type == FAMILY_POSTER_TYPE)
               ImageWithProgress(familyItem.filePath),
-            if (familyItem.type == familyTextType)
+            if (familyItem.type == FAMILY_TEXT_TYPE)
               Expanded(child: PdfView(familyItem.filePath)),
           ],
         ),

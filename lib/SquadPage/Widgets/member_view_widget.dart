@@ -9,7 +9,6 @@ class MemberViewWidget extends StatelessWidget {
 
   const MemberViewWidget(this.squadMember, this.isThisSupervisor);
 
-
   TextStyle supervisorStyle() {
     return TextStyle(
         fontWeight: FontWeight.bold, color: Colors.green, fontSize: 20);
@@ -25,7 +24,11 @@ class MemberViewWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          UserCirlceAvatar(squadMember.memberImagePath, 5),
+          SizedBox(
+            height: 70,
+            width: 70,
+            child: UserCirlceAvatar(squadMember.memberImagePath),
+          ),
           const SizedBox(height: 5),
           Text(
             squadMember.memberName,

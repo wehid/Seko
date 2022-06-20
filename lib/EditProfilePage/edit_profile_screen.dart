@@ -6,6 +6,7 @@ import '../Models/ProviderModel/user_provider.dart';
 import '../GlobalWidgets/seko_text_form_field.dart';
 import '../RegisterPage/Widgets/dropdown_city.dart';
 import '../GlobalWidgets/seko_button.dart';
+import '../GlobalWidgets/user_circle_avatar.dart';
 import '../constants.dart';
 
 import '../Models/ProviderModel/upload_provider.dart';
@@ -81,6 +82,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _userPhotoUrl = _uploadProvider.fileUrl;
   }
 
+  Widget _userPhoto() {
+    return Stack(
+      children: [
+        Container(
+          child: UserCirlceAvatar(_user.imagePath),
+          width: 130,
+          height: 130,
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+            child: IconButton(
+              icon: Icon(
+                Icons.camera_alt_outlined,
+                color: Colors.white,
+                size: 25,
+              ),
+              onPressed: _chosePhoto,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _uploadProvider = Provider.of<UploadProvider>(context);
@@ -88,60 +117,61 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return _isUpdatingUser
         ? progressPage()
         : Scaffold(
-            appBar: customAppBar('گۆڕینی پرۆفایل'),
-            body: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: _chosePhoto,
-                            child: Text("وێنەکەت هەڵبژێرە"),
-                          ),
-                          SekoTextFormField(
-                            controller: _nameController,
-                            label: 'ناو',
-                          ),
-                          SekoTextFormField(
-                            controller: _familyController,
-                            label: 'ناوی سیانی',
-                          ),
-                          SekoTextFormField(
-                            controller: _mobileController,
-                            label: 'مۆبایل',
-                          ),
-                          SekoTextFormField(
-                            controller: _siteController,
-                            label: 'سایت',
-                          ),
-                          SekoTextFormField(
-                            controller: _introductionController,
-                            label: 'ناساندن',
-                            textInputAction: TextInputAction.newline,
-                            textInputType: TextInputType.multiline,
-                          ),
-                          DropdownCity(
-                            cityId: _user.cityID,
-                          ),
-                        ],
+            appBar: customAppBar('دەستکاری کردنی پرۆفایل'),
+            body: Container(
+              color: Color(0xffe5e5e5),
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  _userPhoto(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            SekoTextFormField(
+                              controller: _nameController,
+                              label: 'ناو',
+                            ),
+                            SekoTextFormField(
+                              controller: _familyController,
+                              label: 'ناوی سیانی',
+                            ),
+                            SekoTextFormField(
+                              controller: _mobileController,
+                              label: 'مۆبایل',
+                            ),
+                            SekoTextFormField(
+                              controller: _siteController,
+                              label: 'سایت',
+                            ),
+                            DropdownCity(
+                              cityId: _user.cityID,
+                            ),
+                            SekoTextFormField(
+                              controller: _introductionController,
+                              label: 'ناساندن',
+                              textInputAction: TextInputAction.newline,
+                              textInputType: TextInputType.multiline,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: SekoButton(
-                    buttonIcon: Icons.save,
-                    buttonString: 'پاشەکەوت کردن',
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white,
-                    onPressed: _updateUser,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: SekoButton(
+                      buttonIcon: Icons.save,
+                      buttonString: 'پاشەکەوت کردن',
+                      backgroundColor: Colors.blue,
+                      textColor: Colors.white,
+                      onPressed: _updateUser,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }

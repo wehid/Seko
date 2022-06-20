@@ -10,7 +10,9 @@ class CoursesProvider with ChangeNotifier {
   static const _ALONE_COURSES = "1";
   static const _ACTIVE_COURSE_STATUS = "2";
   bool _isLoadData = false;
-  List<Course> _courseList = [];
+  List<Course> _allCourse =
+      []; //listed all course, both active and inactive courses.
+  List<Course> _courseList = []; //listed only active course.
   Course _selectedCourse;
   List<Course> _showingCourses = [];
 
@@ -26,6 +28,8 @@ class CoursesProvider with ChangeNotifier {
       String courseListString = await Api().getAllCourses();
       Iterable iterable = json.decode(courseListString);
       myCourses = iterable.map((item) => Course.fromJson(item)).toList();
+      _allCourse =
+          myCourses; //in here we keep all course and later remove inactive course to show.
       myCourses = myCourses
           .where((course) => course.status == _ACTIVE_COURSE_STATUS)
           .toList();
@@ -38,7 +42,8 @@ class CoursesProvider with ChangeNotifier {
     }
 
     //todo: this part is for debugging. delete it before release
-    print('all course list length is: ${myCourses.length}');
+    print(
+        'all course list length is: ${_allCourse.length} and active courses is: ${_courseList.length}');
   }
 
   // get all course in category from api and return them.
@@ -113,13 +118,13 @@ class CoursesProvider with ChangeNotifier {
   }
 
   Course courseById(String courseId) {
-    return _courseList.firstWhere((course) => course.id == courseId);
+    Course course = _allCourse.firstWhere((course) => course.id == courseId);
+    return course.status == _ACTIVE_COURSE_STATUS ? course : null;
   }
 
   bool get isLoadData => _isLoadData;
 
   Course get selectedCourse => _selectedCourse;
 
-  // List<Course> get courseList => _courseList;
   List<Course> get courseList => _showingCourses;
 }

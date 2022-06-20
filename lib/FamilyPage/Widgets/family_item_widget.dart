@@ -32,7 +32,7 @@ class FamilyItemWidget extends StatelessWidget {
                 child: ImageWithProgress(familyItem.smallImagePath),
               ),
             if (familyItem.smallImagePath == "" &&
-                familyItem.type == familyPosterType)
+                familyItem.type == FAMILY_POSTER_TYPE)
               Expanded(
                 flex: 4,
                 child: ImageWithProgress(familyItem.filePath),

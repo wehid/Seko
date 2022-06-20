@@ -91,8 +91,8 @@ class _MainScreenScaffoldState extends State<MainScreenScaffold> {
           //     backgroundColor: Colors.red.shade800),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'پرۆفایل',
+            icon: ImageIcon(AssetImage("assets/images/dashboard.png")),
+            label: 'داشبۆرد',
             // backgroundColor: Colors.lightGreen,
           ),
         ],

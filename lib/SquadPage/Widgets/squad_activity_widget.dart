@@ -29,7 +29,12 @@ class SquadActivityWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                UserCirlceAvatar(squadActivity.userImagePath, 4),
+                SizedBox(
+                  width: 35,
+                  height: 35,
+                  child: UserCirlceAvatar(squadActivity.userImagePath),
+                ),
+                SizedBox(width: 8),
                 Text(
                   "${squadActivity.userName} ${squadActivity.userFamily}",
                   style: TextStyle(

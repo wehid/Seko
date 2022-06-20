@@ -7,6 +7,8 @@ class SekoButton extends StatelessWidget {
   final String buttonString;
   final IconData buttonIcon;
   final Color textColor;
+  final double textSize;
+  final double iconSize;
 
   SekoButton({
     this.borderColor = Colors.grey,
@@ -15,6 +17,8 @@ class SekoButton extends StatelessWidget {
     this.buttonString,
     this.buttonIcon,
     this.textColor = Colors.blue,
+    this.textSize = 20,
+    this.iconSize = 30,
   });
 
   @override
@@ -35,9 +39,17 @@ class SekoButton extends StatelessWidget {
           children: [
             Text(
               buttonString,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: textColor),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: textSize,
+                color: textColor,
+              ),
             ),
-            Icon(buttonIcon, size: 30, color: textColor,),
+            Icon(
+              buttonIcon,
+              size: iconSize,
+              color: textColor,
+            ),
           ],
         ),
       ),
