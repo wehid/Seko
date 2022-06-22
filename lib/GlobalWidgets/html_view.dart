@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'youtube_video_item.dart';
-import '../PdfView/pdf_view.dart';
+import 'pdf_view.dart';
 
 class HtmlView extends StatelessWidget {
   final String htmlCode;
@@ -39,8 +39,10 @@ class HtmlView extends StatelessWidget {
       customRender: {
         "iframe": (RenderContext ctx, Widget child) {
           String youtubeUrl = ctx.tree.element.attributes['src'];
-          print(youtubeUrl);
-          return YoutubeVideoItem(youtubeUrl);
+
+          // youtube video in this part back in formate "//www.youtube.com/embed/weDVEn0u7EY"
+          // and i have to change it to standard format
+          return YoutubeVideoItem("https:$youtubeUrl");
         }
       },
       onLinkTap: (url, _, __, ___) {

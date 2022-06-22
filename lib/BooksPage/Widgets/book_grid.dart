@@ -21,7 +21,7 @@ class BookGrid extends StatelessWidget {
         : GridView.builder(
             itemCount: bookList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 5 / 6,
+              childAspectRatio: 220 / 350,
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,

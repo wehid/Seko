@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seko/constants.dart';
 import 'dart:convert';
 
 import '../../Services/api.dart';
@@ -107,6 +108,54 @@ class UserProvider with ChangeNotifier {
       print('in get user logs, error is: $error');
       throw error;
     }
+  }
+
+  Future _setUserLogSeen(UserLog userLog) async {
+    _isLoading = true;
+    try {
+      bool response = await Api().setSeenUserLogs(userLog);
+      if (response) {
+        getUserLogs();
+      } else {
+        throw false;
+      }
+    } catch (error) {
+      throw error;
+    }
+    _isLoading = false;
+  }
+
+  Future setLogAsReadByLogId(String logId) async {
+    UserLog userLog = UserLog(
+      logId: logId,
+      userId: _user.id,
+    );
+
+    try {
+      _setUserLogSeen(userLog);
+    } catch (error) {
+      print("in set log by log id: $logId, error is: $error");
+    }
+  }
+
+  Future setAllLogAsSeen() async {
+    UserLog userLog = UserLog(
+      userId: _user.id,
+      seen: "0",
+    );
+
+    try {
+      _setUserLogSeen(userLog);
+    } catch (error) {
+      print("in set all log seen, error is: $error");
+    }
+  }
+
+  int numberOfUnreadUserLog() {
+    List<UserLog> unreadUserLog =
+        _userLogs.where((log) => log.seen == UNSEEN_LOG).toList();
+
+    return unreadUserLog.length;
   }
 
   void logout() {

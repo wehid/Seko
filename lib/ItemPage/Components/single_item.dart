@@ -4,7 +4,7 @@ import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'item_header.dart';
-import '../Widget/video_item.dart';
+import '../../GlobalWidgets/internal_video_item.dart';
 import '../../GlobalWidgets/youtube_video_item.dart';
 import '../../GlobalWidgets/html_view.dart';
 import '../../Models/ObjectModels/item.dart';
@@ -28,15 +28,9 @@ class SingleItem extends StatelessWidget {
           children: [
             SizedBox(height: 20),
             ItemHeader(item),
-            if (item.videoPath.length > 0)
-              VideoItem(
-                VideoPlayerController.network(item.videoPath),
-              ),
+            if (item.videoPath.length > 0) InternalVideoItem(item.videoPath),
             //video url have http:// as default because that must be >10
-            if (item.videoUrl.length > 10)
-              YoutubeVideoItem(
-                item.videoUrl
-              ),
+            if (item.videoUrl.length > 10) YoutubeVideoItem(item.videoUrl),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: HtmlView(item.contents),

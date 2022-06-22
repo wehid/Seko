@@ -34,10 +34,11 @@ class Courses extends StatelessWidget {
         : GridView.builder(
             itemCount: coursesList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                crossAxisCount: 2,
-                childAspectRatio: 280 / 400),
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              crossAxisCount: 2,
+              childAspectRatio: 280 / 400,
+            ),
             itemBuilder: (context, index) {
               return CourseItem(coursesList[index]);
             },

@@ -25,6 +25,7 @@ import '../Models/RequestModels/search_book.dart';
 import '../Models/RequestModels/search_family_item.dart';
 import '../Models/RequestModels/search_user_log.dart';
 import '../Models/RequestModels/search_squad_activity.dart';
+import '../Models/RequestModels/search_user_item_file.dart';
 import '../Models/ObjectModels/user.dart';
 import '../Models/ObjectModels/course_learner.dart';
 import '../Models/ObjectModels/quiz.dart';
@@ -34,6 +35,7 @@ import '../Models/ObjectModels/forum_post.dart';
 import '../Models/ObjectModels/wane_comment.dart';
 import '../Models/ObjectModels/wane.dart';
 import '../Models/ObjectModels/squad_activity.dart';
+import '../Models/ObjectModels/user_log.dart';
 
 class Api {
   // this part is define base url for all api
@@ -943,6 +945,28 @@ class Api {
     }
   }
 
+  //  ------------------ User Log set seen ------------------------------
+
+  Future<bool> setSeenUserLogs(UserLog userLog) async {
+    final String _METHOD_URL = 'api/log/user/setseen.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(BASE_URL, _METHOD_URL);
+    String requestBody = json.encode(userLog.toJson());
+
+    try {
+      var response = await http.post(url, body: requestBody);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return true;
+      } else {
+        print(response.statusCode);
+        return false;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
   ///  ------------------ Squad ------------------------------
   ///  ------------------ Squad ------------------------------
 
@@ -1028,8 +1052,8 @@ class Api {
 
   //  ------------------ Send file ------------------------------
 
-  Future<String> uploadFile(String filePath, String userToken, String typeOfFile,
-      String typeOfTable, String id) async {
+  Future<String> uploadFile(String filePath, String userToken,
+      String typeOfFile, String typeOfTable, String id) async {
     final String _METHOD_URL = 'api/upload.php';
 
     // to make url for api call from base url and method url.
@@ -1043,7 +1067,7 @@ class Api {
       request.headers.addAll({"Token": userToken});
       request.files.add(await http.MultipartFile.fromPath('file', filePath));
 
-      var response = await request. send();
+      var response = await request.send();
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("file uploaded");
@@ -1054,6 +1078,34 @@ class Api {
 
         print("Something went wrong");
         throw ("Something went wrong!");
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  ///  ------------------ User Item File (activities) ------------------------------
+  ///  ------------------ User Item File (activities) ------------------------------
+
+  //  ------------------ get User Item File ------------------------------
+
+  Future<String> getUserItemFile(SearchUserItemFile searchUserItemFile) async {
+    final String _METHOD_URL = 'api/learn/useritemfile/search.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(BASE_URL, _METHOD_URL);
+
+    String userItemfileSearchBody = json.encode(searchUserItemFile.toJson());
+
+    try {
+      var response = await http.post(url, body: userItemfileSearchBody);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        print(response.statusCode);
+        // TODO: handle if status code is not 200 or 201
+        throw (response.statusCode);
       }
     } catch (error) {
       throw error;

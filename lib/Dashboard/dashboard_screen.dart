@@ -8,9 +8,12 @@ import '../ProfilePage/Components/my_courses.dart';
 import '../EditProfilePage/edit_profile_screen.dart';
 import '../Models/ProviderModel/user_provider.dart';
 import '../UserLogsPage/user_logs_screen.dart';
+import 'Widgets/user_log_icon.dart';
+import '../SquadPage/squad_screen.dart';
+import '../MyHomeWork/my_homework_screen.dart';
 
 enum popupMenuEnum {
-  editeProfile,
+  showProfile,
   logout,
 }
 
@@ -33,8 +36,8 @@ class DashboardScreen extends StatelessWidget {
 
   void _selectedMenuItemAction(BuildContext context, popupMenuEnum item) {
     switch (item) {
-      case popupMenuEnum.editeProfile:
-        Navigator.of(context).pushNamed(EditProfileScreen.routeName);
+      case popupMenuEnum.showProfile:
+        Navigator.of(context).pushNamed(ProfileScreen.routeName);
         break;
       case popupMenuEnum.logout:
         _logout(context);
@@ -56,11 +59,13 @@ class DashboardScreen extends StatelessWidget {
             title: Text("داشبۆرد"),
             centerTitle: true,
             actions: [
+              UserLogicon(),
               PopupMenuButton<popupMenuEnum>(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 itemBuilder: (context) => [
-                  popupMenuRow(popupMenuEnum.editeProfile, "گۆڕینی پرۆفایل", Icons.edit),
+                  popupMenuRow(
+                      popupMenuEnum.showProfile, "پرۆفایل", Icons.person),
                   popupMenuRow(popupMenuEnum.logout, "چوونە دەر", Icons.logout),
                 ],
                 onSelected: (item) => _selectedMenuItemAction(context, item),
@@ -68,19 +73,17 @@ class DashboardScreen extends StatelessWidget {
             ],
             bottom: TabBar(
               tabs: [
-                Tab(text: 'پرۆفایل'),
                 Tab(text: 'خولەکانی من'),
-                Tab(
-                  text: 'پەیام و چالاکی',
-                )
+                Tab(text: 'گرووپی من'),
+                Tab(text: 'ئەرکەکانی من'),
               ],
             ),
           ),
           body: TabBarView(
             children: [
-              ProfileScreen(),
               MyCourses(),
-              UserLogsScreen(),
+              SquadScreen(),
+              MyHomeworkScreen(),
             ],
           )),
     );

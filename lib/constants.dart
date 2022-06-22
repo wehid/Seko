@@ -13,8 +13,7 @@ import 'Models/ProviderModel/survey_provider.dart';
 import 'Models/ProviderModel/internet_check_provider.dart';
 import 'Models/ProviderModel/squad_provider.dart';
 
-
-final String BASE_URL = 'szm.one';
+final String BASE_URL = 'e-rahenan.krd';
 
 Widget progressPage() {
   return Scaffold(
@@ -62,7 +61,12 @@ AppBar customAppBar(String title) {
   return AppBar(
     title: Text(title),
     centerTitle: true,
-    actions: [Image.asset("assets/images/krg_logo.png")],
+    actions: [
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Image.asset("assets/images/krg_logo.png"),
+      ),
+    ],
   );
 }
 
@@ -101,9 +105,15 @@ const MULTI_CHOICE_ANSWER_TYPE = "1";
 const PRSYARXANE = "1";
 const PROJESAZ = "2";
 
-const String TEXT_BOOK_TYPE = "1";
-const String VIDEO_BOOK_TYPE = "2";
-const String AUDIO_BOOK_TYPE = "3";
+const FAMILY_VIDEO_TYPE = '2';
+const FAMILY_TEXT_TYPE = '1';
+const FAMILY_POSTER_TYPE = '4';
+
+const TEXT_BOOK_TYPE = "1";
+const VIDEO_BOOK_TYPE = "2";
+const AUDIO_BOOK_TYPE = "3";
+
+const UNSEEN_LOG = "0";
 
 const List<IconData> BOOK_CATEGORY_ICON = [
   null,
@@ -195,6 +205,19 @@ Future<void> showWarningAlertDialog(String warning, BuildContext context) {
 
 void removeAllDownloadedAfterLogout(BuildContext context) {
 //  todo: remove downloaded from provider
+}
+
+Color getColorCode(String colorString) {
+  return Color(int.parse("0xff$colorString"));
+}
+
+String makeYoutubeUrlFromYoutubeBe(String url) {
+  // youtube video in this part back in formate "https://youtu.be/weDVEn0u7EY"
+  // and i have to change it to standard format
+
+  String videoId = url.split('/').last;
+  print("the video id is: $videoId");
+  return "https://www.youtube.com/watch?v=$videoId";
 }
 
 final Color unReadeItemColor = Colors.pinkAccent;

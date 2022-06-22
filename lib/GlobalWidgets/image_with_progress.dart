@@ -31,36 +31,4 @@ class ImageWithProgress extends StatelessWidget {
       },
     );
   }
-
-  /// this is take image with image network
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Image.network(
-  //     imagePath,
-  //     fit: BoxFit.fill,
-  //     //show progress bar for image loading
-  //     loadingBuilder: (BuildContext context, Widget child, loadingProgress) {
-  //       if (loadingProgress == null) {
-  //         return child;
-  //       }
-  //       return Stack(
-  //         children: [
-  //           Center(
-  //             child: Text(
-  // '${loadingProgress.expectedTotalBytes != null ? ((loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes) * 100).toStringAsFixed(0) : null} %'),
-  //           ),
-  //           Center(
-  //             child: CircularProgressIndicator(
-  //               value: loadingProgress.expectedTotalBytes != null
-  //                   ? loadingProgress.cumulativeBytesLoaded /
-  //                       loadingProgress.expectedTotalBytes
-  //                   : null,
-  //             ),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
 }

@@ -5,15 +5,14 @@ import '../../Models/ObjectModels/family_category.dart';
 import '../../Models/ProviderModel/family_provider.dart';
 import '../../GlobalWidgets/image_with_progress.dart';
 import '../Components/family_category_details.dart';
+import '../../constants.dart';
 
 class FamilyCategoryWidget extends StatelessWidget {
   final FamilyCategory familyCategory;
 
   FamilyCategoryWidget(this.familyCategory);
 
-  Color _getColorCode(String colorString) {
-    return Color(int.parse("0xff$colorString"));
-  }
+
 
   void _openCategory(BuildContext context) {
     Provider.of<FamilyProvider>(context, listen: false)
@@ -27,10 +26,10 @@ class FamilyCategoryWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => _openCategory(context),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.all(3),
         decoration: BoxDecoration(
-          color: _getColorCode(familyCategory.backColor),
+          color: getColorCode(familyCategory.backColor),
           borderRadius: BorderRadius.all(Radius.circular(10)),
           border: Border.all(
             color: Colors.grey,
@@ -54,7 +53,7 @@ class FamilyCategoryWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 17,
-                color: _getColorCode(familyCategory.foreColor),
+                color: getColorCode(familyCategory.foreColor),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -67,7 +66,7 @@ class FamilyCategoryWidget extends StatelessWidget {
                   familyCategory.introduction,
                   style: TextStyle(
                       fontSize: 12,
-                      color: _getColorCode(familyCategory.foreColor)),
+                      color: getColorCode(familyCategory.foreColor)),
                 ),
               ),
             ),

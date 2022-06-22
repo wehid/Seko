@@ -3,17 +3,15 @@ import 'package:provider/provider.dart';
 
 import '../Models/ObjectModels/user_log.dart';
 import '../Models/ProviderModel/user_provider.dart';
+import '../GlobalWidgets/seko_button.dart';
+
+import '../constants.dart';
 
 class UserLogsScreen extends StatelessWidget {
-  bool _ifFirstLoad = true;
-
-  void _loadData(BuildContext context) {
-    Provider.of<UserProvider>(context, listen: false).getUserLogs();
-    _ifFirstLoad = false;
-  }
+  static const routeName = '/user-log-screen';
 
   bool _isNotSeenLog(UserLog log) {
-    return log.seen == "0";
+    return log.seen == UNSEEN_LOG;
   }
 
   Icon notSeenIcon() {
@@ -26,26 +24,50 @@ class UserLogsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_ifFirstLoad) _loadData(context);
+    // if (_ifFirstLoad) _loadData(context);
     final UserProvider userProvider = Provider.of<UserProvider>(context);
     List<UserLog> logs = userProvider.userLogs;
+    print("user log screen rebuild");
 
     return Scaffold(
+      appBar: customAppBar("پەیام و چالاکی"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: logs.length,
-          itemBuilder: (context, index) {
-            UserLog log = logs[index];
-            return Card(
-              elevation: 5,
-              child: ListTile(
-                title: Text(log.message),
-                trailing: _isNotSeenLog(log) ? notSeenIcon() : seenedIcon(),
+        child: userProvider.isLoading
+            ? Center(child: CircularProgressIndicator())
+            : Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: logs.length,
+                      itemBuilder: (context, index) {
+                        UserLog log = logs[index];
+                        return Card(
+                          elevation: 5,
+                          child: ListTile(
+                            onTap: _isNotSeenLog(log)
+                                ? () =>
+                                    userProvider.setLogAsReadByLogId(log.logId)
+                                : null,
+                            title: Text(log.message),
+                            trailing: _isNotSeenLog(log)
+                                ? notSeenIcon()
+                                : seenedIcon(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  if (userProvider.numberOfUnreadUserLog() > 0)
+                    SekoButton(
+                      backgroundColor: Colors.blue,
+                      buttonString: "هەمووی ببینە",
+                      buttonIcon: Icons.visibility,
+                      textColor: Colors.white,
+                      onPressed: () => userProvider.setAllLogAsSeen(),
+                    )
+                ],
               ),
-            );
-          },
-        ),
       ),
     );
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../constants.dart';
-
 import '../Models/ProviderModel/squad_provider.dart';
 import '../Models/ProviderModel/user_provider.dart';
 import '../Models/ObjectModels/squad.dart';
@@ -57,7 +55,6 @@ class _SquadScreenState extends State<SquadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("گرووپی من"),
       body: squadProvider.isLoading
           ? Center(child: CircularProgressIndicator())
           : Column(
