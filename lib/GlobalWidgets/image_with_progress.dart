@@ -10,6 +10,7 @@ class ImageWithProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imagePath,
+      fit: BoxFit.cover,
       progressIndicatorBuilder: (_, url, DownloadProgress progress) {
         if (progress == null) return null;
         return Stack(

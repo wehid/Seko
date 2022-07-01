@@ -6,7 +6,8 @@ import '../Models/ProviderModel/user_provider.dart';
 import '../GlobalWidgets/seko_text_form_field.dart';
 import '../RegisterPage/Widgets/dropdown_city.dart';
 import '../GlobalWidgets/seko_button.dart';
-import '../GlobalWidgets/user_circle_avatar.dart';
+import '../GlobalWidgets/upload_user_photo.dart';
+// import '../GlobalWidgets/user_circle_avatar.dart';
 import '../constants.dart';
 
 import '../Models/ProviderModel/upload_provider.dart';
@@ -35,6 +36,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
+        Provider.of<UploadProvider>(context, listen: false).emptyUploadItems();
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     _user = _userProvider.user;
     _nameController.text = _user.name;
@@ -43,7 +45,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _siteController.text = _user.website;
     _introductionController.text = _user.introduction;
     _userPhotoUrl = _user.imagePath;
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _uploadProvider = Provider.of<UploadProvider>(context);
+    super.didChangeDependencies();
   }
 
   @override
@@ -69,51 +78,55 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     updatedUser.website = _siteController.text;
     updatedUser.introduction = _introductionController.text;
     updatedUser.cityID = getSelectedCityId(context);
-    updatedUser.imagePath = _userPhotoUrl;
+
+
+
+    if (_uploadProvider.fileName != null && _uploadProvider.fileUrl != null) {
+    updatedUser.image = _uploadProvider.fileName;
+    updatedUser.imagePath = _uploadProvider.fileUrl;
+    }
 
     Provider.of<UserProvider>(context, listen: false)
         .update(updatedUser)
-        .then((value) => Navigator.of(context).pop());
+        .then((_) => Navigator.of(context).pop());
   }
 
-  void _chosePhoto() {
-    // final uploadProvider = Provider.of<UploadProvider>(context);
-    _uploadProvider.uploadUserPhoto(_user.token);
-    _userPhotoUrl = _uploadProvider.fileUrl;
-  }
+  // void _chosePhoto() {
+  //   _uploadProvider.uploadUserPhoto(_user.token);
+  // }
 
-  Widget _userPhoto() {
-    return Stack(
-      children: [
-        Container(
-          child: UserCirlceAvatar(_user.imagePath),
-          width: 130,
-          height: 130,
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-            child: IconButton(
-              icon: Icon(
-                Icons.camera_alt_outlined,
-                color: Colors.white,
-                size: 25,
-              ),
-              onPressed: _chosePhoto,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _userPhoto() {
+  //   return Stack(
+  //     children: [
+  //       Container(
+  //         child: _uploadProvider.isLoading
+  //             ? Center(child: CircularProgressIndicator())
+  //             : UserCirlceAvatar(_uploadProvider.fileUrl ?? _userPhotoUrl),
+  //         width: 130,
+  //         height: 130,
+  //       ),
+  //       Positioned(
+  //         bottom: 0,
+  //         right: 0,
+  //         child: Container(
+  //           decoration:
+  //               BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+  //           child: IconButton(
+  //             icon: Icon(
+  //               Icons.camera_alt_outlined,
+  //               color: Colors.white,
+  //               size: 25,
+  //             ),
+  //             onPressed: _chosePhoto,
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
-    _uploadProvider = Provider.of<UploadProvider>(context);
-
     return _isUpdatingUser
         ? progressPage()
         : Scaffold(
@@ -123,7 +136,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  _userPhoto(),
+                  UploadUserPhoto(_userPhotoUrl),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Padding(

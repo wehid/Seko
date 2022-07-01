@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seko/GlobalWidgets/seko_button.dart';
 
 import '../Widgets/dropdown_city.dart';
 import '../../GlobalWidgets/seko_text_form_field.dart';
 import '../../constants.dart';
 import '../../Models/ObjectModels/user.dart';
 import '../../Models/ProviderModel/user_provider.dart';
+import '../../Models/ProviderModel/upload_provider.dart';
 import '../../Services/sql_helper.dart';
 import '../../Models/ObjectModels/login.dart';
+import '../../GlobalWidgets/upload_user_photo.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -49,6 +52,8 @@ class _RegisterFormState extends State<RegisterForm> {
       type: _learnerType,
       status: _enabledStatus,
       cityID: getSelectedCityId(context),
+      image: Provider.of<UploadProvider>(context, listen: false).fileName,
+      imagePath: Provider.of<UploadProvider>(context, listen: false).fileUrl,
     );
     return user;
   }
@@ -67,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
       User registerUser = _registerUser();
       UserProvider userProvider =
           Provider.of<UserProvider>(context, listen: false);
-          
+
       userProvider.register(registerUser).then((value) {
         _saveUsernameAndPassword(registerUser);
         _isRegistering = false;
@@ -143,6 +148,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         controller: _passwordRepeatController,
                       ),
                       DropdownCity(),
+                      UploadUserPhoto(null),
                     ],
                   ),
                 ),
@@ -156,11 +162,14 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                   ],
                 ),
-                ElevatedButton(
+                SekoButton(
+                  backgroundColor: Colors.blue,
+                  buttonString: 'خۆ تۆمار کردن',
+                  textColor: Colors.white,
+                  buttonIcon: Icons.login,
                   onPressed: () {
                     _completeRegistering(context);
                   },
-                  child: Text('خۆ تۆمار کردن'),
                 ),
               ],
             ),

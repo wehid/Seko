@@ -27,15 +27,16 @@ class ProfileScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: Color(0xffe5e5e5),
-      padding: const EdgeInsets.symmetric(vertical: 25),
+      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
       child: Row(
         children: [
-          Expanded(
-            flex: 1,
+          SizedBox(
+            width: 120,
+            height: 120,
             child: UserCirlceAvatar(user.imagePath),
           ),
           Expanded(
-            flex: 2,
+            // flex: 2,
             child: Column(
               children: [
                 Text(
@@ -65,7 +66,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<UserProvider>(context, listen: false).user;
+    final UserProvider _userProvider = Provider.of<UserProvider>(context);
+    User user = _userProvider.user;
+    print("in profile screen, build method rebuild");
+    // User user = Provider.of<UserProvider>(context, listen: false).user;
 
     return Scaffold(
       appBar: customAppBar("پرۆفایل"),

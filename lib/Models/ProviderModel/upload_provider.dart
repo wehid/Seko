@@ -39,6 +39,7 @@ class UploadProvider with ChangeNotifier {
   bool _isLoading = false;
   UploadResponse _response;
   String _fileUrl;
+  String _fileName;
 
   Future<String> _pickFile(bool isImage) async {
     List<PlatformFile> _files;
@@ -54,17 +55,15 @@ class UploadProvider with ChangeNotifier {
     return _files.first.path;
   }
 
-  Future<void> _upload(
-      {@required String userToken,
-      @required TypeOfFile typeOfFile,
-      @required TypeOfTable typeOfTable,
-      id}) async {
+  Future<void> _upload({
+    @required String userToken,
+    @required TypeOfFile typeOfFile,
+    @required TypeOfTable typeOfTable,
+    id,
+  }) async {
     _isLoading = true;
 
     var filePath = await _pickFile(typeOfFile == TypeOfFile.image);
-
-    // TODO: DELTE PRINT
-    print(filePath);
 
     String uploadResultString = await Api().uploadFile(filePath, userToken,
         typeOfFile.toShortString(), typeOfTable.toShortString(), id);
@@ -74,24 +73,25 @@ class UploadProvider with ChangeNotifier {
 
     _response = UploadResponse.fromJson(json.decode(uploadResultString));
 
-    // TOOD: DELETE PRINT
-    print(_makeFileUrl(_response.path));
-    print(_response.fileName);
-
     _fileUrl = _makeFileUrl(_response.path);
+    print("in upload, file url is: $_fileUrl");
+    _fileName = _response.fileName;
+    print("in upload, file name is: $_fileName");
+
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> uploadUserPhoto(String userToken) {
+  Future uploadUserPhoto(String userToken) async {
     _upload(
       userToken: userToken,
       typeOfFile: TypeOfFile.image,
       typeOfTable: TypeOfTable.users,
     );
+    notifyListeners();
   }
 
-  Future<void> uploadTeamFile(String userToken, String teamId) {
+  Future<void> uploadTeamFile(String userToken, String teamId) async {
     _upload(
       userToken: userToken,
       typeOfFile: TypeOfFile.document,
@@ -100,7 +100,7 @@ class UploadProvider with ChangeNotifier {
     );
   }
 
-  Future<void> uploadClubFile(String userToken, String clubeId) {
+  Future<void> uploadClubFile(String userToken, String clubeId) async {
     _upload(
       userToken: userToken,
       typeOfFile: TypeOfFile.document,
@@ -109,9 +109,18 @@ class UploadProvider with ChangeNotifier {
     );
   }
 
+  void emptyUploadItems() {
+    _isLoading = false;
+    _response = null;
+    _fileName = null;
+    _fileUrl = null;
+  }
+
   bool get isLoading => _isLoading;
 
   UploadResponse get uploadResponse => _response;
 
   String get fileUrl => _fileUrl;
+
+  String get fileName => _fileName;
 }

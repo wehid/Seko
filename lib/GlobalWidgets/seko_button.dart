@@ -14,7 +14,7 @@ class SekoButton extends StatelessWidget {
     this.borderColor = Colors.grey,
     this.backgroundColor = Colors.white,
     this.onPressed,
-    this.buttonString,
+    @required this.buttonString,
     this.buttonIcon,
     this.textColor = Colors.blue,
     this.textSize = 20,
