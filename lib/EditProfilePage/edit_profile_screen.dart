@@ -7,7 +7,6 @@ import '../GlobalWidgets/seko_text_form_field.dart';
 import '../RegisterPage/Widgets/dropdown_city.dart';
 import '../GlobalWidgets/seko_button.dart';
 import '../GlobalWidgets/upload_user_photo.dart';
-// import '../GlobalWidgets/user_circle_avatar.dart';
 import '../constants.dart';
 
 import '../Models/ProviderModel/upload_provider.dart';
@@ -90,40 +89,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         .update(updatedUser)
         .then((_) => Navigator.of(context).pop());
   }
-
-  // void _chosePhoto() {
-  //   _uploadProvider.uploadUserPhoto(_user.token);
-  // }
-
-  // Widget _userPhoto() {
-  //   return Stack(
-  //     children: [
-  //       Container(
-  //         child: _uploadProvider.isLoading
-  //             ? Center(child: CircularProgressIndicator())
-  //             : UserCirlceAvatar(_uploadProvider.fileUrl ?? _userPhotoUrl),
-  //         width: 130,
-  //         height: 130,
-  //       ),
-  //       Positioned(
-  //         bottom: 0,
-  //         right: 0,
-  //         child: Container(
-  //           decoration:
-  //               BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-  //           child: IconButton(
-  //             icon: Icon(
-  //               Icons.camera_alt_outlined,
-  //               color: Colors.white,
-  //               size: 25,
-  //             ),
-  //             onPressed: _chosePhoto,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {

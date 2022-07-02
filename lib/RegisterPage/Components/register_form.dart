@@ -18,6 +18,8 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  // this learner type is for teacher. but for admin and gust was difrent
+  // TODO: if need, change this part for can choose learner type.
   final _learnerType = '4';
   final _enabledStatus = '1';
   final _formKey = GlobalKey<FormState>();
@@ -65,19 +67,19 @@ class _RegisterFormState extends State<RegisterForm> {
 
   //check validations and register user, save user and save username and password
   void _completeRegistering(BuildContext context) {
-    setState(() {
-      _isRegistering = true;
-    });
     if (_formKey.currentState.validate()) {
+      setState(() {
+        _isRegistering = true;
+      });
       User registerUser = _registerUser();
       UserProvider userProvider =
           Provider.of<UserProvider>(context, listen: false);
 
-      userProvider.register(registerUser).then((value) {
+      userProvider.register(registerUser).then((_) {
         _saveUsernameAndPassword(registerUser);
         _isRegistering = false;
         Navigator.of(context).pop();
-      }).onError((error, stackTrace) {
+      }).onError((_, __) {
         setState(() {
           _isRegistering = false;
         });
@@ -118,6 +120,8 @@ class _RegisterFormState extends State<RegisterForm> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      UploadUserPhoto(null),
+                      const SizedBox(height: 8),
                       SekoTextFormField(
                         textInputAction: TextInputAction.next,
                         validator: emptyValidatorTFF,
@@ -148,7 +152,6 @@ class _RegisterFormState extends State<RegisterForm> {
                         controller: _passwordRepeatController,
                       ),
                       DropdownCity(),
-                      UploadUserPhoto(null),
                     ],
                   ),
                 ),

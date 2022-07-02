@@ -36,6 +36,7 @@ import '../Models/ObjectModels/wane_comment.dart';
 import '../Models/ObjectModels/wane.dart';
 import '../Models/ObjectModels/squad_activity.dart';
 import '../Models/ObjectModels/user_log.dart';
+import '../Models/ObjectModels/change_password.dart';
 
 class Api {
   // this part is define base url for all api
@@ -573,6 +574,25 @@ class Api {
     try {
       var response = await http.post(url,
           body: loginRequestBody, headers: securityHeader(user.token));
+      return response.body;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //  ------------------ Change Password ------------------------------
+
+  Future<String> changePassword(
+      ChangePassword changePassword, String userToken) async {
+    final String _METHOD_URL = 'api/user/changepassword.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(BASE_URL, _METHOD_URL);
+    String changePasswordRequestBody = json.encode(changePassword.toJson());
+
+    try {
+      var response = await http.post(url,
+          body: changePasswordRequestBody, headers: securityHeader(userToken));
       return response.body;
     } catch (error) {
       throw error;

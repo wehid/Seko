@@ -5,6 +5,7 @@ import 'dart:convert';
 import '../../Services/api.dart';
 import '../ObjectModels/user.dart';
 import '../ObjectModels/user_log.dart';
+import '../ObjectModels/change_password.dart';
 import '../RequestModels/search_user_log.dart';
 
 class UserProvider with ChangeNotifier {
@@ -83,6 +84,37 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       print('error in update is: $error');
+      throw error;
+    }
+  }
+
+  Future<void> changePassword(String oldPassword, String newPassword) async {
+    _isLoading = true;
+    ChangePassword changePassword = ChangePassword(
+      userId: int.parse(_user.id),
+      oldPassword: oldPassword,
+      password: newPassword,
+    );
+    // User user = User();
+
+    try {
+      String changePasswordResponse =
+          await Api().changePassword(changePassword, _user.token);
+
+      String status = json.decode(changePasswordResponse)["Code"];
+      if (status == "200") {
+        //  TODO: delete print
+        print('change passowrd done');
+      } else {
+        _errorMessage = "کێشەیەک ڕووی داوە، دووبارە تاقی بکەرەوە";
+        throw "کێشەیەک ڕووی داوە";
+      }
+      _isLoading = false;
+      notifyListeners();
+    } catch (error) {
+      print('error in update is: $error');
+      _errorMessage = "کێشەیەک ڕووی داوە، دووبارە تاقی بکەرەوە";
+
       throw error;
     }
   }

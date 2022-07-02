@@ -39,7 +39,7 @@ class _WriteSquadMessageState extends State<WriteSquadMessage> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final squadProvider = Provider.of<SquadProvider>(context, listen: false);
     SquadActivity messageActivity = SquadActivity(
-      squadId: squadProvider.mySquad.id,
+      squadId: squadProvider.mySquad.userId,
       userId: userProvider.user.id,
       activityType: MESSAGE_ACTIVITY_TYPE,
       title: "",

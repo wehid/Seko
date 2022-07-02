@@ -7,6 +7,7 @@ import '../ProfilePage/profile_screen.dart';
 import '../ProfilePage/Components/my_courses.dart';
 import '../EditProfilePage/edit_profile_screen.dart';
 import '../Models/ProviderModel/user_provider.dart';
+import '../ChangePasswordPage/change_password_screen.dart';
 import '../UserLogsPage/user_logs_screen.dart';
 import 'Widgets/user_log_icon.dart';
 import '../SquadPage/squad_screen.dart';
@@ -14,6 +15,7 @@ import '../MyHomeWork/my_homework_screen.dart';
 
 enum popupMenuEnum {
   showProfile,
+  changePassword,
   logout,
 }
 
@@ -38,6 +40,9 @@ class DashboardScreen extends StatelessWidget {
     switch (item) {
       case popupMenuEnum.showProfile:
         Navigator.of(context).pushNamed(ProfileScreen.routeName);
+        break;
+      case popupMenuEnum.changePassword:
+        Navigator.of(context).pushNamed(ChangePasswordScreen.routeName);
         break;
       case popupMenuEnum.logout:
         _logout(context);
@@ -65,8 +70,20 @@ class DashboardScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 itemBuilder: (context) => [
                   popupMenuRow(
-                      popupMenuEnum.showProfile, "پرۆفایل", Icons.person),
-                  popupMenuRow(popupMenuEnum.logout, "چوونە دەر", Icons.logout),
+                    popupMenuEnum.showProfile,
+                    "پرۆفایل",
+                    Icons.person,
+                  ),
+                  popupMenuRow(
+                    popupMenuEnum.changePassword,
+                    "گۆڕینی تێپەڕوشە",
+                    Icons.change_circle_outlined,
+                  ),
+                  popupMenuRow(
+                    popupMenuEnum.logout,
+                    "چوونە دەر",
+                    Icons.logout,
+                  ),
                 ],
                 onSelected: (item) => _selectedMenuItemAction(context, item),
               ),
