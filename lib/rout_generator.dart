@@ -19,6 +19,7 @@ import 'FamilyPage/Components/family_item_details.dart';
 import 'SquadPage/squad_screen.dart';
 import 'UserLogsPage/user_logs_screen.dart';
 import 'ChangePasswordPage/change_password_screen.dart';
+import 'DeleteAccountPage/delete_account_screen.dart';
 
 class RoutGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -80,6 +81,9 @@ class RoutGenerator {
         break;
       case ChangePasswordScreen.routeName:
         return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
+        break;
+      case DeleteAccountScreen.routeName:
+        return MaterialPageRoute(builder: (_) => DeleteAccountScreen());
         break;
 
       //  TODO: default: return (_)=> error screen

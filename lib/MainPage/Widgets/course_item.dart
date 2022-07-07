@@ -78,14 +78,6 @@ class CourseItem extends StatelessWidget {
             const Spacer(),
             detailItem(Icons.watch_outlined,
                 '${course.hoursPerWeek}  کاتژمێر لە حەفتەدا'),
-            //todo: this part is for showing description about course. we can show it later
-            // Expanded(
-            //   child: SingleChildScrollView(
-            //     child: Html(
-            //       data: course.brief,
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

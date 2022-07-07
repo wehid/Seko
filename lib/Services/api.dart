@@ -599,6 +599,28 @@ class Api {
     }
   }
 
+  //  ------------------ Delete Account ------------------------------
+
+  Future<String> deleteAccount(int userId, String password) async {
+    final String _METHOD_URL = 'api/user/delete.php';
+
+    // to make url for api call from base url and method url.
+    var url = Uri.https(BASE_URL, _METHOD_URL);
+    Map<String, dynamic> deleteAccountMap = {
+      "ID": userId,
+      "Password": password
+    };
+
+    String deleteAccountRequestBody = json.encode(deleteAccountMap);
+
+    try {
+      var response = await http.post(url, body: deleteAccountRequestBody);
+      return response.body;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   ///  ------------------ Hawkari Hevalkrd ------------------------------
   ///  ------------------ Hawkari Hevalkrd ------------------------------
 

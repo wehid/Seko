@@ -8,6 +8,7 @@ import '../ProfilePage/Components/my_courses.dart';
 import '../EditProfilePage/edit_profile_screen.dart';
 import '../Models/ProviderModel/user_provider.dart';
 import '../ChangePasswordPage/change_password_screen.dart';
+import '../DeleteAccountPage/delete_account_screen.dart';
 import '../UserLogsPage/user_logs_screen.dart';
 import 'Widgets/user_log_icon.dart';
 import '../SquadPage/squad_screen.dart';
@@ -16,6 +17,7 @@ import '../MyHomeWork/my_homework_screen.dart';
 enum popupMenuEnum {
   showProfile,
   changePassword,
+  deleteAccount,
   logout,
 }
 
@@ -43,6 +45,9 @@ class DashboardScreen extends StatelessWidget {
         break;
       case popupMenuEnum.changePassword:
         Navigator.of(context).pushNamed(ChangePasswordScreen.routeName);
+        break;
+      case popupMenuEnum.deleteAccount:
+        Navigator.of(context).pushNamed(DeleteAccountScreen.routeName);
         break;
       case popupMenuEnum.logout:
         _logout(context);
@@ -79,6 +84,8 @@ class DashboardScreen extends StatelessWidget {
                     "گۆڕینی تێپەڕوشە",
                     Icons.change_circle_outlined,
                   ),
+                  popupMenuRow(popupMenuEnum.deleteAccount, "سڕینەوەی هەژمار",
+                      Icons.delete_forever),
                   popupMenuRow(
                     popupMenuEnum.logout,
                     "چوونە دەر",

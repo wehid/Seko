@@ -22,7 +22,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _newPasswordController = TextEditingController();
   final _repeatNewPasswordController = TextEditingController();
   UserProvider userProvider;
-  Login savedLogin;
+  Login _savedLogin;
   bool _isFirstRun = true;
   bool _isChangingPassowrd = false;
 
@@ -42,11 +42,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   }
 
   void _firstRunSetup() async {
-    savedLogin = await _savedLogin();
+    _savedLogin = await _readSavedLogin();
     _isFirstRun = false;
   }
 
-  Future<Login> _savedLogin() async {
+  Future<Login> _readSavedLogin() async {
     print('load _savedLogin method');
     SQLHelper helper = SQLHelper();
     List<Login> savedLoginList = await helper.getLogin();
@@ -58,7 +58,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       return "زانیاری داواکراو نابێ بەتاڵ بێت";
     } else if (value.length < 5) {
       return "تێپەڕوشە نابێ کەمتر لە 5 پیت بێت";
-    } else if (value == savedLogin.password) {
+    } else if (value == _savedLogin.password) {
       return "تێپەڕوشەی تازە پێویستە جیاواز بێت لە پێشوەکەی";
     }
     return null;
@@ -76,7 +76,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   String _oldPasswordValidation(String value) {
     if (value == null || value.isEmpty) {
       return "زانیاری داواکراو نابێ بەتاڵ بێت";
-    } else if (value != savedLogin.password) {
+    } else if (value != _savedLogin.password) {
       return "تێپەڕوشەی پێشوو هەڵەیە";
     } else {
       return null;
@@ -85,7 +85,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   void _saveNewPassword(String newPassword) {
     Login newLogin =
-        Login(username: savedLogin.username, password: newPassword);
+        Login(username: _savedLogin.username, password: newPassword);
     SQLHelper().insertLogin(newLogin);
   }
 
@@ -155,9 +155,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     buttonString: 'پاشەکەوت کردن',
                     textColor: Colors.white,
                     buttonIcon: Icons.save,
-                    onPressed: () {
-                      _completeChangingPassword();
-                    },
+                    onPressed: _completeChangingPassword,
                   ),
                 ],
               ),

@@ -95,7 +95,6 @@ class UserProvider with ChangeNotifier {
       oldPassword: oldPassword,
       password: newPassword,
     );
-    // User user = User();
 
     try {
       String changePasswordResponse =
@@ -105,6 +104,31 @@ class UserProvider with ChangeNotifier {
       if (status == "200") {
         //  TODO: delete print
         print('change passowrd done');
+      } else {
+        _errorMessage = "کێشەیەک ڕووی داوە، دووبارە تاقی بکەرەوە";
+        throw "کێشەیەک ڕووی داوە";
+      }
+      _isLoading = false;
+      notifyListeners();
+    } catch (error) {
+      print('error in update is: $error');
+      _errorMessage = "کێشەیەک ڕووی داوە، دووبارە تاقی بکەرەوە";
+
+      throw error;
+    }
+  }
+
+  Future<void> deleteAccount(String password) async {
+    _isLoading = true;
+
+    try {
+      String deleteAccountResponse =
+          await Api().deleteAccount(int.parse(_user.id), password);
+
+      String status = json.decode(deleteAccountResponse)["Code"];
+      if (status == "200") {
+        //  TODO: delete print
+        print('delete account done');
       } else {
         _errorMessage = "کێشەیەک ڕووی داوە، دووبارە تاقی بکەرەوە";
         throw "کێشەیەک ڕووی داوە";

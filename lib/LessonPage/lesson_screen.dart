@@ -4,23 +4,21 @@ import 'package:provider/provider.dart';
 import '../Models/ProviderModel/lesson_provider.dart';
 import '../Models/ProviderModel/courses_provider.dart';
 import '../Models/ObjectModels/lesson.dart';
-import '../SquadPage/squad_screen.dart';
 import 'Widget/item_tile.dart';
 import '../constants.dart';
 
 class LessonScreen extends StatelessWidget {
   static const routeName = '/lesson_screen';
 
-  List<Lesson> _myLessons;
-
   @override
   Widget build(BuildContext context) {
+    print("lesson screen buil method");
     final _selectedCourse =
         Provider.of<CoursesProvider>(context, listen: false).selectedCourse;
 
     LessonProvider lessonProvider = Provider.of<LessonProvider>(context);
 
-    _myLessons = lessonProvider.lessonList;
+    final List<Lesson> _myLessons = lessonProvider.lessonList;
 
     return Scaffold(
       appBar: customAppBar(_selectedCourse.name),
@@ -29,11 +27,6 @@ class LessonScreen extends StatelessWidget {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  ElevatedButton(
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(SquadScreen.routeName),
-                    child: Text("گرووپی من"),
-                  ),
                   ExpansionPanelList.radio(
                     dividerColor: Colors.blueGrey,
                     animationDuration: const Duration(milliseconds: 550),
